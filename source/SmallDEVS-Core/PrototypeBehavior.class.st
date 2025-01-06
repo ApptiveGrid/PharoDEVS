@@ -8,51 +8,52 @@ When a PrototypeObject changes structure (by adding/removing slots or methods) i
 Implementation detail: Methods stored in PrototypeBehaviors are specially marked to note whether they are slot accessors or normal methods. 
 "
 Class {
-	#name : #PrototypeBehavior,
-	#superclass : #Behavior,
+	#name : 'PrototypeBehavior',
+	#superclass : 'Behavior',
 	#instVars : [
 		'shared'
 	],
-	#category : #'System-Prototypes'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PrototypeBehavior >> basicNew: anInteger [
 
 	self error: 'disallowed'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> beOwned [
 
 	shared := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> beShared [
 
 	shared := true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeBehavior >> category [
 	^ String new: 0
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> classPool [
 
 	^superclass classPool
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> cloneForModifiedObject [
 
 	^self copy beOwned
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 PrototypeBehavior >> compile: aString [
 
 	^self
@@ -60,7 +61,7 @@ PrototypeBehavior >> compile: aString [
 		kind: #PrototypeMethod
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 PrototypeBehavior >> compile: code kind: k [
 
 	"Compile code with a specified kind of method trailer - see senders"
@@ -81,7 +82,7 @@ PrototypeBehavior >> compile: code kind: k [
 	^selector
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 PrototypeBehavior >> compileDelegate: aString index: delegateIndex [
 
 	self
@@ -95,7 +96,7 @@ PrototypeBehavior >> compileDelegate: aString index: delegateIndex [
 	
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 PrototypeBehavior >> compileSlot: aString index: slotIndex [
 
 	self
@@ -109,13 +110,13 @@ PrototypeBehavior >> compileSlot: aString index: slotIndex [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> delegateNames [
 
 	^(self selectors select: [:each | (self compiledMethodAt: each) trailer kind = #PrototypeDelegate]) asSortedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> fromSuperclass: aSuperclass [
 
 	format := aSuperclass format.
@@ -123,36 +124,36 @@ PrototypeBehavior >> fromSuperclass: aSuperclass [
 	methodDict := MethodDictionary new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeBehavior >> hasTraitComposition [
 	^false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> isShared [
 
 	^shared == true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> methodNames [
 
 	^(self selectors select: [:each | (self compiledMethodAt: each) trailer kind = #PrototypeMethod]) asSortedCollection
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PrototypeBehavior >> new [
 
 	self error: 'disallowed'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PrototypeBehavior >> new: anInteger [
 
 	self error: 'disallowed'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeBehavior >> organization [
 	| list org |
 	list := OrderedCollection new.
@@ -164,25 +165,25 @@ PrototypeBehavior >> organization [
 	^ org.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> sharedPools [
 
 	^superclass sharedPools
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> slotNames [
 
 	^(self selectors select: [:each | (self compiledMethodAt: each) trailer kind = #PrototypeSlot]) asSortedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeBehavior >> sourceCodeAt: selector [
 
 		^ (self methodDict at: selector) trailer data
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeBehavior >> theNonMetaClass [
 	"Sent to a class or metaclass, always return the class"
 	^self

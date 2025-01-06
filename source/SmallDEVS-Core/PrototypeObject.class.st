@@ -22,16 +22,17 @@ PrototypeObjects have a class which is an instance of PrototypeBehavior. Look th
 An example structure of PrototypeObjects: execute PrototypeObject exampleFamily.
 "
 Class {
-	#name : #PrototypeObject,
-	#superclass : #Object,
+	#name : 'PrototypeObject',
+	#superclass : 'Object',
 	#instVars : [
 		'slots',
 		'delegates'
 	],
-	#category : #'System-Prototypes'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 PrototypeObject class >> exampleFamily [
 
 	"PrototypeObject exampleFamily"
@@ -109,7 +110,7 @@ PrototypeObject class >> exampleFamily [
 	dad inspect
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PrototypeObject class >> new [
 
 	"Objects are instantiated with no slots"
@@ -117,7 +118,7 @@ PrototypeObject class >> new [
 	^self newPrototypeBehavior basicNew slots: #(); delegates: #()
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PrototypeObject class >> newPrototypeBehavior [
 
 	"Create a new PrototypeBehavior for a cloned object"
@@ -125,7 +126,7 @@ PrototypeObject class >> newPrototypeBehavior [
 	^PrototypeBehavior new fromSuperclass: self
 ]
 
-{ #category : #delegation }
+{ #category : 'delegation' }
 PrototypeObject >> addDelegate: aString withValue: anObject [
 
 	"Add a new slot with the given value. New clones of this object will also have that slot"
@@ -135,14 +136,14 @@ PrototypeObject >> addDelegate: aString withValue: anObject [
 	self ownClass compileDelegate: aString index: delegates size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> addDelegates: anArrayOfAssociations [
 
 	anArrayOfAssociations do: [ :assoc |  self addDelegate: assoc key withValue: assoc value ].
 
 ]
 
-{ #category : #'slot adding/removing' }
+{ #category : 'slot adding/removing' }
 PrototypeObject >> addMethod: aString [
 	"Add a new method to the receiver, or overwrite a method of the same name.
 	Returns the selector of the new method"
@@ -150,13 +151,13 @@ PrototypeObject >> addMethod: aString [
 	^self ownClass compile: aString
 ]
 
-{ #category : #'slot adding/removing' }
+{ #category : 'slot adding/removing' }
 PrototypeObject >> addSlot: aString [
 
 	^self addSlot: aString withValue: nil
 ]
 
-{ #category : #'slot adding/removing' }
+{ #category : 'slot adding/removing' }
 PrototypeObject >> addSlot: aString withValue: anObject [
 	"Add a new slot with the given value. New clones of this object will also have that slot"
 
@@ -164,14 +165,14 @@ PrototypeObject >> addSlot: aString withValue: anObject [
 	self ownClass compileSlot: aString index: slots size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> addSlots: anArrayOfAssociations [
 
 	anArrayOfAssociations do: [ :assoc |  self addSlot: assoc key withValue: assoc value ].
 
 ]
 
-{ #category : #cloning }
+{ #category : 'cloning' }
 PrototypeObject >> clone [
 
 	self class beShared.
@@ -182,35 +183,35 @@ PrototypeObject >> clone [
 		yourself
 ]
 
-{ #category : #cloning }
+{ #category : 'cloning' }
 PrototypeObject >> copy [
 	^ self clone
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 PrototypeObject >> defaultLabelForInspector [
 
 	^self name
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> delegateAt: n [
 	^self perform: n asSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeObject >> delegateNames [
 
 	^self class delegateNames
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PrototypeObject >> delegates: anArray [
 
 	delegates := anArray
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PrototypeObject >> doesNotUnderstand: aMessage [ 
 	| method selector |
 	selector := aMessage selector.
@@ -230,12 +231,12 @@ PrototypeObject >> doesNotUnderstand: aMessage [
 	^ super doesNotUnderstand: aMessage
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> explore [
 	^self inspect
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PrototypeObject >> getCompiledMethod: aSelector [
 	| temp |
 	^self class compiledMethodAt: aSelector ifAbsent: [
@@ -244,37 +245,25 @@ PrototypeObject >> getCompiledMethod: aSelector [
 		^ nil]
 ]
 
-{ #category : #inspecting }
-PrototypeObject >> inspect [
-	"Create and schedule an Inspector in which the user can examine the receiver's variables."
-
-	PrototypeInspector openOn: self withEvalPane: true
-]
-
-{ #category : #'as yet unclassified' }
-PrototypeObject >> inspectorClass [
-	^PrototypeInspector
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeObject >> methodNames [
 
 	^self class methodNames
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeObject >> methodSourceAt: aSymbol [
 
 	^self class sourceCodeAt: aSymbol
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> name [
 
 	^'a Prototype Object'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PrototypeObject >> ownClass [
 
 	| newClass |
@@ -288,26 +277,26 @@ PrototypeObject >> ownClass [
 	^self class
 ]
 
-{ #category : #cloning }
+{ #category : 'cloning' }
 PrototypeObject >> postClone [
 
 	"instances can define something else"
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PrototypeObject >> printOn: aStream [
 
 	aStream nextPutAll: self name
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PrototypeObject >> privatePostClone [
 
 	slots := slots shallowCopy.
 	delegates := delegates shallowCopy
 ]
 
-{ #category : #delegation }
+{ #category : 'delegation' }
 PrototypeObject >> removeDelegate: aString [
 
 	"The storage for the slot is not actually removed. This is left as an exercise for the reader"
@@ -330,13 +319,13 @@ PrototypeObject >> removeDelegate: aString [
 		
 ]
 
-{ #category : #'slot adding/removing' }
+{ #category : 'slot adding/removing' }
 PrototypeObject >> removeMethod: aSymbol [
 
 	self ownClass removeSelector: aSymbol
 ]
 
-{ #category : #'slot adding/removing' }
+{ #category : 'slot adding/removing' }
 PrototypeObject >> removeSlot: aString [
 	"The storage for the slot is not actually removed. This is left as an exercise for the reader"
 	| setter getter |
@@ -351,29 +340,29 @@ PrototypeObject >> removeSlot: aString [
 		removeSelector: getter
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> shallowCopy [
 	^ self clone
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrototypeObject >> slotNames [
 
 	^self class slotNames
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> slotValueAt: n [
 	^self perform: n asSymbol
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PrototypeObject >> slots: anArray [
 
 	slots := anArray
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PrototypeObject >> species [
 	^ PrototypeObject
 ]
