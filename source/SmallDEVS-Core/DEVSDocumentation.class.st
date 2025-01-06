@@ -56,16 +56,6 @@ Class {
 }
 
 { #category : 'demo' }
-DEVSDocumentation class >> classlessDemo [
-
-	"See AtomicDEVSPrototype>>example1 to learn how to construct DEVS models without classes."
-
-	(AtomicDEVSPrototype example1 getSimulatorRT deepVerbose: false;  "reportStream: (DummyStream on: nil);" yourself) simulate: 100
-
-
-]
-
-{ #category : 'demo' }
 DEVSDocumentation class >> continuousDemo [
 
 	"Van Der Pol system specified as atomic model, 
