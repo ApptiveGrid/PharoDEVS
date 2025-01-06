@@ -444,36 +444,6 @@ BaseDEVS >> simulate: t [
 
 ]
 
-{ #category : 'sixx' }
-BaseDEVS >> sixxContentOn: aStream indent: level context: dictionary [ 
-	"Copied from Object>>sixxInstVarsOn:indent:context: and reimplemented not 
-	to store all."
-	aStream cr.
-	(self class allInstVarNames difference: self doNotStore)
-		do: [:var | (self instVarNamed: var)
-				sixxOn: aStream
-				name: var
-				indent: level
-				context: dictionary]
-]
-
-{ #category : 'sixx' }
-BaseDEVS >> sixxOn: aStream name: nameString indent: level context: dictionary [ 
-	" Serializing a component. Connections to other outer comonents have to be disconnected for the serialized version of the component. It is a resposibility of a CoupledDEVS to connect the components."
-	| lParent lInPorts lOutPorts |
-	lParent := parent. lInPorts := inputPorts. lOutPorts := outputPorts.
-	parent := nil. self removeAllPorts. self addInputPorts: lInPorts keys. self addOutputPorts: lOutPorts keys.
-	super sixxOn: aStream name: nameString indent: level context: dictionary.
-	parent := lParent. inputPorts := lInPorts. outputPorts := lOutPorts.
-	
-]
-
-{ #category : 'copying' }
-BaseDEVS >> sixxcopy [
-	"experimental alternative to copy - usefull for testing purposes only"
-	^Object readSixxFrom: self sixxString
-]
-
 { #category : 'copying' }
 BaseDEVS >> sscopy [
 	"experimental alternative to copy - usefull for testing purposes only"

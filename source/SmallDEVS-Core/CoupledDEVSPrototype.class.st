@@ -142,12 +142,6 @@ CoupledDEVSPrototype >> select: immList [
 ]
 
 { #category : 'copying' }
-CoupledDEVSPrototype >> sixxOn: aStream name: nm indent: level context: dictionary [
-
-	(CoupledDEVSConstructor for: self) sixxOn: aStream name: nm indent: level context: dictionary
-]
-
-{ #category : 'copying' }
 CoupledDEVSPrototype >> storeOn: aStream [
 	
 	aStream nextPut: $(.

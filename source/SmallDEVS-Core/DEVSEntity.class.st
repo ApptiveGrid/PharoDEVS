@@ -41,8 +41,3 @@ DEVSEntity >> printOn: aStream [
 		ifFalse: [ aStream nextPutAll: name asString ]
 
 ]
-
-{ #category : 'as yet unclassified' }
-DEVSEntity >> sixxType [
-	^self species name
-]

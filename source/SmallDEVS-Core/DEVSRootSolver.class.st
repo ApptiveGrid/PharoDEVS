@@ -221,18 +221,6 @@ DEVSRootSolver >> simulationStep [
 
 ]
 
-{ #category : 'sixx' }
-DEVSRootSolver >> sixxInitialize [
-	super sixxInitialize.
-	rootDEVS parent: self.
-]
-
-{ #category : 'testing' }
-DEVSRootSolver >> sixxcopy [
-	"experimental alternative to copy - usefull for testing purposes only"
-	^Object readSixxFrom: self sixxString
-]
-
 { #category : 'testing' }
 DEVSRootSolver >> sscopy [
 	"experimental alternative to copy - usefull for testing purposes only"
