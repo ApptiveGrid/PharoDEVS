@@ -3,15 +3,17 @@ Part of coupled model MySystems. intTransition modifies structure of MySystems a
  
 "
 Class {
-	#name : #MyDaemon,
-	#superclass : #AtomicDEVS,
+	#name : 'MyDaemon',
+	#superclass : 'AtomicDEVS',
 	#instVars : [
 		'done'
 	],
-	#category : #'SmallDEVS-Core-Examples'
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyDaemon >> initialize [
 
 	super initialize.
@@ -21,7 +23,7 @@ MyDaemon >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyDaemon >> intTransition [
 	"This is an example of dynamic self-modication of a model."
 
@@ -87,13 +89,13 @@ MyDaemon >> intTransition [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyDaemon >> outputFnc [
 
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyDaemon >> timeAdvance [
 
 	^ done ifTrue: [ Float infinity ] ifFalse: [ 25 ]

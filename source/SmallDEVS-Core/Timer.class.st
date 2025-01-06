@@ -13,18 +13,20 @@ Waiting for real time value. How to use:
 
 "
 Class {
-	#name : #Timer,
-	#superclass : #Delay,
-	#category : #'SmallDEVS-Core-RT'
+	#name : 'Timer',
+	#superclass : 'Delay',
+	#category : 'SmallDEVS-Core-RT',
+	#package : 'SmallDEVS-Core',
+	#tag : 'RT'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Timer class >> at: time [
 
 	^ (self new setDelay: 0 forSemaphore: Semaphore new) scheduleResumptionTime: time
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Timer >> scheduleEventResumptionTime: t [
 	"Schedule this delay"
 	resumptionTime := t.
@@ -34,7 +36,7 @@ Timer >> scheduleEventResumptionTime: t [
 	].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Timer >> scheduleResumptionTime: t [
 
 	"This code is taken from Delay>>schedule and slightly modified."
@@ -55,7 +57,7 @@ Timer >> scheduleResumptionTime: t [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Timer >> unschedule [
 
 	super unschedule.
@@ -63,7 +65,7 @@ Timer >> unschedule [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Timer >> wait [
 
 	delaySemaphore wait.

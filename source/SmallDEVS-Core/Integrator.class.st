@@ -1,14 +1,16 @@
 Class {
-	#name : #Integrator,
-	#superclass : #AtomicDEVnDESS,
+	#name : 'Integrator',
+	#superclass : 'AtomicDEVnDESS',
 	#instVars : [
 		'initCondition',
 		'pm'
 	],
-	#category : #'SmallDEVS-Core-Continuous'
+	#category : 'SmallDEVS-Core-Continuous',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Continuous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Integrator class >> newWithInitialCondition: aValue [
 
 	| integrator |
@@ -18,7 +20,7 @@ Integrator class >> newWithInitialCondition: aValue [
 	^ integrator
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Integrator >> initCondition: aValue [
 
 	initCondition := aValue.
@@ -29,14 +31,14 @@ Integrator >> initCondition: aValue [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Integrator >> initConditions [
 
 	self allocateIntegrators: 1.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Integrator >> intgStep [
 
 	self intg: 1 integrate: [ input values at: 1 ].
@@ -44,7 +46,7 @@ Integrator >> intgStep [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Integrator >> outputNFnc [
 
 	self poke: (intg at: 1) to: #output.
@@ -52,7 +54,7 @@ Integrator >> outputNFnc [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Integrator >> timeAdvance [
 
 	^ Float infinity

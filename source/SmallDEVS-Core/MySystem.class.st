@@ -7,12 +7,14 @@ Example:
 
 "
 Class {
-	#name : #MySystem,
-	#superclass : #CoupledDEVS,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MySystem',
+	#superclass : 'CoupledDEVS',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MySystem >> initialize [
 
 	| out discard generator prevPort tmp |

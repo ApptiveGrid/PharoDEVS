@@ -10,8 +10,8 @@ Lots of operations are not thread safe !
 
 "
 Class {
-	#name : #DEVSRootSolverRT,
-	#superclass : #DEVSRootSolver,
+	#name : 'DEVSRootSolverRT',
+	#superclass : 'DEVSRootSolver',
 	#instVars : [
 		'rtTimer',
 		'startTime',
@@ -20,17 +20,19 @@ Class {
 		'rtFactor',
 		'lastTime'
 	],
-	#category : #'SmallDEVS-Core-RT'
+	#category : 'SmallDEVS-Core-RT',
+	#package : 'SmallDEVS-Core',
+	#tag : 'RT'
 }
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> asyncRtFactor: f [
 
 	self asyncSafelyDo: [ rtFactor := f ]
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> initModel [
 
 	super initModel.
@@ -41,7 +43,7 @@ DEVSRootSolverRT >> initModel [
 	
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> initialize [
 
 	super initialize.	
@@ -54,7 +56,7 @@ DEVSRootSolverRT >> initialize [
 
 ]
 
-{ #category : #'asynchronous interrupts' }
+{ #category : 'asynchronous interrupts' }
 DEVSRootSolverRT >> inject: value to: port [
 
 	inputQueue isNil ifFalse: [ inputQueue nextPut: { port. value. } ].
@@ -62,14 +64,14 @@ DEVSRootSolverRT >> inject: value to: port [
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> nonRTStep [
 
 	^ super simulationStep
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> prepareToStart [
 
 	rtFactor = 0 
@@ -79,7 +81,7 @@ DEVSRootSolverRT >> prepareToStart [
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> prepareToStop [
 
 	super prepareToStop.
@@ -87,7 +89,7 @@ DEVSRootSolverRT >> prepareToStop [
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> realTime [
 	"returns real time in seconds"
 	(self isRunning) 
@@ -96,26 +98,26 @@ DEVSRootSolverRT >> realTime [
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> receiveMsgSETime: t [
 	"nothing to do here"
 
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> rtFactor [
   ^rtFactor
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> rtFactor: f [
 
 	self safelyDo: [ rtFactor := f ]
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> simulate: t [
 	"Performs the simulation. For simulation in background use start/stop instead."
 
@@ -133,7 +135,7 @@ DEVSRootSolverRT >> simulate: t [
 
 ]
 
-{ #category : #'realtime simulation' }
+{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> simulationStep [
 
 	| msg aSubModel duration inputOccured input |
@@ -178,7 +180,7 @@ DEVSRootSolverRT >> simulationStep [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolverRT >> startUnprotected [
 
 	super startUnprotected.
@@ -187,7 +189,7 @@ DEVSRootSolverRT >> startUnprotected [
 
 ]
 
-{ #category : #'asynchronous interrupts' }
+{ #category : 'asynchronous interrupts' }
 DEVSRootSolverRT >> stateEventIn: aSubmodel [
 
 	seQueue isNil ifFalse: [ seQueue nextPut: aSubmodel ].
@@ -195,7 +197,7 @@ DEVSRootSolverRT >> stateEventIn: aSubmodel [
 
 ]
 
-{ #category : #'asynchronous interrupts' }
+{ #category : 'asynchronous interrupts' }
 DEVSRootSolverRT >> stopUnprotected [
 
 	| r |
@@ -213,7 +215,7 @@ DEVSRootSolverRT >> stopUnprotected [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolverRT >> timeToShow [
 
 	^ rtFactor = 0 ifTrue: [ self time ] ifFalse: [ self realTime ] 	

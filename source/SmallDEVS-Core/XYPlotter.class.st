@@ -1,20 +1,22 @@
 Class {
-	#name : #XYPlotter,
-	#superclass : #Plotter,
-	#category : #'SmallDEVS-Core-Continuous'
+	#name : 'XYPlotter',
+	#superclass : 'Plotter',
+	#category : 'SmallDEVS-Core-Continuous',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Continuous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 XYPlotter class >> new [ 
 
 	^ super withInputs: #(x y)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 XYPlotter class >> withInputs: i [
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 XYPlotter >> intTransition [
 
 	pm series: name addPoint: ((input at: (inputPorts at: #x))) @ ((input at: (inputPorts at: #y))).
@@ -23,7 +25,7 @@ XYPlotter >> intTransition [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 XYPlotter >> open [
 
 	pm := PlotMorph new.

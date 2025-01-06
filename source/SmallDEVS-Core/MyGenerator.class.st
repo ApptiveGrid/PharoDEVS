@@ -2,8 +2,8 @@
 Part of MySystem
 "
 Class {
-	#name : #MyGenerator,
-	#superclass : #AtomicDEVS,
+	#name : 'MyGenerator',
+	#superclass : 'AtomicDEVS',
 	#instVars : [
 		'ia',
 		'ib',
@@ -12,17 +12,19 @@ Class {
 		'first',
 		'n'
 	],
-	#category : #'SmallDEVS-Core-Examples'
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator class >> ia: a ib: b sa: c sb: d [
 
 	^ self new ia: a ib: b sa: c sb: d
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator >> ia: a ib: b sa: c sb: d [
 
 	ia := a.	"interval min"
@@ -33,7 +35,7 @@ MyGenerator >> ia: a ib: b sa: c sb: d [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator >> initialize [
 
 	super initialize.
@@ -45,21 +47,21 @@ MyGenerator >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator >> intTransition [
 
 	first := false.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator >> outputFnc [
 
 	n := n+1.
 	self poke: ((MyJob sizeBetween: sa and: sb) n: n) to: #out.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator >> timeAdvance [
 
 	^ first ifTrue: [ 0 ] ifFalse: [ (ia to: ib) atRandom ]

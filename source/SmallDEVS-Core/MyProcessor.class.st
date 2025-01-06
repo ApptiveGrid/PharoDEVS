@@ -2,8 +2,8 @@
 Part of MySystem
 "
 Class {
-	#name : #MyProcessor,
-	#superclass : #AtomicDEVS,
+	#name : 'MyProcessor',
+	#superclass : 'AtomicDEVS',
 	#instVars : [
 		'queue',
 		'queueSize',
@@ -11,16 +11,18 @@ Class {
 		'currentJob',
 		'timeSpent'
 	],
-	#category : #'SmallDEVS-Core-Examples'
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyProcessor class >> withQueueSize: n [
 
 	^ super new initialize queueSize: n
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyProcessor >> extTransition [
 
 	| job |
@@ -43,7 +45,7 @@ MyProcessor >> extTransition [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyProcessor >> initialize [
 
 	super initialize.
@@ -60,7 +62,7 @@ MyProcessor >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyProcessor >> intTransition [
 
 	processorStatus caseOf: {
@@ -84,7 +86,7 @@ MyProcessor >> intTransition [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyProcessor >> outputFnc [
 
 	processorStatus caseOf: {
@@ -100,13 +102,13 @@ MyProcessor >> outputFnc [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyProcessor >> queueSize: n [
 
 	queueSize := n
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyProcessor >> timeAdvance [
 
 	processorStatus caseOf: {

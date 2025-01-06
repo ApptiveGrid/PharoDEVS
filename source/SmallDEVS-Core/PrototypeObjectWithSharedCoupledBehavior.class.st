@@ -3,32 +3,34 @@ Used in CoupledDEVSPrototype>>initialize for its nested prototype object creatio
 
 "
 Class {
-	#name : #PrototypeObjectWithSharedCoupledBehavior,
-	#superclass : #Object,
-	#category : #'SmallDEVS-Core-Prototypes'
+	#name : 'PrototypeObjectWithSharedCoupledBehavior',
+	#superclass : 'Object',
+	#category : 'SmallDEVS-Core-Prototypes',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Prototypes'
 }
 
-{ #category : #'coupled devs shared behavior' }
+{ #category : 'coupled devs shared behavior' }
 PrototypeObjectWithSharedCoupledBehavior >> name [
 	^ self devs name
 ]
 
-{ #category : #'coupled devs shared behavior' }
+{ #category : 'coupled devs shared behavior' }
 PrototypeObjectWithSharedCoupledBehavior >> name: n [  
 	^ self devs name: n
 ]
 
-{ #category : #'coupled devs shared behavior' }
+{ #category : 'coupled devs shared behavior' }
 PrototypeObjectWithSharedCoupledBehavior >> parent [  
 	^ self devs parent
 ]
 
-{ #category : #'coupled devs shared behavior' }
+{ #category : 'coupled devs shared behavior' }
 PrototypeObjectWithSharedCoupledBehavior >> parent: p [  
 	^ self devs parent: p
 ]
 
-{ #category : #'coupled devs shared behavior' }
+{ #category : 'coupled devs shared behavior' }
 PrototypeObjectWithSharedCoupledBehavior >> species [
 	^ PrototypeObjectWithSharedCoupledBehavior
 

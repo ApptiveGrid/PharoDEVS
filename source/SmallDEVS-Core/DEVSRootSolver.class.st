@@ -1,31 +1,32 @@
 Class {
-	#name : #DEVSRootSolver,
-	#superclass : #AbstractSimulation,
+	#name : 'DEVSRootSolver',
+	#superclass : 'AbstractSimulation',
 	#instVars : [
 		'rootDEVS'
 	],
-	#category : #'SmallDEVS-Core'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> addComponent: c Named: n [
 	^ rootDEVS addComponent: c named: n
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> addComponents: compList [
 	^ rootDEVS addComponents: compList
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> assureComponentName: aName [
      	^rootDEVS assureComponentName: aName.
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVSRootSolver >> asyncReportStream: s [
 
 	self asyncSafelyDo: [ reportStream := s ]
@@ -33,7 +34,7 @@ DEVSRootSolver >> asyncReportStream: s [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolver >> beVerbose: truefalse [
 
 	verbose := truefalse.
@@ -42,22 +43,22 @@ DEVSRootSolver >> beVerbose: truefalse [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> componentNamed: n [
   ^self rootDEVS componentNamed: n
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> componentNamed: n ifAbsent: aBlock [
   ^self rootDEVS componentNamed: n ifAbsent: aBlock
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> componentNames [
   ^self rootDEVS componentNames
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolver >> deepVerbose: truefalse [
 
 	verbose := truefalse.
@@ -66,7 +67,7 @@ DEVSRootSolver >> deepVerbose: truefalse [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolver >> doSteps: n [
 
 	| tmp |
@@ -77,7 +78,7 @@ DEVSRootSolver >> doSteps: n [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolver >> finalize [
 
 	"who needs this?????"
@@ -85,7 +86,7 @@ DEVSRootSolver >> finalize [
 	rootDEVS finalize
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> initModel [
 
 	"let's initialize the model"
@@ -100,7 +101,7 @@ DEVSRootSolver >> initModel [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolver >> initialize [
 
 	super initialize.
@@ -108,7 +109,7 @@ DEVSRootSolver >> initialize [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> model [
 
 	^ rootDEVS
@@ -117,68 +118,68 @@ DEVSRootSolver >> model [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> name [
 
 	^ rootDEVS ifNotNil: [ rootDEVS name ] ifNil: [ name ]
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> name: n [
 
 	name := n.
 	rootDEVS ifNotNil: [ rootDEVS name: n ]
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 DEVSRootSolver >> postCopy [
 	self rootDEVS: self rootDEVS copy.
 	^ self
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVSRootSolver >> prepareToStart [
 
 	rootDEVS receiveMsgInitTime: clock.
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVSRootSolver >> prepareToStop [
 
 	rootDEVS receiveMsgSyncTime: clock.
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> removeComponentNamed: n [
 	^ rootDEVS removeComponentNamed: n
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> renameComponentNamed: n1 to: n2 [
 	^ rootDEVS renameComponentNamed: n1 to: n2
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVSRootSolver >> reportStream: s [
 
 	self safelyDo: [ reportStream := s ]
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVSRootSolver >> reset [
 
 	super reset.
 	self initModel.
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> rootDEVS [
 
 	^ rootDEVS
@@ -187,7 +188,7 @@ DEVSRootSolver >> rootDEVS [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> rootDEVS: d [
 
 	rootDEVS := d.
@@ -197,13 +198,13 @@ DEVSRootSolver >> rootDEVS: d [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 DEVSRootSolver >> rootSolver [
 
 	^ self
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVSRootSolver >> simulationStep [
 
 	clock := rootDEVS timeNext.
@@ -220,25 +221,25 @@ DEVSRootSolver >> simulationStep [
 
 ]
 
-{ #category : #sixx }
+{ #category : 'sixx' }
 DEVSRootSolver >> sixxInitialize [
 	super sixxInitialize.
 	rootDEVS parent: self.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DEVSRootSolver >> sixxcopy [
 	"experimental alternative to copy - usefull for testing purposes only"
 	^Object readSixxFrom: self sixxString
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DEVSRootSolver >> sscopy [
 	"experimental alternative to copy - usefull for testing purposes only"
 	^Object readFrom: self storeString
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 DEVSRootSolver >> storeOn: aStream [
 
 	aStream nextPut: $(.
@@ -250,7 +251,7 @@ DEVSRootSolver >> storeOn: aStream [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVSRootSolver >> time [
 
 	^ clock

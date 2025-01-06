@@ -2,33 +2,34 @@
 Common behavior of DEVS components. To be replaced by a subclass of MyRepository (?). 
 "
 Class {
-	#name : #DEVSEntity,
-	#superclass : #Object,
+	#name : 'DEVSEntity',
+	#superclass : 'Object',
 	#instVars : [
 		'name'
 	],
-	#category : #'SmallDEVS-Core'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSEntity >> fullName [
 
 	^name
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSEntity >> name [
 
 	^name
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSEntity >> name: n [
 
 	name := n. 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSEntity >> printOn: aStream [
 
 	name isNil 
@@ -41,7 +42,7 @@ DEVSEntity >> printOn: aStream [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSEntity >> sixxType [
 	^self species name
 ]

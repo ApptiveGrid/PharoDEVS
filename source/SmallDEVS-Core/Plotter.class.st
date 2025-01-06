@@ -1,14 +1,16 @@
 Class {
-	#name : #Plotter,
-	#superclass : #AtomicDEVnDESS,
+	#name : 'Plotter',
+	#superclass : 'AtomicDEVnDESS',
 	#instVars : [
 		'pm',
 		'pstep'
 	],
-	#category : #'SmallDEVS-Core-Continuous'
+	#category : 'SmallDEVS-Core-Continuous',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Continuous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Plotter class >> withInputs: inputPortNames [ 
 
 	| p |
@@ -17,7 +19,7 @@ Plotter class >> withInputs: inputPortNames [
 	^ p
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> addPlotterPorts: listOfInputPortNames [
 
 	listOfInputPortNames do: [ :portName |
@@ -25,7 +27,7 @@ Plotter >> addPlotterPorts: listOfInputPortNames [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> copy [
 
 	^ super copy open
@@ -33,13 +35,13 @@ Plotter >> copy [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> initConditions [
 
 	pstep := 0.1
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> initialize [
 
 	super initialize.
@@ -47,7 +49,7 @@ Plotter >> initialize [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> intTransition [
 
 	inputPorts keys do: [ :portName |
@@ -57,11 +59,11 @@ Plotter >> intTransition [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> intgStep [
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> open [
 
 	pm := PlotMorph new.
@@ -75,21 +77,21 @@ Plotter >> open [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> outputFnc [
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> outputNFnc [
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> plotStep: t [
 
 	pstep := t
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 Plotter >> timeAdvance [
 
 	^ pstep

@@ -9,8 +9,8 @@ Note: Since the simulation runs as a sequence of steps, there could be possible 
 
 "
 Class {
-	#name : #AbstractSimulation,
-	#superclass : #Object,
+	#name : 'AbstractSimulation',
+	#superclass : 'Object',
 	#instVars : [
 		'parent',
 		'name',
@@ -23,61 +23,62 @@ Class {
 		'reportStream',
 		'verbose'
 	],
-	#category : #'SmallDEVS-MyRepository'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> accessProtect [
 
 	^accessProtect
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> asyncReportStream: s [
 
 	self asyncSafelyDo: [ reportStream := s ]
 
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> asyncReset [
 
 	[ self reset ] fork
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> asyncSafelyDo: aBlock [
 
 	[ self safelyDo: aBlock ] fork
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> asyncStart [
 
 	[ self start ] fork
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> asyncStop [
 
 	[ self stop ] fork
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> asyncStopTime: endTime [
 
 	self asyncSafelyDo: [ stopTime := endTime ]. 				"in seconds"
 
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> cancelStopTime [
 
 	self stopTime: Float infinity
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 AbstractSimulation >> copy [
 
 	| aCopy |
@@ -86,35 +87,25 @@ AbstractSimulation >> copy [
 	^aCopy
 ]
 
-{ #category : #GUI }
-AbstractSimulation >> copyAction [
-	MyRepository clipboardObject: self
-]
-
-{ #category : #GUI }
-AbstractSimulation >> copyToClipboard [
-	MyRepository clipboardObject: self
-]
-
-{ #category : #GUI }
+{ #category : 'GUI' }
 AbstractSimulation >> cutAction [
   self copyToClipboard.
   self remove.
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 AbstractSimulation >> doNotStore [
 	^{ 'parent'. 'namedComponents'. 'process'. 'idleSemaphore'. 	'startStopSemaphore'. 'accessProtect'.  'reportStream'.  'rtTimer'. 'inputQueue'. 'seQueue'. 			"TO DO: move this to subclasses!!!"  
 	}
 ]
 
-{ #category : #'simple simulation' }
+{ #category : 'simple simulation' }
 AbstractSimulation >> doOneStep [
 
 	self doSteps: 1.
 ]
 
-{ #category : #'simple simulation' }
+{ #category : 'simple simulation' }
 AbstractSimulation >> doSteps: n [
 
 	self stop.
@@ -128,17 +119,12 @@ AbstractSimulation >> doSteps: n [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> fullName [
 	^ self name, ' [', (self isRunning ifTrue: ['R'] ifFalse: ['S']) , ']'
 ]
 
-{ #category : #GUI }
-AbstractSimulation >> getMenu [
-	^ AbstractSimulationControlMorph on: self
-]
-
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> initialize [
 
 	self initializeSimulationControl.
@@ -148,7 +134,7 @@ AbstractSimulation >> initialize [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> initializeSimulationControl [
 
 	startStopSemaphore := Semaphore new.
@@ -160,79 +146,62 @@ AbstractSimulation >> initializeSimulationControl [
 
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> isIdle [
 
 	^ idleSemaphore isSignaled
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> isRunning [
 
 	^ startStopSemaphore isSignaled not
 ]
 
-{ #category : #'as yet unclassified' }
-AbstractSimulation >> makeSAR [
-	self safelyDo: [ MyRepository makeSARfrom: self ]
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> name [
 	^ name
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> name: n [
 	name := n
 ]
 
-{ #category : #GUI }
+{ #category : 'GUI' }
 AbstractSimulation >> openModel [
 
 	self subclassResponsibility
 ]
 
-{ #category : #GUI }
-AbstractSimulation >> openSimControl [
-
-	AbstractSimulationControlMorph openOn: self.
-]
-
-{ #category : #GUI }
-AbstractSimulation >> openSimControl1 [
-
-	AbstractSimulationControlMorph new openWindowOn: self.
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> parent [
 	^ parent
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> parent: p [
 	parent := p
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> pathName [
   parent isNil ifTrue: [^''] ifFalse: [^(parent pathName),'/',name].
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> prepareToStart [
 
 	"Subclasses may define some initalization code."
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> prepareToStop [
 
 	"Subclasses may define some finalization code."
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> processBody [
 
 	self prepareToStart.
@@ -244,13 +213,13 @@ AbstractSimulation >> processBody [
 
 ]
 
-{ #category : #GUI }
+{ #category : 'GUI' }
 AbstractSimulation >> remove [
   (UIManager default confirm: 'Really DELETE simulation?')
   ifTrue: [ parent removeComponents: (Array with: name) ].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> reportStream [
 
 	reportStream ifNil: [ reportStream := (DummyStream on: nil) ].
@@ -258,14 +227,14 @@ AbstractSimulation >> reportStream [
 
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> reportStream: s [
 
 	self safelyDo: [ reportStream := s ]
 
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> reset [
 
 	self stop.
@@ -273,7 +242,7 @@ AbstractSimulation >> reset [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> safelyDo: aBlock [
 
 	| r v |
@@ -285,7 +254,7 @@ AbstractSimulation >> safelyDo: aBlock [
 
 ]
 
-{ #category : #'simple simulation' }
+{ #category : 'simple simulation' }
 AbstractSimulation >> simulate: t [
 
 	stopTime := t.
@@ -299,14 +268,14 @@ AbstractSimulation >> simulate: t [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> simulationStep [
 
 	self subclassResponsibility
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 AbstractSimulation >> sixxContentOn: aStream indent: level context: dictionary [ 
 
 	aStream cr.
@@ -320,22 +289,21 @@ AbstractSimulation >> sixxContentOn: aStream indent: level context: dictionary [
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 AbstractSimulation >> sixxInitialize [
 	self initializeSimulationControl
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> start [
 
 	| r |
 	accessProtect critical: [ r := self startUnprotected ].
-	(MyRepository root) changed: #hierarchicalList.
 	^ r
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> startUnprotected [
 
 	| r |
@@ -350,29 +318,28 @@ AbstractSimulation >> startUnprotected [
 
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> stop [
 
 	| r |
 	accessProtect critical: [ r := self stopUnprotected ].
-	(MyRepository root) changed: #hierarchicalList.
 	^ r
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractSimulation >> stopTime [
   ^stopTime
 ]
 
-{ #category : #'simulation control' }
+{ #category : 'simulation control' }
 AbstractSimulation >> stopTime: endTime [
 
 	self safelyDo: [ stopTime := endTime ]. 				"in seconds"
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractSimulation >> stopUnprotected [
 
 	| r |
@@ -389,7 +356,7 @@ AbstractSimulation >> stopUnprotected [
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 AbstractSimulation >> storeOn: aStream [
 
 	aStream nextPut: $(.
@@ -405,7 +372,7 @@ AbstractSimulation >> storeOn: aStream [
 
 ]
 
-{ #category : #GUI }
+{ #category : 'GUI' }
 AbstractSimulation >> timeToShow [
 	^ clock 
 ]

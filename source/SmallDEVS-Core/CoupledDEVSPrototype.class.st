@@ -5,28 +5,30 @@ Uses PrototypeObject from Squeak Prototype package.
 
 "
 Class {
-	#name : #CoupledDEVSPrototype,
-	#superclass : #CoupledDEVS,
+	#name : 'CoupledDEVSPrototype',
+	#superclass : 'CoupledDEVS',
 	#instVars : [
 		'agent',
 		'comment',
 		'positions'
 	],
-	#category : #'SmallDEVS-Core-Prototypes'
+	#category : 'SmallDEVS-Core-Prototypes',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Prototypes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> agent [
 	^ agent
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> agent: a [
 	agent := a.
 	a devs: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> balloonText [
 	| text |
 	text := self workspace findTokens: String cr.
@@ -34,17 +36,17 @@ CoupledDEVSPrototype >> balloonText [
 	^ nil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> comment [
 	^ comment
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> comment: aString [
 	comment := aString.
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 CoupledDEVSPrototype >> copy [
 
 	| aCopy |
@@ -59,7 +61,7 @@ CoupledDEVSPrototype >> copy [
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 CoupledDEVSPrototype >> couplingsStoreString [
 	"a more readable version of self coupling storeString"
 
@@ -77,7 +79,7 @@ CoupledDEVSPrototype >> couplingsStoreString [
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 CoupledDEVSPrototype >> eq: anObject [
 
 	anObject class = self class ifFalse: [ NonEqDetected signal. ^ false ].
@@ -99,7 +101,7 @@ CoupledDEVSPrototype >> eq: anObject [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> initialize [
 	super initialize.
 	
@@ -114,24 +116,24 @@ CoupledDEVSPrototype >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> positions [
 	^positions
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> positions: aDictionary [
 	positions:=aDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> renameTo: aString [
 
 	^self parent rename: self name to: aString asSymbol
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> select: immList [
 
 	^ (agent respondsTo: #select:) 
@@ -139,13 +141,13 @@ CoupledDEVSPrototype >> select: immList [
 		ifFalse: [ super select: immList ]
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 CoupledDEVSPrototype >> sixxOn: aStream name: nm indent: level context: dictionary [
 
 	(CoupledDEVSConstructor for: self) sixxOn: aStream name: nm indent: level context: dictionary
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 CoupledDEVSPrototype >> storeOn: aStream [
 	
 	aStream nextPut: $(.
@@ -185,7 +187,7 @@ CoupledDEVSPrototype >> storeOn: aStream [
 	aStream nextPutAll: ' yourself)'; nextPutAll: String cr
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSPrototype >> workspace [
 	^ comment
 ]

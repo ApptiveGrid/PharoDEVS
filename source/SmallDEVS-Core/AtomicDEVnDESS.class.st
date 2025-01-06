@@ -1,6 +1,6 @@
 Class {
-	#name : #AtomicDEVnDESS,
-	#superclass : #AtomicDEVS,
+	#name : 'AtomicDEVnDESS',
+	#superclass : 'AtomicDEVS',
 	#instVars : [
 		'time',
 		'step',
@@ -12,22 +12,24 @@ Class {
 		'sePolarity',
 		'seConditionIndex'
 	],
-	#category : #'SmallDEVS-Core-Continuous'
+	#category : 'SmallDEVS-Core-Continuous',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Continuous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> addInputNPortNamed: n [
 
 	^ self addInputPortOfType: InputNPort named: n
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> addOutputNPortNamed: n [
 
 	^ self addOutputPortOfType: OutputNPort named: n
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> addSECondition: aBlock [
 
 	conditions add: aBlock.
@@ -36,7 +38,7 @@ AtomicDEVnDESS >> addSECondition: aBlock [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> allocateIntegrators: n [
 
 	intg := Array new: n.
@@ -45,25 +47,25 @@ AtomicDEVnDESS >> allocateIntegrators: n [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> getSimulator [
 
 	^ (DEVnDESSRootSolver basicNew rootDEVS: self) initialize
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> getSimulatorRT [
 
 	^ (DEVnDESSRootSolverRT basicNew rootDEVS: self) initialize
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> initConditions [
 
 	self subclassResponsibility
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> initialize [
 
 	super initialize.
@@ -78,7 +80,7 @@ AtomicDEVnDESS >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> intg: n integrate: block [ 
 
 	"Euler integration. To be replaced by RK4 or something else in future."
@@ -87,21 +89,21 @@ AtomicDEVnDESS >> intg: n integrate: block [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> intgPostStep [
 
 	intg := intgTmp copy.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> receiveMsgInitTime: t [
 
 	super receiveMsgInitTime: t.
 	time := t.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> receiveNMsgStarTime: t step: h [
 
 	(t = time) "no #closeTo: because step restart is initated by exatly the same argument (?)"
@@ -121,7 +123,7 @@ AtomicDEVnDESS >> receiveNMsgStarTime: t step: h [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> receiveNMsgX: x time: t step: h [
 
 	 | s1 s2 | 
@@ -145,7 +147,7 @@ AtomicDEVnDESS >> receiveNMsgX: x time: t step: h [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> removeSEConditionNo: index [
 
 	conditions remove: (conditions at: index).
@@ -154,13 +156,13 @@ AtomicDEVnDESS >> removeSEConditionNo: index [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> revertToPrevState [
 
 	intg := savedIntg copy.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AtomicDEVnDESS >> saveState [
 
 	savedIntg := intg copy.

@@ -4,8 +4,8 @@ I'm a class of auxiliary objects needed by SIXX to serialize/deserialize instanc
 TO DO: Use SIXX custom serialization instead of this dirty hack.
 "
 Class {
-	#name : #CoupledDEVSConstructor,
-	#superclass : #Object,
+	#name : 'CoupledDEVSConstructor',
+	#superclass : 'Object',
 	#instVars : [
 		'class',
 		'components',
@@ -17,16 +17,18 @@ Class {
 		'agent',
 		'comment'
 	],
-	#category : #'SmallDEVS-Core-Prototypes'
+	#category : 'SmallDEVS-Core-Prototypes',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Prototypes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSConstructor class >> for: aCoupledDEVS [
 
 	^ self new for: aCoupledDEVS
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSConstructor >> for: aCoupledDEVS [
 
 	class := "aCoupledDEVS species" CoupledDEVSPrototype.
@@ -46,7 +48,7 @@ CoupledDEVSConstructor >> for: aCoupledDEVS [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVSConstructor >> sixxInitialize [
 	"The method is called after the loading of the receiver"
 

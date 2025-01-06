@@ -6,17 +6,18 @@ Signalized in #eq:. Usefull for debugging:
 
 "
 Class {
-	#name : #NonEqDetected,
-	#superclass : #Exception,
-	#category : #'SmallDEVS-MyRepository'
+	#name : 'NonEqDetected',
+	#superclass : 'Exception',
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 NonEqDetected >> defaultAction [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 NonEqDetected >> isResumable [
 	^true
 ]

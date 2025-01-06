@@ -1,34 +1,36 @@
 Class {
-	#name : #CoupledDEVnDESS,
-	#superclass : #CoupledDEVS,
-	#category : #'SmallDEVS-Core-Continuous'
+	#name : 'CoupledDEVnDESS',
+	#superclass : 'CoupledDEVS',
+	#category : 'SmallDEVS-Core-Continuous',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Continuous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVnDESS >> addInputNPortNamed: n [
 
 	^ self addInputPortOfType: InputNPort named: n
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVnDESS >> addOutputNPortNamed: n [
 
 	^ self addOutputPortOfType: OutputNPort named: n
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVnDESS >> getSimulator [
 
 	^ (DEVnDESSRootSolver basicNew rootDEVS: self) initialize
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVnDESS >> getSimulatorRT [
 
 	^ (DEVnDESSRootSolverRT basicNew rootDEVS: self) initialize
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVnDESS >> receiveNMsgStarTime: t step: h [
 
 	| yy xx yetUnevaluatedFunctions toEvaluate |
@@ -61,7 +63,7 @@ CoupledDEVnDESS >> receiveNMsgStarTime: t step: h [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVnDESS >> receiveNMsgX: x time: t step: h [
 
 	| xx yy |

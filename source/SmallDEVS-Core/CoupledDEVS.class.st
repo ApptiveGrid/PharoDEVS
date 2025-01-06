@@ -1,30 +1,30 @@
 Class {
-	#name : #CoupledDEVS,
-	#superclass : #BaseDEVS,
+	#name : 'CoupledDEVS',
+	#superclass : 'BaseDEVS',
 	#instVars : [
 		'components',
 		'namedComponents',
 		'eventList'
 	],
-	#category : #'SmallDEVS-Core'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> addComponent: model named: n [
 	^ self addSubModel: model named: n
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> addComponents: compList [
 
 	compList do: [ :assoc |
 		self addComponent: (assoc value) named: (assoc key) ].
-	(MyRepository root) changed: #hierarchicalList.
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> addCouplings: net [
 
 	"aCoupledDEVS addCouplings: {
@@ -38,7 +38,7 @@ CoupledDEVS >> addCouplings: net [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> addSubModel: model [
 
 	self safelyDo: [
@@ -47,7 +47,7 @@ CoupledDEVS >> addSubModel: model [
 	^ model
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> addSubModel: model named: n [
 
 	(namedComponents keys includes: n) ifTrue: [ self error: 'Coulpled DEVS: Name of new component collides.' ].
@@ -58,23 +58,23 @@ CoupledDEVS >> addSubModel: model named: n [
 	^ model.
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> componentNamed: n [
   ^self subModelNamed: n.
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> componentNamed: n ifAbsent: aBlock [
   ^self subModelNamed: n ifAbsent: aBlock.
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> componentNames [
 
 	^ namedComponents keys
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> connectInAnyDirectionSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 [
 
 	self connectSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 ifFail: [
@@ -84,7 +84,7 @@ CoupledDEVS >> connectInAnyDirectionSubModelNamed: c1 port: p1 toSubModelNamed: 
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> connectPort: p1 to: p2 [
 
 	(p1 outLines includes: p2) & (p2 inLines includes: p1) ifFalse: [
@@ -93,7 +93,7 @@ CoupledDEVS >> connectPort: p1 to: p2 [
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> connectSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 [
 
 "	self connectSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 ifFail: 
@@ -103,7 +103,7 @@ CoupledDEVS >> connectSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 [
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> connectSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 ifFail: aBlock [
 
 	| port1 port2 | 
@@ -120,7 +120,7 @@ CoupledDEVS >> connectSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 if
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 CoupledDEVS >> copy [
 
 	| aCopy |
@@ -134,13 +134,13 @@ CoupledDEVS >> copy [
 	^  aCopy
 ]
 
-{ #category : #couplings }
+{ #category : 'couplings' }
 CoupledDEVS >> couplingExists: aCoupling [
 
  	^ (self couplings detect: [ :c | c = aCoupling ] ifNone: [ nil ]) notNil
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> couplings [
 
 	"Returns something like this:
@@ -188,21 +188,21 @@ CoupledDEVS >> couplings [
 
 ]
 
-{ #category : #couplings }
+{ #category : 'couplings' }
 CoupledDEVS >> couplingsOfModel: aSymbol [
 
 	^ self couplings select: [ :c | ((c key first)=aSymbol) | ((c value first)=aSymbol) ]
 
 ]
 
-{ #category : #couplings }
+{ #category : 'couplings' }
 CoupledDEVS >> couplingsOfPort: aSymbol [
 
 	^ self couplings select: [ :c |
 		(((c key second)=aSymbol) & ((c key first)=#self)) | (((c value second)=aSymbol) & ((c value first)=#self))]
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> deepVerbose: truefalse [
 
 	self beVerbose: truefalse.
@@ -210,13 +210,13 @@ CoupledDEVS >> deepVerbose: truefalse [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> finalize [
 
 	components do: [ :c | c finalize ]
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> initialize [
 
 	super initialize.
@@ -224,7 +224,7 @@ CoupledDEVS >> initialize [
 	namedComponents := Dictionary new.
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> receiveMsgInitTime: t [
 
 	timeLast := 0.
@@ -238,7 +238,7 @@ CoupledDEVS >> receiveMsgInitTime: t [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> receiveMsgSETime: t [
 
 	t < timeNext ifTrue: [ 
@@ -251,7 +251,7 @@ CoupledDEVS >> receiveMsgSETime: t [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> receiveMsgStarTime: t [
 
 	| immChildren selected yy xx |
@@ -294,14 +294,14 @@ CoupledDEVS >> receiveMsgStarTime: t [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> receiveMsgSyncTime: t [
 
 	components do: [ :c | c receiveMsgSyncTime: t ].
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> receiveMsgX: x time: t [
 
 	| xx |
@@ -322,7 +322,7 @@ CoupledDEVS >> receiveMsgX: x time: t [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> removeAllCouplings [
 	| cpl |
 	cpl := OrderedCollection new.
@@ -333,29 +333,27 @@ CoupledDEVS >> removeAllCouplings [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> removeAllSubModels [
 
 	components := OrderedCollection new.
 	namedComponents := Dictionary new.
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> removeComponentNamed: n [
 	^ self removeSubModelNamed: n
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> removeComponents: compList [
 
 	compList do: [ :x |
 		self removeComponentNamed: x ].
-	(MyRepository root) changed: #hierarchicalList.
-
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> removeCouplings: net [
 
 	"aCoupledDEVS removeCouplings: {
@@ -369,34 +367,34 @@ CoupledDEVS >> removeCouplings: net [
 
 ]
 
-{ #category : #couplings }
+{ #category : 'couplings' }
 CoupledDEVS >> removeCouplingsOfModel: n [
 
 	self safelyDo: [ self removeCouplings: (self couplingsOfModel: n) ].
 
 ]
 
-{ #category : #couplings }
+{ #category : 'couplings' }
 CoupledDEVS >> removeCouplingsOfPort: n [
 
 	self safelyDo: [ self removeCouplings: (self couplingsOfPort: n) ]
 ]
 
-{ #category : #couplings }
+{ #category : 'couplings' }
 CoupledDEVS >> removeInputPortNamed: n [
 
   self removeCouplingsOfPort: n.
   super removeInputPortNamed: n.
 ]
 
-{ #category : #couplings }
+{ #category : 'couplings' }
 CoupledDEVS >> removeOutputPortNamed: n [
 
   self removeCouplingsOfPort: n.
   super removeOutputPortNamed: n.
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> removeSubModel: model [
 
 	self safelyDo: [ 
@@ -407,7 +405,7 @@ CoupledDEVS >> removeSubModel: model [
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> removeSubModelNamed: n [
 	| model |
 
@@ -418,7 +416,7 @@ CoupledDEVS >> removeSubModelNamed: n [
 	^model
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> rename: n1 to: n2 [
 	"returns true if ok"
 	(namedComponents keys includes: n1) ifFalse: [^false].
@@ -430,7 +428,7 @@ CoupledDEVS >> rename: n1 to: n2 [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 CoupledDEVS >> reportStructure [
 
 	super reportStructure.
@@ -440,7 +438,7 @@ CoupledDEVS >> reportStructure [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CoupledDEVS >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
@@ -449,27 +447,27 @@ CoupledDEVS >> reset [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> select: immList [
 
 	^ (immList asSortedCollection: [ :c1 :c2 | c1 name <= c2 name ]) first
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> subModelNamed: n [
 
 	n == #self ifTrue: [ ^ self ].
 	^ namedComponents at: n
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> subModelNamed: n ifAbsent: aBlock [
 
 	n == #self ifTrue: [ ^ self ].
 	^ namedComponents at: n ifAbsent: aBlock
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 CoupledDEVS >> unconnectPort: p1 from: p2 [
 
 	(p1 outLines includes: p2)  ifTrue: [ p1 outLines remove: p2 ].
@@ -477,7 +475,7 @@ CoupledDEVS >> unconnectPort: p1 from: p2 [
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c2 port: p2 [
 
 	self unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c2 port: p2 ifFail: [
@@ -486,7 +484,7 @@ CoupledDEVS >> unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c2 port: p
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 CoupledDEVS >> unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c2 port: p2 ifFail: aBlock [
 
 	| port1 port2 | 

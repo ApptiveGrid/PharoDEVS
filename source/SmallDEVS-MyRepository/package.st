@@ -1,1 +1,1 @@
-Package { #name : #'SmallDEVS-MyRepository' }
+Package { #name : 'SmallDEVS-MyRepository' }

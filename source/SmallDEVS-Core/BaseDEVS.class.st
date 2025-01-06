@@ -1,6 +1,6 @@
 Class {
-	#name : #BaseDEVS,
-	#superclass : #DEVSEntity,
+	#name : 'BaseDEVS',
+	#superclass : 'DEVSEntity',
 	#instVars : [
 		'parent',
 		'inputPorts',
@@ -11,36 +11,37 @@ Class {
 		'timeNext',
 		'verbose'
 	],
-	#category : #'SmallDEVS-Core'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BaseDEVS class >> getSimulator [
 
 	^ self new getSimulator
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BaseDEVS class >> getSimulatorRT [
 
 	^ self new getSimulatorRT
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BaseDEVS class >> new [
 
 	^ self basicNew initialize	"not needed in 3.7+"
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> addInputPortNamed: n [
 
 	^ self addInputPortOfType: InputPort named: n
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BaseDEVS >> addInputPortOfType: portClass named: n [
 
 	| port |
@@ -49,20 +50,20 @@ BaseDEVS >> addInputPortOfType: portClass named: n [
 	^ port
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> addInputPorts: list [
 
 	list do: [ :p | self addInputPortNamed: p ].
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> addOutputPortNamed: n [
 
 	^ self addOutputPortOfType: OutputPort named: n
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BaseDEVS >> addOutputPortOfType: portClass named: n [
 
 	| port |
@@ -71,14 +72,14 @@ BaseDEVS >> addOutputPortOfType: portClass named: n [
 	^ port
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> addOutputPorts: list [
 
 	list do: [ :p | self addOutputPortNamed: p ].
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> beVerbose: truefalse [
 
 	verbose := truefalse.
@@ -86,12 +87,12 @@ BaseDEVS >> beVerbose: truefalse [
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> componentNames [
   ^Array new
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BaseDEVS >> copy [
 
 	| aCopy |
@@ -114,7 +115,7 @@ BaseDEVS >> copy [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> deepVerbose: truefalse [
 
 	self beVerbose: truefalse.
@@ -122,31 +123,31 @@ BaseDEVS >> deepVerbose: truefalse [
 
 ]
 
-{ #category : #sixx }
+{ #category : 'sixx' }
 BaseDEVS >> doNotStore [
 	"Returns array of inst variables which have not to be stored."
 	^ Array new.
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> getSimulator [
 
 	^ (DEVSRootSolver basicNew rootDEVS: self) initialize
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> getSimulatorRT [
 
 	^ (DEVSRootSolverRT basicNew rootDEVS: self) initialize
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> initModel [
 
 	^ self
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> initialize [
 
 	inputPorts := Dictionary new.
@@ -163,92 +164,83 @@ BaseDEVS >> initialize [
 
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> input [
 	^input
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> input: i [
 	input := i
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> inputPortNamed: n [
 	
 	^  inputPorts at: n ifAbsent: [nil]
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> inputPortNames [
   ^self inputPorts collect: [:ip | ip name]
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> inputPorts [
 
 	^ inputPorts values
 
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> isRootDEVS [
 	^ parent isKindOf: DEVSRootSolver
 
 ]
 
-{ #category : #fileout }
-BaseDEVS >> makeSAR [
-	self rootSolver 
-		ifNotNil: [ self rootSolver safelyDo: [ MyRepository makeSARfrom: self ] ]
-		ifNil: [ MyRepository makeSARfrom: self ].
-
-
-]
-
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> output [
 	^output
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> output: o [
 	output := o
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> outputPortNamed: n [
 
 	^  outputPorts at: n ifAbsent: [nil]
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> outputPortNames [
   ^self outputPorts collect: [:op | op name]
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> outputPorts [
 
 	^ outputPorts values
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> parent [
 
 	^ parent
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> parent: p [
 
 	parent := p
 
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> pathName [
 	parent isNil ifTrue: [^''].
 	self isRootDEVS 
@@ -257,21 +249,21 @@ BaseDEVS >> pathName [
 
 ]
 
-{ #category : #'port accessing' }
+{ #category : 'port accessing' }
 BaseDEVS >> peekFrom: p [
 	| port |
 	(port := (self inputPortNamed: p)) ifNil: [self error: 'port not found'].
 	^ input at: port ifAbsent: [ nil ]
 ]
 
-{ #category : #'port accessing' }
+{ #category : 'port accessing' }
 BaseDEVS >> poke: x to: p [
 	| port |
 	(port := (self outputPortNamed: p)) ifNil: [self error: 'port not found'].
 	output at: port  put: x
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BaseDEVS >> printOn: aStream [
 
 	(parent isKindOf: BaseDEVS) ifTrue: [ parent printOn: aStream. aStream nextPutAll: '/' ].
@@ -280,7 +272,7 @@ BaseDEVS >> printOn: aStream [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> receiveMsgSyncTime: t [
 
 	"See subclasses. MsgSync prepares atomic models to receive MsgInit safely during simulation. It updates elapsed time of atomic models. This is used before cloning, removing, and adding submodels during simulation. MsgInit uses saved value if timeAdvance for sure (it eases random generation of timeAdvance because timeAdvenace is not invocated more then once at a time).
@@ -291,7 +283,7 @@ BaseDEVS >> receiveMsgSyncTime: t [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> removeAllPorts [
 
 	inputPorts := Dictionary new.
@@ -299,35 +291,35 @@ BaseDEVS >> removeAllPorts [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> removeInputPortNamed: n [
 
 	inputPorts removeKey: n.
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> removeInputPorts: list [
 
 	list do: [ :p | self removeInputPortNamed: p ].
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 BaseDEVS >> removeOutputPortNamed: n [
 
 	outputPorts removeKey: n.
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> removeOutputPorts: list [
 
 	list do: [ :p | self removeOutputPortNamed: p ].
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> renameInputPort: n1 to: n2 [
 	"returns true if ok"
 	(inputPorts keys includes: n1) ifFalse: [^false].
@@ -338,7 +330,7 @@ BaseDEVS >> renameInputPort: n1 to: n2 [
 
 ]
 
-{ #category : #modeling2 }
+{ #category : 'modeling2' }
 BaseDEVS >> renameOutputPort: n1 to: n2 [
 	"returns true if ok"
 	(outputPorts keys includes: n1) ifFalse: [^false].
@@ -349,28 +341,28 @@ BaseDEVS >> renameOutputPort: n1 to: n2 [
 
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BaseDEVS >> reportInputPortConfig [
 
 	inputPorts associationsDo: [ :assoc |
 		self reportStream nextPutAll: '        ', assoc key asString, ':', String tab, (input at: assoc value ifAbsent: [nil]) printString, String cr ].
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BaseDEVS >> reportOutputPortConfig [
 
 	outputPorts associationsDo: [ :assoc |
 		self reportStream nextPutAll: '        ', assoc key asString, ': ', String tab, (output at: assoc value ifAbsent: [nil]) printString, String cr ].
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> reportStream [
 
 	^ self rootSolver reportStream
 
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BaseDEVS >> reportStructure [
 
 	| prefix |
@@ -388,14 +380,14 @@ BaseDEVS >> reportStructure [
 
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
 	self initModel
 ]
 
-{ #category : #misc }
+{ #category : 'misc' }
 BaseDEVS >> rootSolver [
 
 	(parent isKindOf: DEVSRootSolver) ifTrue: [ ^parent ].
@@ -404,7 +396,7 @@ BaseDEVS >> rootSolver [
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BaseDEVS >> safeCopy [
 
 	| aCopy |
@@ -414,7 +406,7 @@ BaseDEVS >> safeCopy [
 	^ aCopy
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BaseDEVS >> safelyDo: aBlock [
 	"Intended for model edition at runtime (not thread safe - usable either only reflectively by a DEVS itself as part of a simulation step, or by anybody else when simulation is suspended; for thread safe use see AbstractSimulation>>safelyDo:). 
 	Synchronizes DEVS before and inits it after the block evaluation. If the simulation is suspended, then no synchronization nor initialization is needed because it has already been synchronized during simulation stop and it will be initialized during simulation start."
@@ -431,7 +423,7 @@ BaseDEVS >> safelyDo: aBlock [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> simulate: t [
 
 	"obsolete! Use getSimulator simulate: t "
@@ -452,7 +444,7 @@ BaseDEVS >> simulate: t [
 
 ]
 
-{ #category : #sixx }
+{ #category : 'sixx' }
 BaseDEVS >> sixxContentOn: aStream indent: level context: dictionary [ 
 	"Copied from Object>>sixxInstVarsOn:indent:context: and reimplemented not 
 	to store all."
@@ -465,7 +457,7 @@ BaseDEVS >> sixxContentOn: aStream indent: level context: dictionary [
 				context: dictionary]
 ]
 
-{ #category : #sixx }
+{ #category : 'sixx' }
 BaseDEVS >> sixxOn: aStream name: nameString indent: level context: dictionary [ 
 	" Serializing a component. Connections to other outer comonents have to be disconnected for the serialized version of the component. It is a resposibility of a CoupledDEVS to connect the components."
 	| lParent lInPorts lOutPorts |
@@ -476,19 +468,19 @@ BaseDEVS >> sixxOn: aStream name: nameString indent: level context: dictionary [
 	
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BaseDEVS >> sixxcopy [
 	"experimental alternative to copy - usefull for testing purposes only"
 	^Object readSixxFrom: self sixxString
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BaseDEVS >> sscopy [
 	"experimental alternative to copy - usefull for testing purposes only"
 	^Object readFrom: self storeString
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BaseDEVS >> storeOn: aStream [
 
 	"NOT USED. Remove ???" self halt. "for sure"
@@ -517,19 +509,19 @@ BaseDEVS >> storeOn: aStream [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> timeLast [
 
 	^ timeLast
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> timeNext [
 
 	^ timeNext
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 BaseDEVS >> verbose [
 
 	^ verbose 

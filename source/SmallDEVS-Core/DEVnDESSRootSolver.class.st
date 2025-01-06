@@ -1,16 +1,18 @@
 Class {
-	#name : #DEVnDESSRootSolver,
-	#superclass : #DEVSRootSolver,
+	#name : 'DEVnDESSRootSolver',
+	#superclass : 'DEVSRootSolver',
 	#instVars : [
 		'tn',
 		'h',
 		'dh',
 		'seDetected'
 	],
-	#category : #'SmallDEVS-Core-Continuous'
+	#category : 'SmallDEVS-Core-Continuous',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Continuous'
 }
 
-{ #category : #'OBSOLETE ???' }
+{ #category : 'OBSOLETE ???' }
 DEVnDESSRootSolver >> bigStep [
 
 		tn := rootDEVS timeNext. 
@@ -32,7 +34,7 @@ DEVnDESSRootSolver >> bigStep [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVnDESSRootSolver >> initialize [
 
 	super initialize.
@@ -40,7 +42,7 @@ DEVnDESSRootSolver >> initialize [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVnDESSRootSolver >> numericStep [
 
 	clock + h < tn ifTrue: [ dh := h ] ifFalse: [ dh := tn - clock ].
@@ -65,7 +67,7 @@ DEVnDESSRootSolver >> numericStep [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVnDESSRootSolver >> receiveMsgSETime: tnc [
 
 	seDetected := true.
@@ -74,7 +76,7 @@ DEVnDESSRootSolver >> receiveMsgSETime: tnc [
 
 ]
 
-{ #category : #'OBSOLETE ???' }
+{ #category : 'OBSOLETE ???' }
 DEVnDESSRootSolver >> simulateB: t [
 
 	stopTime := t.
@@ -87,7 +89,7 @@ DEVnDESSRootSolver >> simulateB: t [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 DEVnDESSRootSolver >> simulationStep [
 
 	"Numeric step:"

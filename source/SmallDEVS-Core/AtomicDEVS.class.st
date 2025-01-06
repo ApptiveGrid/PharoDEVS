@@ -1,14 +1,15 @@
 Class {
-	#name : #AtomicDEVS,
-	#superclass : #BaseDEVS,
+	#name : 'AtomicDEVS',
+	#superclass : 'BaseDEVS',
 	#instVars : [
 		'elapsed',
 		'savedTimeAdvance'
 	],
-	#category : #'SmallDEVS-Core'
+	#category : 'SmallDEVS-Core',
+	#package : 'SmallDEVS-Core'
 }
 
-{ #category : #copying }
+{ #category : 'copying' }
 AtomicDEVS >> copy [
 
 	| aCopy |
@@ -17,18 +18,18 @@ AtomicDEVS >> copy [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> elapsed [
 	^elapsed
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> extTransition [
 
 	self subclassResponsibility
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> initialize [
 
 	super initialize.
@@ -37,13 +38,13 @@ AtomicDEVS >> initialize [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> intTransition [
 
 	self subclassResponsibility
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 AtomicDEVS >> longPrintOn: aStream [
 	"Prints DEVS state, i.e. only variables that are not inherited from AtomicDEVS"
 
@@ -58,25 +59,25 @@ AtomicDEVS >> longPrintOn: aStream [
 		 cr]]
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> outputFnc [
 
 	self subclassResponsibility
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> prepareToStart [
 	"Resumes eventual processes in atomic model. It makes some sense in RT simulation."
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> prepareToStop [
 	"Suspends eventual processes in atomic model. It makes some sense in RT simulation."
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 AtomicDEVS >> receiveMsgInitTime: t [
 
 	timeLast := t - elapsed.
@@ -88,7 +89,7 @@ AtomicDEVS >> receiveMsgInitTime: t [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 AtomicDEVS >> receiveMsgStarTime: t [
 
 	self assert: [ (t - timeNext) closeTo: 0 ].
@@ -114,7 +115,7 @@ AtomicDEVS >> receiveMsgStarTime: t [
 
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 AtomicDEVS >> receiveMsgSyncTime: t [
 
 	timeLast ifNotNil: [ 
@@ -123,7 +124,7 @@ AtomicDEVS >> receiveMsgSyncTime: t [
 	self prepareToStop.		"suspend processes in atomic models"
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 AtomicDEVS >> receiveMsgX: x time: t [
 
 	self assert: [ (timeLast <= t) & (t <= timeNext) ].
@@ -145,12 +146,12 @@ AtomicDEVS >> receiveMsgX: x time: t [
 
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> remaining [
 	^ savedTimeAdvance - elapsed
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AtomicDEVS >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
@@ -158,19 +159,19 @@ AtomicDEVS >> reset [
 	self initModel
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 AtomicDEVS >> sendMsgSETime: t [
 
 	parent receiveMsgSETime: (timeNext := t).
 
 ]
 
-{ #category : #'internal events' }
+{ #category : 'internal events' }
 AtomicDEVS >> signalStateEvent [   
 	self rootSolver stateEventIn: self
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 AtomicDEVS >> timeAdvance [
 
 	self subclassResponsibility

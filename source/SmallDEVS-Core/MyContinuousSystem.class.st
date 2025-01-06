@@ -2,12 +2,14 @@
 Coupled DEVnDESS example.
 "
 Class {
-	#name : #MyContinuousSystem,
-	#superclass : #CoupledDEVnDESS,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MyContinuousSystem',
+	#superclass : 'CoupledDEVnDESS',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousSystem >> initialize [
 
 	super initialize.

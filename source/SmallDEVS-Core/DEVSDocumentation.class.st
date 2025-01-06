@@ -48,12 +48,14 @@ To do:
 
 "
 Class {
-	#name : #DEVSDocumentation,
-	#superclass : #Object,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'DEVSDocumentation',
+	#superclass : 'Object',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #demo }
+{ #category : 'demo' }
 DEVSDocumentation class >> classlessDemo [
 
 	"See AtomicDEVSPrototype>>example1 to learn how to construct DEVS models without classes."
@@ -63,7 +65,7 @@ DEVSDocumentation class >> classlessDemo [
 
 ]
 
-{ #category : #demo }
+{ #category : 'demo' }
 DEVSDocumentation class >> continuousDemo [
 
 	"Van Der Pol system specified as atomic model, 
@@ -85,7 +87,7 @@ DEVSDocumentation class >> continuousDemo [
 
 ]
 
-{ #category : #demo }
+{ #category : 'demo' }
 DEVSDocumentation class >> discreteDemo [
 
 	"Generator generates jobs of random size, cascade of processors with queues process the jobs."
@@ -97,7 +99,7 @@ DEVSDocumentation class >> discreteDemo [
 
 ]
 
-{ #category : #demo }
+{ #category : 'demo' }
 DEVSDocumentation class >> dynamicDemo [
 
 	| s c |
@@ -110,36 +112,7 @@ DEVSDocumentation class >> dynamicDemo [
 
 ]
 
-{ #category : #demo }
-DEVSDocumentation class >> multisimulationDemo [
-
-	(MyRepository componentNamed: 'Simulations') addComponents: { 
-		'AtomicDEVSPrototype example1' -> AtomicDEVSPrototype example1.
-		'MySystem3b-RT' -> MySystem3b getSimulatorRT. 
-		'MyContinuousSystem1' -> MyContinuousSystem1 getSimulator.
-		'MyContinuousSystem2'-> MyContinuousSystem2 getSimulator. }.
-	
-	((MyRepository componentNamed: 'Simulations') componentNamed: 'MyContinuousSystem1') 
-		stopTime: 5;
-		start.
-
-	((MyRepository componentNamed: 'Simulations') componentNamed: 'MyContinuousSystem2') 
-		stopTime: 50;
-		start.
-
-	"Interactive simulation:
-		MyRepository root explore.
-	 Find a simulation and try:
-		self start
-		self stop
-		self restart
-		self rtFactor: 10
-		self stopTime: 50
-		self simulate: 20 "
-
-]
-
-{ #category : #demo }
+{ #category : 'demo' }
 DEVSDocumentation class >> realtimeDemo [
 
 	| s |

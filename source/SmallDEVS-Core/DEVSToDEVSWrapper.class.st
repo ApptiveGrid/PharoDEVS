@@ -4,8 +4,8 @@ This wrapper wraps a simulator with independent time. Simulation can be controll
 TO DO: eventsOut
 "
 Class {
-	#name : #DEVSToDEVSWrapper,
-	#superclass : #DEVSWrapper,
+	#name : 'DEVSToDEVSWrapper',
+	#superclass : 'DEVSWrapper',
 	#instVars : [
 		'rootSolver',
 		'phase',
@@ -13,21 +13,23 @@ Class {
 		'eventsOut',
 		'reportOut'
 	],
-	#category : #'SmallDEVS-Core-Wrapping'
+	#category : 'SmallDEVS-Core-Wrapping',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Wrapping'
 }
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> balloonText [
 
 	^ 'Nested simulation'
 ]
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> componentNames [
   ^ rootSolver rootDEVS componentNames
 ]
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> doesNotUnderstand: message [
 	"delegate the other messages to the nested rootSolver"
 	"Transcript show: 'WRAPPER: Delegating to root DEVS: ', message printString; cr."
@@ -36,7 +38,7 @@ DEVSToDEVSWrapper >> doesNotUnderstand: message [
 
 ]
 
-{ #category : #devs }
+{ #category : 'devs' }
 DEVSToDEVSWrapper >> extTransition [
 
 	(self peekFrom: #start) ifNotNil: [ rootSolver start. phase := #running ].
@@ -49,12 +51,12 @@ DEVSToDEVSWrapper >> extTransition [
 
 ]
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> fullName [
 	^ rootSolver name, ' [', (rootSolver isRunning ifTrue: ['R'] ifFalse: ['S']) , ']'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DEVSToDEVSWrapper >> initialize [
 
 	super initialize.
@@ -70,7 +72,7 @@ DEVSToDEVSWrapper >> initialize [
 
 ]
 
-{ #category : #devs }
+{ #category : 'devs' }
 DEVSToDEVSWrapper >> intTransition [
 
 	request := nil.
@@ -84,19 +86,19 @@ DEVSToDEVSWrapper >> intTransition [
 
 ]
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> name [
   ^ rootSolver rootDEVS name
 ]
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> name: n [
 	name := n.
 	rootSolver name: n.
 	^ rootSolver rootDEVS name: n
 ]
 
-{ #category : #devs }
+{ #category : 'devs' }
 DEVSToDEVSWrapper >> outputFnc [
 
 	request caseOf: {
@@ -108,32 +110,32 @@ DEVSToDEVSWrapper >> outputFnc [
 
 ]
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> parent [
   ^ rootSolver rootDEVS parent
 ]
 
-{ #category : #wrapper }
+{ #category : 'wrapper' }
 DEVSToDEVSWrapper >> parent: p [
 	parent := p.
 "	rootSolver parent: p. "
 
 ]
 
-{ #category : #devs }
+{ #category : 'devs' }
 DEVSToDEVSWrapper >> prepareToStart [
 
 	phase = #running ifTrue: [ rootSolver start ].
 ]
 
-{ #category : #devs }
+{ #category : 'devs' }
 DEVSToDEVSWrapper >> prepareToStop [
 
 	rootSolver isRunning ifTrue: [ phase := #running. rootSolver stop ].
 
 ]
 
-{ #category : #devs }
+{ #category : 'devs' }
 DEVSToDEVSWrapper >> timeAdvance [
 
 	^ ((request ifNil: [Float infinity] ifNotNil: [0])

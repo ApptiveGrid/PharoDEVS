@@ -7,12 +7,14 @@ MySystem2 getSimulator simulate: 100.
 
 "
 Class {
-	#name : #MySystem2,
-	#superclass : #CoupledDEVS,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MySystem2',
+	#superclass : 'CoupledDEVS',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MySystem2 >> initialize [
 
 	super initialize.

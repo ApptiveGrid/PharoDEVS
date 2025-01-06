@@ -1,6 +1,6 @@
-Extension { #name : #SharedQueue }
+Extension { #name : 'SharedQueue' }
 
-{ #category : #'*SmallDEVS-Core' }
+{ #category : '*SmallDEVS-Core' }
 SharedQueue >> getContentsOrNilAndFlush [
 
 	| r |
@@ -15,7 +15,7 @@ SharedQueue >> getContentsOrNilAndFlush [
 	^r
 ]
 
-{ #category : #'*SmallDEVS-Core' }
+{ #category : '*SmallDEVS-Core' }
 SharedQueue >> nextPutAll: aCollection [
 	"slow. todo: make it faster"
 

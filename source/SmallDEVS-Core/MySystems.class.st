@@ -2,12 +2,14 @@
 DEVS example. All systems coupled together. MyDaemon (part of MySystems) modifies structure of MySystems at runtime
 "
 Class {
-	#name : #MySystems,
-	#superclass : #CoupledDEVnDESS,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MySystems',
+	#superclass : 'CoupledDEVnDESS',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MySystems >> initialize [
 
 	super initialize.

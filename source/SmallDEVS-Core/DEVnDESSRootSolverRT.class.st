@@ -1,16 +1,18 @@
 Class {
-	#name : #DEVnDESSRootSolverRT,
-	#superclass : #DEVSRootSolverRT,
+	#name : 'DEVnDESSRootSolverRT',
+	#superclass : 'DEVSRootSolverRT',
 	#instVars : [
 		'tn',
 		'h',
 		'dh',
 		'seDetected'
 	],
-	#category : #'SmallDEVS-Core-RT'
+	#category : 'SmallDEVS-Core-RT',
+	#package : 'SmallDEVS-Core',
+	#tag : 'RT'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVnDESSRootSolverRT >> initialize [
 	"a pure copy of the same method form non-RT  DEVnDESSRootSolver"
 
@@ -19,7 +21,7 @@ DEVnDESSRootSolverRT >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVnDESSRootSolverRT >> numericStep [
 	"a pure copy of the same method from non-RT  DEVnDESSRootSolver"
 
@@ -45,7 +47,7 @@ DEVnDESSRootSolverRT >> numericStep [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVnDESSRootSolverRT >> receiveMsgSETime: tnc [
 	"a pure copy of the same method form non-RT  DEVnDESSRootSolver"
 
@@ -55,7 +57,7 @@ DEVnDESSRootSolverRT >> receiveMsgSETime: tnc [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVnDESSRootSolverRT >> simulationStep [
 	"Probably full of bugs."
 

@@ -2,15 +2,17 @@
 Part of MySystem3b. Built fo RT.
 "
 Class {
-	#name : #MyGenerator2,
-	#superclass : #MyGenerator,
+	#name : 'MyGenerator2',
+	#superclass : 'MyGenerator',
 	#instVars : [
 		'process'
 	],
-	#category : #'SmallDEVS-Core-Examples'
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator2 >> finalize [
 
 	process isNil ifFalse: [ process terminate. process := nil ]
@@ -18,7 +20,7 @@ MyGenerator2 >> finalize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator2 >> initialize [
 
 	super initialize.
@@ -32,7 +34,7 @@ MyGenerator2 >> initialize [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator2 >> prepareToStart [
 
 	process isNil ifTrue: [ self initialize ].
@@ -40,14 +42,14 @@ MyGenerator2 >> prepareToStart [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator2 >> prepareToStop [
 
 	process suspend.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyGenerator2 >> timeAdvance [
 
 	^ Float infinity	

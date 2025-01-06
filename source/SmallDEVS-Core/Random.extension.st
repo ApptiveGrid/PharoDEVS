@@ -1,6 +1,6 @@
-Extension { #name : #Random }
+Extension { #name : 'Random' }
 
-{ #category : #'*SmallDEVS-Core' }
+{ #category : '*SmallDEVS-Core' }
 Random >> = anObject [
 
 	^ anObject class = self class and: [ seed = anObject seed ]

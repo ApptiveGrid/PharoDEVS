@@ -1,11 +1,11 @@
-Extension { #name : #Association }
+Extension { #name : 'Association' }
 
-{ #category : #'*SmallDEVS-Core' }
+{ #category : '*SmallDEVS-Core' }
 Association >> first [
 	^key
 ]
 
-{ #category : #'*SmallDEVS-Core' }
+{ #category : '*SmallDEVS-Core' }
 Association >> second [
 	^value
 ]

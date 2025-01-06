@@ -1,6 +1,6 @@
-Extension { #name : #Float }
+Extension { #name : 'Float' }
 
-{ #category : #'*SmallDEVS-Core' }
+{ #category : '*SmallDEVS-Core' }
 Float >> storeOn: aStream [
 
 	self = Infinity

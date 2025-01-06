@@ -2,12 +2,14 @@
 Atomic DEVnDESS example.
 "
 Class {
-	#name : #MyContinuousBlock3,
-	#superclass : #AtomicDEVnDESS,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MyContinuousBlock3',
+	#superclass : 'AtomicDEVnDESS',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock3 >> initConditions [
 
 	self allocateIntegrators: 3.
@@ -23,13 +25,13 @@ MyContinuousBlock3 >> initConditions [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock3 >> intTransition [
 
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock3 >> intgStep [
 
 	self intg: 1 integrate: [ 10 * ((intg at: 2) - (intg at: 1)) ].
@@ -39,13 +41,13 @@ MyContinuousBlock3 >> intgStep [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock3 >> outputFnc [
 
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock3 >> outputNFnc [
 
 	self poke: (intg at: 1) to: #o1.
@@ -55,7 +57,7 @@ MyContinuousBlock3 >> outputNFnc [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock3 >> timeAdvance [
 
 	^ Float infinity

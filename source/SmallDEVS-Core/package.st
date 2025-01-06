@@ -1,1 +1,1 @@
-Package { #name : #'SmallDEVS-Core' }
+Package { #name : 'SmallDEVS-Core' }

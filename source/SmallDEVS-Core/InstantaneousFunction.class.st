@@ -7,16 +7,18 @@ f inspect.
 
 "
 Class {
-	#name : #InstantaneousFunction,
-	#superclass : #BaseDEVS,
+	#name : 'InstantaneousFunction',
+	#superclass : 'BaseDEVS',
 	#instVars : [
 		'function',
 		'inputPortNames'
 	],
-	#category : #'SmallDEVS-Core-Continuous'
+	#category : 'SmallDEVS-Core-Continuous',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Continuous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 InstantaneousFunction class >> withInputs: inputPortNames codeBlock: aBlock [
 
 	| function |
@@ -26,7 +28,7 @@ InstantaneousFunction class >> withInputs: inputPortNames codeBlock: aBlock [
 	^ function
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 InstantaneousFunction >> addFunctionPorts: listOfInputPortNames [
 
 
@@ -40,26 +42,26 @@ InstantaneousFunction >> addFunctionPorts: listOfInputPortNames [
 	
 ]
 
-{ #category : #modeling }
+{ #category : 'modeling' }
 InstantaneousFunction >> function: aBlock [
 
 	function := aBlock
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 InstantaneousFunction >> receiveMsgInitTime: t [
 
 	timeLast := t.
 	timeNext := Float infinity.
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 InstantaneousFunction >> receiveMsgStarTime: t [
 
 	^ Dictionary new.
 ]
 
-{ #category : #simulation }
+{ #category : 'simulation' }
 InstantaneousFunction >> receiveNMsgX: x time: t step: h [
 
 	input := x.

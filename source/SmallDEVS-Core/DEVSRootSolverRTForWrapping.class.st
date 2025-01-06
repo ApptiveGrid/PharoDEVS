@@ -1,10 +1,12 @@
 Class {
-	#name : #DEVSRootSolverRTForWrapping,
-	#superclass : #DEVSRootSolverRT,
-	#category : #'SmallDEVS-Core-Wrapping'
+	#name : 'DEVSRootSolverRTForWrapping',
+	#superclass : 'DEVSRootSolverRT',
+	#category : 'SmallDEVS-Core-Wrapping',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Wrapping'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DEVSRootSolverRTForWrapping >> simulationStep [
 
 	super simulationStep.

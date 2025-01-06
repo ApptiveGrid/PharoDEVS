@@ -2,12 +2,14 @@
 Atomic DEVnDESS example.
 "
 Class {
-	#name : #MyContinuousBlock2,
-	#superclass : #AtomicDEVnDESS,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MyContinuousBlock2',
+	#superclass : 'AtomicDEVnDESS',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock2 >> initConditions [
 
 	self allocateIntegrators: 2.
@@ -23,7 +25,7 @@ MyContinuousBlock2 >> initConditions [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock2 >> intTransition [
 
 	sePolarity < 0 ifFalse: [ ^self ].
@@ -34,7 +36,7 @@ MyContinuousBlock2 >> intTransition [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock2 >> intgStep [
 
 	self intg: 1 integrate: [ intg at: 2 ].
@@ -43,14 +45,14 @@ MyContinuousBlock2 >> intgStep [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock2 >> outputFnc [
 
 	self poke: #e to: #o3.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock2 >> outputNFnc [
 
 	self poke: (intg at: 1) to: #o1.
@@ -59,7 +61,7 @@ MyContinuousBlock2 >> outputNFnc [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MyContinuousBlock2 >> timeAdvance [
 
 	^ Float infinity

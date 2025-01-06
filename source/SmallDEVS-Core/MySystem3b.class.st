@@ -7,12 +7,14 @@ Example:
 
 "
 Class {
-	#name : #MySystem3b,
-	#superclass : #CoupledDEVS,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MySystem3b',
+	#superclass : 'CoupledDEVS',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MySystem3b >> initialize [
 
 	super initialize.

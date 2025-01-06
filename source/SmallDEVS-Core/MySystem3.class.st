@@ -9,12 +9,14 @@ s inject: #aaaa to: #in
 
 "
 Class {
-	#name : #MySystem3,
-	#superclass : #MySystem2,
-	#category : #'SmallDEVS-Core-Examples'
+	#name : 'MySystem3',
+	#superclass : 'MySystem2',
+	#category : 'SmallDEVS-Core-Examples',
+	#package : 'SmallDEVS-Core',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MySystem3 >> initialize [
 
 	super initialize.
