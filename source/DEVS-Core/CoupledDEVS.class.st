@@ -1,6 +1,6 @@
 Class {
 	#name : 'CoupledDEVS',
-	#superclass : 'BaseDEVS',
+	#superclass : 'BasicDEVS',
 	#instVars : [
 		'components',
 		'namedComponents',

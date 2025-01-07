@@ -20,13 +20,13 @@ Class {
 { #category : 'as yet unclassified' }
 AtomicDEVnDESS >> addInputNPortNamed: n [
 
-	^ self addInputPortOfType: InputNPort named: n
+	^ self addInputPortOfType: DEVSInputNPort named: n
 ]
 
 { #category : 'as yet unclassified' }
 AtomicDEVnDESS >> addOutputNPortNamed: n [
 
-	^ self addOutputPortOfType: OutputNPort named: n
+	^ self addOutputPortOfType: DEVSOutputNPort named: n
 ]
 
 { #category : 'as yet unclassified' }

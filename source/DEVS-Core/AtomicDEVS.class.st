@@ -1,6 +1,6 @@
 Class {
 	#name : 'AtomicDEVS',
-	#superclass : 'BaseDEVS',
+	#superclass : 'BasicDEVS',
 	#instVars : [
 		'elapsed',
 		'savedTimeAdvance'

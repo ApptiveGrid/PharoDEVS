@@ -7,14 +7,14 @@ MySystem2 getSimulator simulate: 100.
 
 "
 Class {
-	#name : 'MySystem2',
+	#name : 'DEVSMySystem2',
 	#superclass : 'CoupledDEVS',
 	#category : 'DEVS-Examples',
 	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-MySystem2 >> initialize [
+DEVSMySystem2 >> initialize [
 
 	super initialize.
 
@@ -24,8 +24,8 @@ MySystem2 >> initialize [
 	}.
 
 	self addComponents: {
-		#generator -> (MyGenerator ia: 2 ib: 7 sa: 5 sb: 10).
-		#processor -> (MyProcessor withQueueSize: 5).
+		#generator -> (DEVSMyGenerator ia: 2 ib: 7 sa: 5 sb: 10).
+		#processor -> (DEVSMyProcessor withQueueSize: 5).
 	}. 
 
 	self addCouplings: { 

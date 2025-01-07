@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSRootSolver',
-	#superclass : 'AbstractSimulation',
+	#superclass : 'DEVSAbstractSimulation',
 	#instVars : [
 		'rootDEVS'
 	],

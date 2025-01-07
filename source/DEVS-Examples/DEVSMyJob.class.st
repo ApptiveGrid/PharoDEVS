@@ -2,7 +2,7 @@
 Part of MySystem
 "
 Class {
-	#name : 'MyJob',
+	#name : 'DEVSMyJob',
 	#superclass : 'DEVSEntity',
 	#instVars : [
 		'n',
@@ -13,32 +13,32 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-MyJob class >> sizeBetween: sl and: sh [
+DEVSMyJob class >> sizeBetween: sl and: sh [
 
 	^ self new size: (sl to: sh) atRandom.
 ]
 
 { #category : 'as yet unclassified' }
-MyJob >> n: num [
+DEVSMyJob >> n: num [
 
 	n := num
 
 ]
 
 { #category : 'as yet unclassified' }
-MyJob >> printOn: aStream [
+DEVSMyJob >> printOn: aStream [
 
 	aStream nextPutAll: 'aJob', (n isNil ifTrue: [''] ifFalse: ['(', n printString, ')']).
 ]
 
 { #category : 'as yet unclassified' }
-MyJob >> size [
+DEVSMyJob >> size [
 
 	^ size
 ]
 
 { #category : 'as yet unclassified' }
-MyJob >> size: s [
+DEVSMyJob >> size: s [
 
 	size := s
 

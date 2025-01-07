@@ -66,7 +66,7 @@ DEVnDESSRootSolverRT >> simulationStep [
 	rtFactor = 0 ifTrue: [ ^ self nonRTStep ].
 
 	"Synchronize clock with real time"
-	rtTimer := Timer at: ((startTime + ((clock min: stopTime) / rtFactor * 1000)) min: SmallInteger maxVal) rounded.
+	rtTimer := DEVSTimer at: ((startTime + ((clock min: stopTime) / rtFactor * 1000)) min: SmallInteger maxVal) rounded.
 	rtTimer wait.		"Waiting can be interrupted by asynchronous internal or external event."
 
 	"Accept potential interrupts"

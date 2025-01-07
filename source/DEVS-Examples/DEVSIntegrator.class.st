@@ -1,5 +1,5 @@
 Class {
-	#name : 'Integrator',
+	#name : 'DEVSIntegrator',
 	#superclass : 'AtomicDEVnDESS',
 	#instVars : [
 		'initCondition',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Integrator class >> newWithInitialCondition: aValue [
+DEVSIntegrator class >> newWithInitialCondition: aValue [
 
 	| integrator |
 	integrator := self new.
@@ -20,7 +20,7 @@ Integrator class >> newWithInitialCondition: aValue [
 ]
 
 { #category : 'as yet unclassified' }
-Integrator >> initCondition: aValue [
+DEVSIntegrator >> initCondition: aValue [
 
 	initCondition := aValue.
 	intg at: 1 put: initCondition.
@@ -31,14 +31,14 @@ Integrator >> initCondition: aValue [
 ]
 
 { #category : 'as yet unclassified' }
-Integrator >> initConditions [
+DEVSIntegrator >> initConditions [
 
 	self allocateIntegrators: 1.
 
 ]
 
 { #category : 'as yet unclassified' }
-Integrator >> intgStep [
+DEVSIntegrator >> intgStep [
 
 	self intg: 1 integrate: [ input values at: 1 ].
 
@@ -46,7 +46,7 @@ Integrator >> intgStep [
 ]
 
 { #category : 'as yet unclassified' }
-Integrator >> outputNFnc [
+DEVSIntegrator >> outputNFnc [
 
 	self poke: (intg at: 1) to: #output.
 
@@ -54,7 +54,7 @@ Integrator >> outputNFnc [
 ]
 
 { #category : 'as yet unclassified' }
-Integrator >> timeAdvance [
+DEVSIntegrator >> timeAdvance [
 
 	^ Float infinity
 

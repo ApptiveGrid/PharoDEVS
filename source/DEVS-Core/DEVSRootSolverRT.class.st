@@ -143,7 +143,7 @@ DEVSRootSolverRT >> simulationStep [
 	rtFactor = 0 ifTrue: [ ^ self nonRTStep ].
 
 	"Synchronize with real time"
-	rtTimer := Timer at: ((startTime + ((rootDEVS timeNext min: stopTime) / rtFactor * 1000)) min: SmallInteger maxVal) rounded.
+	rtTimer := DEVSTimer at: ((startTime + ((rootDEVS timeNext min: stopTime) / rtFactor * 1000)) min: SmallInteger maxVal) rounded.
 	rtTimer wait.		"Waiting can be interrupted by asynchronous internal or external event."
 	
 	startStopSemaphore isSignaled ifTrue: [^self].	"No step, return immediately."

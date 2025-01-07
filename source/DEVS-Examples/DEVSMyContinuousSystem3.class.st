@@ -2,29 +2,29 @@
 Coupled DEVnDESS example.
 "
 Class {
-	#name : 'MyContinuousSystem3',
+	#name : 'DEVSMyContinuousSystem3',
 	#superclass : 'CoupledDEVnDESS',
 	#category : 'DEVS-Examples',
 	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-MyContinuousSystem3 >> initialize [
+DEVSMyContinuousSystem3 >> initialize [
 
 	super initialize.
 
 
 	self addComponents: {
-		#intg1 	-> (Integrator newWithInitialCondition: -0.5).
-		#intg2 	-> (Integrator newWithInitialCondition: 0.5).
-		#intg3 	-> (Integrator newWithInitialCondition: 0.3).
-		#f1 	-> (InstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
+		#intg1 	-> (DEVSIntegrator newWithInitialCondition: -0.5).
+		#intg2 	-> (DEVSIntegrator newWithInitialCondition: 0.5).
+		#intg3 	-> (DEVSIntegrator newWithInitialCondition: 0.3).
+		#f1 	-> (DEVSInstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
 					("a" 0.2 * i1) + i2 ]).
-		#f2 	-> (InstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
+		#f2 	-> (DEVSInstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
 					0 - i1 - i2 ]).
-		#f3 	-> (InstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
+		#f3 	-> (DEVSInstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
 					0.5 + (i1 - 0.3) * i2 ]).
-		#plotter -> (Plotter withInputs: {#i1. #i2. #i3}).
+		#plotter -> (DEVSPlotter withInputs: {#i1. #i2. #i3}).
 	}. 
 
 	self addCouplings: { 

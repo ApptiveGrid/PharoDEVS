@@ -2,24 +2,24 @@
 Coupled DEVnDESS example.
 "
 Class {
-	#name : 'MyContinuousSystem2',
+	#name : 'DEVSMyContinuousSystem2',
 	#superclass : 'CoupledDEVnDESS',
 	#category : 'DEVS-Examples',
 	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-MyContinuousSystem2 >> initialize [
+DEVSMyContinuousSystem2 >> initialize [
 
 	super initialize.
 
 
 	self addComponents: {
-		#intg1 	-> (Integrator newWithInitialCondition: -2.0).
-		#intg2 	-> (Integrator newWithInitialCondition: 2.0).
-		#f 		-> (InstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
+		#intg1 	-> (DEVSIntegrator newWithInitialCondition: -2.0).
+		#intg2 	-> (DEVSIntegrator newWithInitialCondition: 2.0).
+		#f 		-> (DEVSInstantaneousFunction withInputs: {#i1. #i2.} codeBlock: [:i1 :i2 | 
 					1.0 * (1.0 - i1 squared) * i2 - i1 ]).
-		#plotter -> (Plotter withInputs: {#i1. #i2.}).
+		#plotter -> (DEVSPlotter withInputs: {#i1. #i2.}).
 	}. 
 
 	self addCouplings: { 

@@ -7,14 +7,14 @@ Example:
 
 "
 Class {
-	#name : 'MySystem3b',
+	#name : 'DEVSMySystem3b',
 	#superclass : 'CoupledDEVS',
 	#category : 'DEVS-Examples',
 	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-MySystem3b >> initialize [
+DEVSMySystem3b >> initialize [
 
 	super initialize.
 
@@ -24,8 +24,8 @@ MySystem3b >> initialize [
 	}.
 
 	self addComponents: {
-		#generator -> (MyGenerator2 ia: 2 ib: 7 sa: 5 sb: 10).		"! RT !"
-		#processor -> (MyProcessor withQueueSize: 5).
+		#generator -> (DEVSMyGenerator2 ia: 2 ib: 7 sa: 5 sb: 10).		"! RT !"
+		#processor -> (DEVSMyProcessor withQueueSize: 5).
 	}. 
 
 	self addCouplings: { 

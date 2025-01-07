@@ -9,7 +9,7 @@ Note: Since the simulation runs as a sequence of steps, there could be possible 
 
 "
 Class {
-	#name : 'AbstractSimulation',
+	#name : 'DEVSAbstractSimulation',
 	#superclass : 'Object',
 	#instVars : [
 		'parent',
@@ -28,58 +28,58 @@ Class {
 }
 
 { #category : 'private' }
-AbstractSimulation >> accessProtect [
+DEVSAbstractSimulation >> accessProtect [
 
 	^accessProtect
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> asyncReportStream: s [
+DEVSAbstractSimulation >> asyncReportStream: s [
 
 	self asyncSafelyDo: [ reportStream := s ]
 
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> asyncReset [
+DEVSAbstractSimulation >> asyncReset [
 
 	[ self reset ] fork
 
 ]
 
 { #category : 'private' }
-AbstractSimulation >> asyncSafelyDo: aBlock [
+DEVSAbstractSimulation >> asyncSafelyDo: aBlock [
 
 	[ self safelyDo: aBlock ] fork
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> asyncStart [
+DEVSAbstractSimulation >> asyncStart [
 
 	[ self start ] fork
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> asyncStop [
+DEVSAbstractSimulation >> asyncStop [
 
 	[ self stop ] fork
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> asyncStopTime: endTime [
+DEVSAbstractSimulation >> asyncStopTime: endTime [
 
 	self asyncSafelyDo: [ stopTime := endTime ]. 				"in seconds"
 
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> cancelStopTime [
+DEVSAbstractSimulation >> cancelStopTime [
 
 	self stopTime: Float infinity
 ]
 
 { #category : 'copying' }
-AbstractSimulation >> copy [
+DEVSAbstractSimulation >> copy [
 
 	| aCopy |
 	self safelyDo: [
@@ -88,25 +88,25 @@ AbstractSimulation >> copy [
 ]
 
 { #category : 'GUI' }
-AbstractSimulation >> cutAction [
+DEVSAbstractSimulation >> cutAction [
   self copyToClipboard.
   self remove.
 ]
 
 { #category : 'copying' }
-AbstractSimulation >> doNotStore [
+DEVSAbstractSimulation >> doNotStore [
 	^{ 'parent'. 'namedComponents'. 'process'. 'idleSemaphore'. 	'startStopSemaphore'. 'accessProtect'.  'reportStream'.  'rtTimer'. 'inputQueue'. 'seQueue'. 			"TO DO: move this to subclasses!!!"  
 	}
 ]
 
 { #category : 'simple simulation' }
-AbstractSimulation >> doOneStep [
+DEVSAbstractSimulation >> doOneStep [
 
 	self doSteps: 1.
 ]
 
 { #category : 'simple simulation' }
-AbstractSimulation >> doSteps: n [
+DEVSAbstractSimulation >> doSteps: n [
 
 	self stop.
 	self prepareToStart.
@@ -120,12 +120,12 @@ AbstractSimulation >> doSteps: n [
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> fullName [
+DEVSAbstractSimulation >> fullName [
 	^ self name, ' [', (self isRunning ifTrue: ['R'] ifFalse: ['S']) , ']'
 ]
 
 { #category : 'private' }
-AbstractSimulation >> initialize [
+DEVSAbstractSimulation >> initialize [
 
 	self initializeSimulationControl.
 	clock ifNil: [ clock := 0 ]. stopTime := Float infinity.
@@ -135,7 +135,7 @@ AbstractSimulation >> initialize [
 ]
 
 { #category : 'private' }
-AbstractSimulation >> initializeSimulationControl [
+DEVSAbstractSimulation >> initializeSimulationControl [
 
 	startStopSemaphore := Semaphore new.
 	startStopSemaphore signal.							"means that simulator has been requested to stop"
@@ -147,62 +147,62 @@ AbstractSimulation >> initializeSimulationControl [
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> isIdle [
+DEVSAbstractSimulation >> isIdle [
 
 	^ idleSemaphore isSignaled
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> isRunning [
+DEVSAbstractSimulation >> isRunning [
 
 	^ startStopSemaphore isSignaled not
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> name [
+DEVSAbstractSimulation >> name [
 	^ name
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> name: n [
+DEVSAbstractSimulation >> name: n [
 	name := n
 ]
 
 { #category : 'GUI' }
-AbstractSimulation >> openModel [
+DEVSAbstractSimulation >> openModel [
 
 	self subclassResponsibility
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> parent [
+DEVSAbstractSimulation >> parent [
 	^ parent
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> parent: p [
+DEVSAbstractSimulation >> parent: p [
 	parent := p
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> pathName [
+DEVSAbstractSimulation >> pathName [
   parent isNil ifTrue: [^''] ifFalse: [^(parent pathName),'/',name].
 ]
 
 { #category : 'private' }
-AbstractSimulation >> prepareToStart [
+DEVSAbstractSimulation >> prepareToStart [
 
 	"Subclasses may define some initalization code."
 ]
 
 { #category : 'private' }
-AbstractSimulation >> prepareToStop [
+DEVSAbstractSimulation >> prepareToStop [
 
 	"Subclasses may define some finalization code."
 ]
 
 { #category : 'private' }
-AbstractSimulation >> processBody [
+DEVSAbstractSimulation >> processBody [
 
 	self prepareToStart.
 	[ startStopSemaphore isSignaled ] whileFalse: [ 	
@@ -214,13 +214,13 @@ AbstractSimulation >> processBody [
 ]
 
 { #category : 'GUI' }
-AbstractSimulation >> remove [
+DEVSAbstractSimulation >> remove [
   (UIManager default confirm: 'Really DELETE simulation?')
   ifTrue: [ parent removeComponents: (Array with: name) ].
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> reportStream [
+DEVSAbstractSimulation >> reportStream [
 
 	reportStream ifNil: [ reportStream := (DummyStream on: nil) ].
 	^ reportStream 
@@ -228,14 +228,14 @@ AbstractSimulation >> reportStream [
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> reportStream: s [
+DEVSAbstractSimulation >> reportStream: s [
 
 	self safelyDo: [ reportStream := s ]
 
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> reset [
+DEVSAbstractSimulation >> reset [
 
 	self stop.
 	clock := 0. stopTime := Float infinity.
@@ -243,7 +243,7 @@ AbstractSimulation >> reset [
 ]
 
 { #category : 'private' }
-AbstractSimulation >> safelyDo: aBlock [
+DEVSAbstractSimulation >> safelyDo: aBlock [
 
 	| r v |
 	accessProtect critical: [
@@ -255,7 +255,7 @@ AbstractSimulation >> safelyDo: aBlock [
 ]
 
 { #category : 'simple simulation' }
-AbstractSimulation >> simulate: time [
+DEVSAbstractSimulation >> simulate: time [
 
 	stopTime := time.
 	self prepareToStart.
@@ -269,14 +269,14 @@ AbstractSimulation >> simulate: time [
 ]
 
 { #category : 'private' }
-AbstractSimulation >> simulationStep [
+DEVSAbstractSimulation >> simulationStep [
 
 	self subclassResponsibility
 
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> start [
+DEVSAbstractSimulation >> start [
 
 	| r |
 	accessProtect critical: [ r := self startUnprotected ].
@@ -285,7 +285,7 @@ AbstractSimulation >> start [
 ]
 
 { #category : 'private' }
-AbstractSimulation >> startUnprotected [
+DEVSAbstractSimulation >> startUnprotected [
 
 	| r |
 	r := true.
@@ -300,7 +300,7 @@ AbstractSimulation >> startUnprotected [
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> stop [
+DEVSAbstractSimulation >> stop [
 
 	| r |
 	accessProtect critical: [ r := self stopUnprotected ].
@@ -309,19 +309,19 @@ AbstractSimulation >> stop [
 ]
 
 { #category : 'as yet unclassified' }
-AbstractSimulation >> stopTime [
+DEVSAbstractSimulation >> stopTime [
   ^stopTime
 ]
 
 { #category : 'simulation control' }
-AbstractSimulation >> stopTime: endTime [
+DEVSAbstractSimulation >> stopTime: endTime [
 
 	self safelyDo: [ stopTime := endTime ]. 				"in seconds"
 
 ]
 
 { #category : 'private' }
-AbstractSimulation >> stopUnprotected [
+DEVSAbstractSimulation >> stopUnprotected [
 
 	| r |
 	r := false.
@@ -338,7 +338,7 @@ AbstractSimulation >> stopUnprotected [
 ]
 
 { #category : 'copying' }
-AbstractSimulation >> storeOn: aStream [
+DEVSAbstractSimulation >> storeOn: aStream [
 
 	aStream nextPut: $(.
 	aStream nextPutAll: self class name, ' new'.	"initialized instance"
@@ -354,6 +354,6 @@ AbstractSimulation >> storeOn: aStream [
 ]
 
 { #category : 'GUI' }
-AbstractSimulation >> timeToShow [
+DEVSAbstractSimulation >> timeToShow [
 	^ clock 
 ]

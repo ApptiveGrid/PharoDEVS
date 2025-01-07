@@ -1,5 +1,5 @@
 Class {
-	#name : 'Port',
+	#name : 'DEVSPort',
 	#superclass : 'Object',
 	#instVars : [
 		'name',
@@ -12,31 +12,31 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Port class >> hostDEVS: host name: n [
+DEVSPort class >> hostDEVS: host name: n [
 
 	^ (super new initialize hostDEVS: host) name: n
 ]
 
 { #category : 'as yet unclassified' }
-Port >> hostDEVS [
+DEVSPort >> hostDEVS [
 
 	^ hostDEVS
 ]
 
 { #category : 'as yet unclassified' }
-Port >> hostDEVS: host [
+DEVSPort >> hostDEVS: host [
 
 	hostDEVS := host
 ]
 
 { #category : 'as yet unclassified' }
-Port >> inLines [
+DEVSPort >> inLines [
 
 	^ inLines
 ]
 
 { #category : 'as yet unclassified' }
-Port >> initialize [
+DEVSPort >> initialize [
 
 	inLines := OrderedCollection new.
 	outLines := OrderedCollection new.
@@ -44,19 +44,19 @@ Port >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-Port >> name [
+DEVSPort >> name [
 
 	^name
 ]
 
 { #category : 'as yet unclassified' }
-Port >> name: n [
+DEVSPort >> name: n [
 
 	name := n. 
 ]
 
 { #category : 'as yet unclassified' }
-Port >> outLines [
+DEVSPort >> outLines [
 
 	^ outLines
 ]

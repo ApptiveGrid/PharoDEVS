@@ -13,7 +13,7 @@ Waiting for real time value. How to use:
 
 "
 Class {
-	#name : 'Timer',
+	#name : 'DEVSTimer',
 	#superclass : 'Delay',
 	#category : 'DEVS-Core-RT',
 	#package : 'DEVS-Core',
@@ -21,13 +21,13 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Timer class >> at: time [
+DEVSTimer class >> at: time [
 
 	^ (self new setDelay: 0 forSemaphore: Semaphore new) scheduleResumptionTime: time
 ]
 
 { #category : 'as yet unclassified' }
-Timer >> scheduleEventResumptionTime: t [
+DEVSTimer >> scheduleEventResumptionTime: t [
 	"Schedule this delay"
 	resumptionTime := t.
 	AccessProtect critical:[
@@ -37,7 +37,7 @@ Timer >> scheduleEventResumptionTime: t [
 ]
 
 { #category : 'as yet unclassified' }
-Timer >> scheduleResumptionTime: t [
+DEVSTimer >> scheduleResumptionTime: t [
 
 	"This code is taken from Delay>>schedule and slightly modified."
 
@@ -58,7 +58,7 @@ Timer >> scheduleResumptionTime: t [
 ]
 
 { #category : 'as yet unclassified' }
-Timer >> unschedule [
+DEVSTimer >> unschedule [
 
 	super unschedule.
 	delaySemaphore signal.
@@ -66,7 +66,7 @@ Timer >> unschedule [
 ]
 
 { #category : 'as yet unclassified' }
-Timer >> wait [
+DEVSTimer >> wait [
 
 	delaySemaphore wait.
 

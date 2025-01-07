@@ -7,8 +7,8 @@ f inspect.
 
 "
 Class {
-	#name : 'InstantaneousFunction',
-	#superclass : 'BaseDEVS',
+	#name : 'DEVSInstantaneousFunction',
+	#superclass : 'BasicDEVS',
 	#instVars : [
 		'function',
 		'inputPortNames'
@@ -19,7 +19,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-InstantaneousFunction class >> withInputs: inputPortNames codeBlock: aBlock [
+DEVSInstantaneousFunction class >> withInputs: inputPortNames codeBlock: aBlock [
 
 	| function |
 	function := self new.
@@ -29,40 +29,40 @@ InstantaneousFunction class >> withInputs: inputPortNames codeBlock: aBlock [
 ]
 
 { #category : 'modeling' }
-InstantaneousFunction >> addFunctionPorts: listOfInputPortNames [
+DEVSInstantaneousFunction >> addFunctionPorts: listOfInputPortNames [
 
 
 	inputPortNames := listOfInputPortNames. 
 	"we need to remember positions of parameter names"
 
 	listOfInputPortNames do: [ :portName |
-		inputPorts at: portName put: (InputNPort hostDEVS: self name: portName) ].
+		inputPorts at: portName put: (DEVSInputNPort hostDEVS: self name: portName) ].
 
-	outputPorts at: #output put: (OutputNPort hostDEVS: self name: #output).
+	outputPorts at: #output put: (DEVSOutputNPort hostDEVS: self name: #output).
 	
 ]
 
 { #category : 'modeling' }
-InstantaneousFunction >> function: aBlock [
+DEVSInstantaneousFunction >> function: aBlock [
 
 	function := aBlock
 ]
 
 { #category : 'simulation' }
-InstantaneousFunction >> receiveMsgInitTime: t [
+DEVSInstantaneousFunction >> receiveMsgInitTime: t [
 
 	timeLast := t.
 	timeNext := Float infinity.
 ]
 
 { #category : 'simulation' }
-InstantaneousFunction >> receiveMsgStarTime: t [
+DEVSInstantaneousFunction >> receiveMsgStarTime: t [
 
 	^ Dictionary new.
 ]
 
 { #category : 'simulation' }
-InstantaneousFunction >> receiveNMsgX: x time: t step: h [
+DEVSInstantaneousFunction >> receiveNMsgX: x time: t step: h [
 
 	input := x.
 

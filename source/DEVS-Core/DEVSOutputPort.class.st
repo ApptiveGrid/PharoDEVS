@@ -1,6 +1,6 @@
 Class {
-	#name : 'InputPort',
-	#superclass : 'Port',
+	#name : 'DEVSOutputPort',
+	#superclass : 'DEVSPort',
 	#category : 'DEVS-Core',
 	#package : 'DEVS-Core'
 }

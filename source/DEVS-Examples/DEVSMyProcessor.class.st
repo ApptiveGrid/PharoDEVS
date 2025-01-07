@@ -2,7 +2,7 @@
 Part of MySystem
 "
 Class {
-	#name : 'MyProcessor',
+	#name : 'DEVSMyProcessor',
 	#superclass : 'AtomicDEVS',
 	#instVars : [
 		'queue',
@@ -16,13 +16,13 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-MyProcessor class >> withQueueSize: n [
+DEVSMyProcessor class >> withQueueSize: n [
 
 	^ super new initialize queueSize: n
 ]
 
 { #category : 'as yet unclassified' }
-MyProcessor >> extTransition [
+DEVSMyProcessor >> extTransition [
 
 	| job |
 
@@ -45,7 +45,7 @@ MyProcessor >> extTransition [
 ]
 
 { #category : 'as yet unclassified' }
-MyProcessor >> initialize [
+DEVSMyProcessor >> initialize [
 
 	super initialize.
 
@@ -62,7 +62,7 @@ MyProcessor >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-MyProcessor >> intTransition [
+DEVSMyProcessor >> intTransition [
 
 	processorStatus caseOf: {
 		[ #busy ] -> [
@@ -86,7 +86,7 @@ MyProcessor >> intTransition [
 ]
 
 { #category : 'as yet unclassified' }
-MyProcessor >> outputFnc [
+DEVSMyProcessor >> outputFnc [
 
 	processorStatus caseOf: {
 		[ #busy ] -> [
@@ -102,13 +102,13 @@ MyProcessor >> outputFnc [
 ]
 
 { #category : 'as yet unclassified' }
-MyProcessor >> queueSize: n [
+DEVSMyProcessor >> queueSize: n [
 
 	queueSize := n
 ]
 
 { #category : 'as yet unclassified' }
-MyProcessor >> timeAdvance [
+DEVSMyProcessor >> timeAdvance [
 
 	processorStatus caseOf: {
 		[ #busy ] 		-> [ ^ currentJob size - timeSpent ].

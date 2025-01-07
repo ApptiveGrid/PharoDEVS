@@ -2,7 +2,7 @@
 Part of MySystem
 "
 Class {
-	#name : 'MyGenerator',
+	#name : 'DEVSMyGenerator',
 	#superclass : 'AtomicDEVS',
 	#instVars : [
 		'ia',
@@ -17,14 +17,14 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-MyGenerator class >> ia: a ib: b sa: c sb: d [
+DEVSMyGenerator class >> ia: a ib: b sa: c sb: d [
 
 	^ self new ia: a ib: b sa: c sb: d
 
 ]
 
 { #category : 'as yet unclassified' }
-MyGenerator >> ia: a ib: b sa: c sb: d [
+DEVSMyGenerator >> ia: a ib: b sa: c sb: d [
 
 	ia := a.	"interval min"
 	ib := b.	"interval max"
@@ -35,7 +35,7 @@ MyGenerator >> ia: a ib: b sa: c sb: d [
 ]
 
 { #category : 'as yet unclassified' }
-MyGenerator >> initialize [
+DEVSMyGenerator >> initialize [
 
 	super initialize.
 
@@ -47,21 +47,21 @@ MyGenerator >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-MyGenerator >> intTransition [
+DEVSMyGenerator >> intTransition [
 
 	first := false.
 
 ]
 
 { #category : 'as yet unclassified' }
-MyGenerator >> outputFnc [
+DEVSMyGenerator >> outputFnc [
 
 	n := n+1.
-	self poke: ((MyJob sizeBetween: sa and: sb) n: n) to: #out.
+	self poke: ((DEVSMyJob sizeBetween: sa and: sb) n: n) to: #out.
 ]
 
 { #category : 'as yet unclassified' }
-MyGenerator >> timeAdvance [
+DEVSMyGenerator >> timeAdvance [
 
 	^ first ifTrue: [ 0 ] ifFalse: [ (ia to: ib) atRandom ]
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : 'Plotter',
+	#name : 'DEVSPlotter',
 	#superclass : 'AtomicDEVnDESS',
 	#instVars : [
 		'pm',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Plotter class >> withInputs: inputPortNames [ 
+DEVSPlotter class >> withInputs: inputPortNames [ 
 
 	| p |
 	p := super new.
@@ -19,15 +19,15 @@ Plotter class >> withInputs: inputPortNames [
 ]
 
 { #category : 'modeling' }
-Plotter >> addPlotterPorts: listOfInputPortNames [
+DEVSPlotter >> addPlotterPorts: listOfInputPortNames [
 
 	listOfInputPortNames do: [ :portName |
-		inputPorts at: portName put: (InputNPort hostDEVS: self name: portName) ].
+		inputPorts at: portName put: (DEVSInputNPort hostDEVS: self name: portName) ].
 
 ]
 
 { #category : 'modeling' }
-Plotter >> copy [
+DEVSPlotter >> copy [
 
 	^ super copy open
 
@@ -35,13 +35,13 @@ Plotter >> copy [
 ]
 
 { #category : 'modeling' }
-Plotter >> initConditions [
+DEVSPlotter >> initConditions [
 
 	pstep := 0.1
 ]
 
 { #category : 'modeling' }
-Plotter >> initialize [
+DEVSPlotter >> initialize [
 
 	super initialize.
 	self open.
@@ -49,7 +49,7 @@ Plotter >> initialize [
 ]
 
 { #category : 'modeling' }
-Plotter >> intTransition [
+DEVSPlotter >> intTransition [
 
 	inputPorts keys do: [ :portName |
 		pm series: portName addPoint: (self rootSolver time) @ ((input at: (inputPorts at: portName))) ].
@@ -59,11 +59,11 @@ Plotter >> intTransition [
 ]
 
 { #category : 'modeling' }
-Plotter >> intgStep [
+DEVSPlotter >> intgStep [
 ]
 
 { #category : 'modeling' }
-Plotter >> open [
+DEVSPlotter >> open [
 
 	pm := PlotMorph new.
 	pm position: (World extent x - 250) atRandom @ (World extent y - 250) atRandom.  
@@ -77,21 +77,21 @@ Plotter >> open [
 ]
 
 { #category : 'modeling' }
-Plotter >> outputFnc [
+DEVSPlotter >> outputFnc [
 ]
 
 { #category : 'modeling' }
-Plotter >> outputNFnc [
+DEVSPlotter >> outputNFnc [
 ]
 
 { #category : 'modeling' }
-Plotter >> plotStep: t [
+DEVSPlotter >> plotStep: t [
 
 	pstep := t
 ]
 
 { #category : 'modeling' }
-Plotter >> timeAdvance [
+DEVSPlotter >> timeAdvance [
 
 	^ pstep
 ]

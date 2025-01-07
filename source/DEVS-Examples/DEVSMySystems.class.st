@@ -2,23 +2,23 @@
 DEVS example. All systems coupled together. MyDaemon (part of MySystems) modifies structure of MySystems at runtime
 "
 Class {
-	#name : 'MySystems',
+	#name : 'DEVSMySystems',
 	#superclass : 'CoupledDEVnDESS',
 	#category : 'DEVS-Examples',
 	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-MySystems >> initialize [
+DEVSMySystems >> initialize [
 
 	super initialize.
 
 	self addComponents: {
-		#s1 -> (MySystem new).
-		#s2 -> (MySystem2 new).
-		#c1 -> (MyContinuousSystem new).
-		#c2 -> (MyContinuousSystem2 new).
-		#d	-> (MyDaemon new)
+		#s1 -> (DEVSMySystem new).
+		#s2 -> (DEVSMySystem2 new).
+		#c1 -> (DEVSMyContinuousSystem new).
+		#c2 -> (DEVSMyContinuousSystem2 new).
+		#d	-> (DEVSMyDaemon new)
 	}. 
 
 ]

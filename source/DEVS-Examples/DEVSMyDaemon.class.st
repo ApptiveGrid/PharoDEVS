@@ -3,7 +3,7 @@ Part of coupled model MySystems. intTransition modifies structure of MySystems a
  
 "
 Class {
-	#name : 'MyDaemon',
+	#name : 'DEVSMyDaemon',
 	#superclass : 'AtomicDEVS',
 	#instVars : [
 		'done'
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-MyDaemon >> initialize [
+DEVSMyDaemon >> initialize [
 
 	super initialize.
 
@@ -23,7 +23,7 @@ MyDaemon >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-MyDaemon >> intTransition [
+DEVSMyDaemon >> intTransition [
 	"This is an example of dynamic self-modication of a model."
 
 	| newsystem newsolver |
@@ -32,7 +32,7 @@ MyDaemon >> intTransition [
 	done := true.
 
 	"Add new components"
-	newsystem := MyContinuousSystem new.
+	newsystem := DEVSMyContinuousSystem new.
 	self rootSolver rootDEVS addComponents: { #ns -> newsystem }.
 
 	"Add empty model and fill it by components ..."
@@ -40,8 +40,8 @@ MyDaemon >> intTransition [
 	newsystem := CoupledDEVnDESS new.	
 	self rootSolver rootDEVS addComponents: { #ns2 -> newsystem }.
 	newsystem addComponents: {
-		#contiblock 	-> (MyContinuousBlock new).
-		#plotter 	-> (Plotter withInputs: {#i1. #i2.}).
+		#contiblock 	-> (DEVSMyContinuousBlock new).
+		#plotter 	-> (DEVSPlotter withInputs: {#i1. #i2.}).
 	}. 
 	newsystem addCouplings: { 
 		#(contiblock o1) -> #(plotter i1).
@@ -89,13 +89,13 @@ MyDaemon >> intTransition [
 ]
 
 { #category : 'as yet unclassified' }
-MyDaemon >> outputFnc [
+DEVSMyDaemon >> outputFnc [
 
 
 ]
 
 { #category : 'as yet unclassified' }
-MyDaemon >> timeAdvance [
+DEVSMyDaemon >> timeAdvance [
 
 	^ done ifTrue: [ Float infinity ] ifFalse: [ 25 ]
 ]

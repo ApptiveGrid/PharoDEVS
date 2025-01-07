@@ -2,21 +2,21 @@
 Coupled DEVnDESS example.
 "
 Class {
-	#name : 'MyContinuousSystem',
+	#name : 'DEVSMyContinuousSystem',
 	#superclass : 'CoupledDEVnDESS',
 	#category : 'DEVS-Examples',
 	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-MyContinuousSystem >> initialize [
+DEVSMyContinuousSystem >> initialize [
 
 	super initialize.
 
 	self addComponents: {
-		#contiblock 	-> (MyContinuousBlock new).
-		#plotter 	-> (Plotter withInputs: {#i1. #i2.}).
-		#plotter2	-> (XYPlotter new)
+		#contiblock 	-> (DEVSMyContinuousBlock new).
+		#plotter 	-> (DEVSPlotter withInputs: {#i1. #i2.}).
+		#plotter2	-> (DEVSXYPlotter new)
 	}. 
 
 	self addCouplings: { 

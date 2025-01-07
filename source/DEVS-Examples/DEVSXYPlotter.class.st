@@ -1,22 +1,22 @@
 Class {
-	#name : 'XYPlotter',
-	#superclass : 'Plotter',
+	#name : 'DEVSXYPlotter',
+	#superclass : 'DEVSPlotter',
 	#category : 'DEVS-Examples',
 	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-XYPlotter class >> new [ 
+DEVSXYPlotter class >> new [ 
 
 	^ super withInputs: #(x y)
 ]
 
 { #category : 'as yet unclassified' }
-XYPlotter class >> withInputs: i [
+DEVSXYPlotter class >> withInputs: i [
 ]
 
 { #category : 'as yet unclassified' }
-XYPlotter >> intTransition [
+DEVSXYPlotter >> intTransition [
 
 	pm series: name addPoint: ((input at: (inputPorts at: #x))) @ ((input at: (inputPorts at: #y))).
 	pm title: self printString.	"may change at runtime"
@@ -25,7 +25,7 @@ XYPlotter >> intTransition [
 ]
 
 { #category : 'as yet unclassified' }
-XYPlotter >> open [
+DEVSXYPlotter >> open [
 
 	pm := PlotMorph new.
 	pm position: (World extent x - 250) atRandom @ (World extent y - 250) atRandom.  
