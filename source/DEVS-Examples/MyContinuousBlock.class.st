@@ -4,9 +4,8 @@ Atomic DEVnDESS example.
 Class {
 	#name : 'MyContinuousBlock',
 	#superclass : 'AtomicDEVnDESS',
-	#category : 'DEVS-Core-Examples',
-	#package : 'DEVS-Core',
-	#tag : 'Examples'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }

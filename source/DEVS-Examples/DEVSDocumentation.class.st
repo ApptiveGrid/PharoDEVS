@@ -50,9 +50,8 @@ To do:
 Class {
 	#name : 'DEVSDocumentation',
 	#superclass : 'Object',
-	#category : 'DEVS-Core-Examples',
-	#package : 'DEVS-Core',
-	#tag : 'Examples'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'demo' }

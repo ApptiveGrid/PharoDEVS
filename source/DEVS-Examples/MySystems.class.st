@@ -4,9 +4,8 @@ DEVS example. All systems coupled together. MyDaemon (part of MySystems) modifie
 Class {
 	#name : 'MySystems',
 	#superclass : 'CoupledDEVnDESS',
-	#category : 'DEVS-Core-Examples',
-	#package : 'DEVS-Core',
-	#tag : 'Examples'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }

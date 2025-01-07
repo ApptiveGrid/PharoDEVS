@@ -2,21 +2,20 @@
 Atomic DEVnDESS example.
 "
 Class {
-	#name : 'MyContinuousBlock4',
+	#name : 'MyContinuousBlock3',
 	#superclass : 'AtomicDEVnDESS',
-	#category : 'DEVS-Core-Examples',
-	#package : 'DEVS-Core',
-	#tag : 'Examples'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
-MyContinuousBlock4 >> initConditions [
+MyContinuousBlock3 >> initConditions [
 
 	self allocateIntegrators: 3.
 
-	intg at: 1 put: 0.1234.
+	intg at: 1 put: 0.1.
 	intg at: 2 put: 0.2.
-	intg at: 3 put: 0.1.
+	intg at: 3 put: 0.3.
 
 	self addOutputNPortNamed: #o1.
 	self addOutputNPortNamed: #o2.
@@ -26,29 +25,29 @@ MyContinuousBlock4 >> initConditions [
 ]
 
 { #category : 'as yet unclassified' }
-MyContinuousBlock4 >> intTransition [
+MyContinuousBlock3 >> intTransition [
 
 
 ]
 
 { #category : 'as yet unclassified' }
-MyContinuousBlock4 >> intgStep [
+MyContinuousBlock3 >> intgStep [
 
-	self intg: 1 integrate: [ intg at: 2 ].
- 	self intg: 2 integrate: [ intg at: 3 ].
-	self intg: 3 integrate: [ -0.4 * (intg at: 3) - (intg at: 2) + (0.65 * (intg at: 1) * (1.0 - (intg at: 1) squared)) ].
-
-
-]
-
-{ #category : 'as yet unclassified' }
-MyContinuousBlock4 >> outputFnc [
+	self intg: 1 integrate: [ 10 * ((intg at: 2) - (intg at: 1)) ].
+ 	self intg: 2 integrate: [ (1 + 24 - (intg at: 3)) * (intg at: 1) - (intg at: 2) ].
+	self intg: 3 integrate: [ ((intg at: 1) * (intg at: 2)) - (2 * (intg at: 3)) ].
 
 
 ]
 
 { #category : 'as yet unclassified' }
-MyContinuousBlock4 >> outputNFnc [
+MyContinuousBlock3 >> outputFnc [
+
+
+]
+
+{ #category : 'as yet unclassified' }
+MyContinuousBlock3 >> outputNFnc [
 
 	self poke: (intg at: 1) to: #o1.
 	self poke: (intg at: 2) to: #o2.
@@ -58,7 +57,7 @@ MyContinuousBlock4 >> outputNFnc [
 ]
 
 { #category : 'as yet unclassified' }
-MyContinuousBlock4 >> timeAdvance [
+MyContinuousBlock3 >> timeAdvance [
 
 	^ Float infinity
 

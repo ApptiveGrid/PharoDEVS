@@ -9,9 +9,8 @@ MySystem2 getSimulator simulate: 100.
 Class {
 	#name : 'MySystem2',
 	#superclass : 'CoupledDEVS',
-	#category : 'DEVS-Core-Examples',
-	#package : 'DEVS-Core',
-	#tag : 'Examples'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }

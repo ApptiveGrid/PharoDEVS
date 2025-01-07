@@ -5,9 +5,8 @@ Class {
 		'initCondition',
 		'pm'
 	],
-	#category : 'DEVS-Core-Continuous',
-	#package : 'DEVS-Core',
-	#tag : 'Continuous'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }

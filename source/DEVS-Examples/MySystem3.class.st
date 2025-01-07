@@ -11,9 +11,8 @@ s inject: #aaaa to: #in
 Class {
 	#name : 'MySystem3',
 	#superclass : 'MySystem2',
-	#category : 'DEVS-Core-Examples',
-	#package : 'DEVS-Core',
-	#tag : 'Examples'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }

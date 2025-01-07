@@ -1,9 +1,8 @@
 Class {
 	#name : 'XYPlotter',
 	#superclass : 'Plotter',
-	#category : 'DEVS-Core-Continuous',
-	#package : 'DEVS-Core',
-	#tag : 'Continuous'
+	#category : 'DEVS-Examples',
+	#package : 'DEVS-Examples'
 }
 
 { #category : 'as yet unclassified' }
