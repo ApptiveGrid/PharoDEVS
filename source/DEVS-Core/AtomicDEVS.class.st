@@ -89,7 +89,7 @@ AtomicDEVS >> receiveMsgStarTime: t [
 
 	verbose ifTrue: [
 		self reportStream nextPutAll: '* Internal Transition: ', self printString, String cr.
-		self reportStream nextPutAll: '    * New State: ', String cr, self printString.
+		self reportStream nextPutAll: '    * New State: ', self printString, String cr.
 		self reportStream nextPutAll: '    * Output Port Configuration: ', String cr.
 		self reportOutputPortConfig.
 		self reportStream nextPutAll: '    * Next scheduled internal transition at time ', timeNext printString, String cr ].
@@ -127,7 +127,7 @@ AtomicDEVS >> receiveMsgX: x time: t [
 		self reportStream nextPutAll: '* External Transition: ', self printString, String cr.
 		self reportStream nextPutAll: '    * Input Port Configuration: ', String cr.
 		self reportInputPortConfig. 
-		self reportStream nextPutAll: '    * New State: ', String cr, self printString ].
+		self reportStream nextPutAll: '    * New State: ', self printString, String cr ].
 
 ]
 

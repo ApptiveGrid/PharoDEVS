@@ -1,0 +1,58 @@
+Class {
+	#name : 'DEVSTrafficLight',
+	#superclass : 'AtomicDEVS',
+	#instVars : [
+		'state'
+	],
+	#category : 'DEVS-Examples-crossing',
+	#package : 'DEVS-Examples',
+	#tag : 'crossing'
+}
+
+{ #category : 'modeling' }
+DEVSTrafficLight >> extTransition [
+	| inputState |
+	inputState := self peekFrom: #in.
+	(inputState ifNil: [^ self ]).
+	(inputState beginsWith: name) 
+		ifTrue: [ 
+			(state = #red) ifTrue: [ state := #green ] ]
+		ifFalse: [
+			(state = #yellow) ifTrue: [ state := #red ].
+			(state = #green) ifTrue: [ state := #yellow ] ] .
+	self reportStream nextPutAll: '----> ', name ,' state is now ', state, String cr.
+
+]
+
+{ #category : 'modeling' }
+DEVSTrafficLight >> initialize [
+	super initialize.
+	state := #green.
+	self addInputPortNamed: #in
+]
+
+{ #category : 'modeling' }
+DEVSTrafficLight >> intTransition [
+	self extTransition 
+]
+
+{ #category : 'modeling' }
+DEVSTrafficLight >> outputFnc [
+	
+]
+
+{ #category : 'modeling' }
+DEVSTrafficLight >> prepareToStart [ 
+	state := #red 
+]
+
+{ #category : 'modeling' }
+DEVSTrafficLight >> timeAdvance [
+
+	state caseOf: {
+		[ #green ] 		-> [ ^ 57 ].
+		[ #yellow ] 	-> [ ^ 3 ].
+		[ #red ] 		-> [ ^ 60 ].
+	} otherwise: [ self error ].
+
+]

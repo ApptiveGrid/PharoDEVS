@@ -424,62 +424,6 @@ BasicDEVS >> safelyDo: aBlock [
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> simulate: t [
-
-	"obsolete! Use getSimulator simulate: t "
-
-	| clock |
-	self receiveMsgInitTime: 0.
-	clock := timeNext.
-	[ clock <= t ] whileTrue: [ 
-		self reportStream nextPutAll: '****************** time: ', clock printString, String cr.
-		self receiveMsgStarTime: clock. 
-		verbose ifTrue: [
-			self reportStream nextPutAll: '* Root DEVS Output Port Configuration: ', String cr.
-		 	self reportOutputPortConfig ].
-		clock := self timeNext ].
-	self reportStream flush.
-
-
-
-]
-
-{ #category : 'copying' }
-BasicDEVS >> sscopy [
-	"experimental alternative to copy - usefull for testing purposes only"
-	^Object readFrom: self storeString
-]
-
-{ #category : 'copying' }
-BasicDEVS >> storeOn: aStream [
-
-	"NOT USED. Remove ???" self halt. "for sure"
-
-
-	aStream nextPut: $(.
-	aStream nextPutAll: self class name, ' new'.		"initialized instance"
-	(self class allInstVarNames difference: {'parent'. 'inputPorts'. 'outputPorts'. 'input'. 'output'.
-		'reportStream'. 'components'. 'namedComponents'. 'eventList'}) do:
-		[:n |
-		aStream nextPutAll: ' instVarNamed: ';
-			store: n;
-			nextPutAll: ' put: ';
-			store: (self instVarNamed: n);
-			nextPut: $;].
-
-	"ports"
-	inputPorts keysAndValuesDo: [ :k :v | 
-		aStream nextPutAll: ' addInputPortOfType: '; store: v species; nextPutAll: ' named: '; store: k; nextPut: $; ].	
-	outputPorts keysAndValuesDo: [ :k :v | 
-		aStream nextPutAll: ' addOutputPortOfType: '; store: v species; nextPutAll: ' named: '; store: k; nextPut: $; ].	
-
-	aStream nextPutAll: ' yourself)'
-
-
-
-]
-
-{ #category : 'simulation' }
 BasicDEVS >> timeLast [
 
 	^ timeLast
