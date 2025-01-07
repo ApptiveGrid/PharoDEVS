@@ -1,7 +1,0 @@
-Class {
-	#name : 'OutputNPort',
-	#superclass : 'Port',
-	#category : 'SmallDEVS-Core-Continuous',
-	#package : 'SmallDEVS-Core',
-	#tag : 'Continuous'
-}
