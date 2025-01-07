@@ -1,6 +1,6 @@
 Class {
 	#name : 'BasicDEVS',
-	#superclass : 'DEVSEntity',
+	#superclass : 'Object',
 	#instVars : [
 		'parent',
 		'inputPorts',
@@ -9,7 +9,8 @@ Class {
 		'output',
 		'timeLast',
 		'timeNext',
-		'verbose'
+		'verbose',
+		'name'
 	],
 	#category : 'DEVS-Core',
 	#package : 'DEVS-Core'
@@ -181,6 +182,18 @@ BasicDEVS >> inputPorts [
 BasicDEVS >> isRootDEVS [
 	^ parent isKindOf: DEVSRootSolver
 
+]
+
+{ #category : 'as yet unclassified' }
+BasicDEVS >> name [
+
+	^ name
+]
+
+{ #category : 'as yet unclassified' }
+BasicDEVS >> name: n [
+
+	name := n. 
 ]
 
 { #category : 'misc' }

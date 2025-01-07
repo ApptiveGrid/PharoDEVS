@@ -3,7 +3,7 @@ Part of MySystem
 "
 Class {
 	#name : 'DEVSMyJob',
-	#superclass : 'DEVSEntity',
+	#superclass : 'Object',
 	#instVars : [
 		'n',
 		'size'
