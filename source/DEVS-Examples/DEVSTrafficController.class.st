@@ -17,12 +17,12 @@ DEVSTrafficController >> initialize [
 ]
 
 { #category : 'modeling' }
-DEVSTrafficController >> intTransition [ 
+DEVSTrafficController >> internalTransition [ 
 	
 ]
 
 { #category : 'modeling' }
-DEVSTrafficController >> outputFnc [
+DEVSTrafficController >> outputFunction [
 	(direction = #northSouth)
 		ifTrue: [   
 			self poke: #eastWestGreen to: #out.

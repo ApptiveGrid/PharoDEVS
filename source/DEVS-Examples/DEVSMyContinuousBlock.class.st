@@ -29,7 +29,7 @@ DEVSMyContinuousBlock >> initConditions [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyContinuousBlock >> intTransition [
+DEVSMyContinuousBlock >> internalTransition [
 
 	
 ]
@@ -44,7 +44,7 @@ DEVSMyContinuousBlock >> intgStep [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyContinuousBlock >> outputFnc [
+DEVSMyContinuousBlock >> outputFunction [
 
 	self poke: #e to: #o3.
 

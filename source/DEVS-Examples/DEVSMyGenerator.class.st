@@ -48,14 +48,14 @@ DEVSMyGenerator >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyGenerator >> intTransition [
+DEVSMyGenerator >> internalTransition [
 
 	first := false.
 
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyGenerator >> outputFnc [
+DEVSMyGenerator >> outputFunction [
 
 	n := n+1.
 	self poke: ((DEVSMyJob sizeBetween: sa and: sb) n: n) to: #out.

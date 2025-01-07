@@ -11,11 +11,11 @@ Class {
 
 { #category : 'modeling' }
 AtomicDEVS >> elapsed [
-	^elapsed
+	^ elapsed
 ]
 
 { #category : 'modeling' }
-AtomicDEVS >> extTransition [
+AtomicDEVS >> externalTransition [
 
 	self subclassResponsibility
 ]
@@ -30,13 +30,13 @@ AtomicDEVS >> initialize [
 ]
 
 { #category : 'modeling' }
-AtomicDEVS >> intTransition [
+AtomicDEVS >> internalTransition [
 
 	self subclassResponsibility
 ]
 
 { #category : 'modeling' }
-AtomicDEVS >> outputFnc [
+AtomicDEVS >> outputFunction [
 
 	self subclassResponsibility
 
@@ -54,27 +54,27 @@ AtomicDEVS >> prepareToStop [
 ]
 
 { #category : 'simulation' }
-AtomicDEVS >> receiveMsgInitTime: t [
+AtomicDEVS >> receiveMsgInitTime: time [
 
-	timeLast := t - elapsed.
+	timeLast := time - elapsed.
 	savedTimeAdvance isNil ifTrue: [ savedTimeAdvance := self timeAdvance ].
 	timeNext := timeLast + savedTimeAdvance.
-	self assert: [ (timeNext >= t) | ((timeNext - t) closeTo: 0) ].
+	self assert: [ (timeNext >= time) | ((timeNext - time) closeTo: 0) ].
 
 	self prepareToStart. 		"resume processes in atomic model"
 
 ]
 
 { #category : 'simulation' }
-AtomicDEVS >> receiveMsgStarTime: t [
+AtomicDEVS >> receiveMsgStarTime: time [
 
-	self assert: [ (t - timeNext) closeTo: 0 ].
+	self assert: [ (time - timeNext) closeTo: 0 ].
 
 	output := Dictionary new.
-	self outputFnc.
+	self outputFunction.
 
-	self intTransition.
-	timeLast := t.
+	self internalTransition.
+	timeLast := time.
 	timeNext := timeLast + (savedTimeAdvance := self timeAdvance).
 	elapsed := 0.
 
@@ -92,25 +92,25 @@ AtomicDEVS >> receiveMsgStarTime: t [
 ]
 
 { #category : 'simulation' }
-AtomicDEVS >> receiveMsgSyncTime: t [
+AtomicDEVS >> receiveMsgSyncTime: time [
 
 	timeLast ifNotNil: [ 
-		elapsed := t - timeLast ].
+		elapsed := time - timeLast ].
 
 	self prepareToStop.		"suspend processes in atomic models"
 ]
 
 { #category : 'simulation' }
-AtomicDEVS >> receiveMsgX: x time: t [
+AtomicDEVS >> receiveMsgX: message time: time [
 
-	self assert: [ (timeLast <= t) & (t <= timeNext) ].
+	self assert: [ (timeLast <= time) & (time <= timeNext) ].
 
-	input := x.
+	input := message.
 
-	elapsed := t - timeLast.
-	self extTransition.
+	elapsed := time - timeLast.
+	self externalTransition.
 
-	timeLast := t.
+	timeLast := time.
 	timeNext := timeLast + (savedTimeAdvance := self timeAdvance).
 	elapsed := 0.
 
@@ -136,9 +136,9 @@ AtomicDEVS >> reset [
 ]
 
 { #category : 'simulation' }
-AtomicDEVS >> sendMsgSETime: t [
+AtomicDEVS >> sendMsgSETime: time [
 
-	parent receiveMsgSETime: (timeNext := t).
+	parent receiveMsgSETime: (timeNext := time).
 
 ]
 

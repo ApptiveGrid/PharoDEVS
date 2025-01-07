@@ -26,7 +26,7 @@ DEVSMyContinuousBlock3 >> initConditions [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyContinuousBlock3 >> intTransition [
+DEVSMyContinuousBlock3 >> internalTransition [
 
 
 ]
@@ -42,7 +42,7 @@ DEVSMyContinuousBlock3 >> intgStep [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyContinuousBlock3 >> outputFnc [
+DEVSMyContinuousBlock3 >> outputFunction [
 
 
 ]

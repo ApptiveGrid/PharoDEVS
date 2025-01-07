@@ -109,12 +109,6 @@ BasicDEVS >> deepVerbose: truefalse [
 
 ]
 
-{ #category : 'sixx' }
-BasicDEVS >> doNotStore [
-	"Returns array of inst variables which have not to be stored."
-	^ Array new.
-]
-
 { #category : 'simulation' }
 BasicDEVS >> getSimulator [
 

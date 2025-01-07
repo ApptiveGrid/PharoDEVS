@@ -24,7 +24,7 @@ DEVSMyDaemon >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyDaemon >> intTransition [
+DEVSMyDaemon >> internalTransition [
 	"This is an example of dynamic self-modication of a model."
 
 	| newsystem newsolver |
@@ -90,7 +90,7 @@ DEVSMyDaemon >> intTransition [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyDaemon >> outputFnc [
+DEVSMyDaemon >> outputFunction [
 
 
 ]

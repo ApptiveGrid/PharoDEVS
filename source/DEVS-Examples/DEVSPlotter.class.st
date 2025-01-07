@@ -50,7 +50,7 @@ DEVSPlotter >> initialize [
 ]
 
 { #category : 'modeling' }
-DEVSPlotter >> intTransition [
+DEVSPlotter >> internalTransition [
 
 	inputPorts keys do: [ :portName |
 		pm series: portName addPoint: (self rootSolver time) @ ((input at: (inputPorts at: portName))) ].
@@ -78,7 +78,7 @@ DEVSPlotter >> open [
 ]
 
 { #category : 'modeling' }
-DEVSPlotter >> outputFnc [
+DEVSPlotter >> outputFunction [
 ]
 
 { #category : 'modeling' }

@@ -26,7 +26,7 @@ DEVSMyContinuousBlock2 >> initConditions [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyContinuousBlock2 >> intTransition [
+DEVSMyContinuousBlock2 >> internalTransition [
 
 	sePolarity < 0 ifFalse: [ ^self ].
 	
@@ -46,7 +46,7 @@ DEVSMyContinuousBlock2 >> intgStep [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyContinuousBlock2 >> outputFnc [
+DEVSMyContinuousBlock2 >> outputFunction [
 
 	self poke: #e to: #o3.
 

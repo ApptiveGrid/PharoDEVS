@@ -17,7 +17,7 @@ DEVSXYPlotter class >> withInputs: i [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSXYPlotter >> intTransition [
+DEVSXYPlotter >> internalTransition [
 
 	pm series: name addPoint: ((input at: (inputPorts at: #x))) @ ((input at: (inputPorts at: #y))).
 	pm title: self printString.	"may change at runtime"

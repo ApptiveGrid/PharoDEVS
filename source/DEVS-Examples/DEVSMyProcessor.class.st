@@ -23,7 +23,7 @@ DEVSMyProcessor class >> withQueueSize: n [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyProcessor >> extTransition [
+DEVSMyProcessor >> externalTransition [
 
 	| job |
 
@@ -63,7 +63,7 @@ DEVSMyProcessor >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyProcessor >> intTransition [
+DEVSMyProcessor >> internalTransition [
 
 	processorStatus caseOf: {
 		[ #busy ] -> [
@@ -87,7 +87,7 @@ DEVSMyProcessor >> intTransition [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSMyProcessor >> outputFnc [
+DEVSMyProcessor >> outputFunction [
 
 	processorStatus caseOf: {
 		[ #busy ] -> [

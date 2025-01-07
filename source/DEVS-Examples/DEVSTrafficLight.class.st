@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'modeling' }
-DEVSTrafficLight >> extTransition [
+DEVSTrafficLight >> externalTransition [
 	| inputState |
 	inputState := self peekFrom: #in.
 	(inputState ifNil: [^ self ]).
@@ -32,12 +32,12 @@ DEVSTrafficLight >> initialize [
 ]
 
 { #category : 'modeling' }
-DEVSTrafficLight >> intTransition [
-	self extTransition 
+DEVSTrafficLight >> internalTransition [
+	self externalTransition 
 ]
 
 { #category : 'modeling' }
-DEVSTrafficLight >> outputFnc [
+DEVSTrafficLight >> outputFunction [
 	
 ]
 
