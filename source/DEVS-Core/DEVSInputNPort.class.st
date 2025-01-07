@@ -1,7 +1,7 @@
 Class {
 	#name : 'DEVSInputNPort',
 	#superclass : 'DEVSPort',
-	#category : 'DEVS-Core-Continuous',
+	#category : 'DEVS-Core-Basic',
 	#package : 'DEVS-Core',
-	#tag : 'Continuous'
+	#tag : 'Basic'
 }
