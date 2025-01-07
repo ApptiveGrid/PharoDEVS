@@ -38,22 +38,30 @@ BasicDEVS class >> new [
 { #category : 'modeling' }
 BasicDEVS >> addInputPortNamed: n [
 
-	^ self addInputPortOfType: DEVSInputPort named: n
+	^ self 
+		addInputPortOfType: DEVSInputPort 
+		named: n
 ]
 
 { #category : 'private' }
-BasicDEVS >> addInputPortOfType: portClass named: n [
+BasicDEVS >> addInputPortOfType: inputPortClass named: aString [
 
 	| port |
-	port := portClass hostDEVS: self name: n.
-	inputPorts at: n put: port.
+	port := inputPortClass 
+		hostDEVS: self 
+		name: aString.
+		
+	inputPorts 
+		at: aString 
+		put: port.
+		
 	^ port
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> addInputPorts: list [
+BasicDEVS >> addInputPorts: aCollection [
 
-	list do: [ :p | self addInputPortNamed: p ].
+	aCollection do: [ :p | self addInputPortNamed: p ].
 
 ]
 
@@ -90,29 +98,6 @@ BasicDEVS >> beVerbose: truefalse [
 { #category : 'modeling2' }
 BasicDEVS >> componentNames [
   ^Array new
-]
-
-{ #category : 'copying' }
-BasicDEVS >> copy [
-
-	| aCopy |
-	aCopy := self shallowCopy.
-	aCopy parent: nil.
-	"Original ports are to be replaced by new ones. Input and output (contents of ports) are copied
-	 (although it is not necessary - their initialization should be sufficient - as in #storeOn:; 
-	shallow copy is not problem here - hopefully) - REMOVE ????. Consult with DEVS theory!!!"
-	aCopy removeAllPorts.
-	aCopy input: Dictionary new.
-	aCopy output: Dictionary new.
-	inputPorts keysAndValuesDo: [ :n :p || np | 
-		np := aCopy addInputPortOfType: p species named: n.
-		(input keys includes: p) ifTrue: [ aCopy input at: np put: (input at: p) copy ]].	
-	outputPorts keysAndValuesDo: [ :n :p || np |
-		np := aCopy addOutputPortOfType: p species named: n.
-		(output keys includes: p) ifTrue: [ aCopy output at: np put: (output at: p) copy ]].
-	^ aCopy postCopy
-	
-
 ]
 
 { #category : 'simulation' }
@@ -394,16 +379,6 @@ BasicDEVS >> rootSolver [
 	(parent isKindOf: BasicDEVS) ifTrue: [ ^parent rootSolver ].
 	^nil
 
-]
-
-{ #category : 'copying' }
-BasicDEVS >> safeCopy [
-
-	| aCopy |
-	self rootSolver 
-		ifNotNil: [ self rootSolver safelyDo: [ aCopy := self copy ] ]
-		ifNil: [ aCopy := self copy ].
-	^ aCopy
 ]
 
 { #category : 'private' }

@@ -34,13 +34,6 @@ DEVSAbstractSimulation >> accessProtect [
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> asyncReportStream: s [
-
-	self asyncSafelyDo: [ reportStream := s ]
-
-]
-
-{ #category : 'simulation control' }
 DEVSAbstractSimulation >> asyncReset [
 
 	[ self reset ] fork
@@ -76,27 +69,6 @@ DEVSAbstractSimulation >> asyncStopTime: endTime [
 DEVSAbstractSimulation >> cancelStopTime [
 
 	self stopTime: Float infinity
-]
-
-{ #category : 'copying' }
-DEVSAbstractSimulation >> copy [
-
-	| aCopy |
-	self safelyDo: [
-		aCopy := self shallowCopy postCopy initializeSimulationControl ].
-	^aCopy
-]
-
-{ #category : 'GUI' }
-DEVSAbstractSimulation >> cutAction [
-  self copyToClipboard.
-  self remove.
-]
-
-{ #category : 'copying' }
-DEVSAbstractSimulation >> doNotStore [
-	^{ 'parent'. 'namedComponents'. 'process'. 'idleSemaphore'. 	'startStopSemaphore'. 'accessProtect'.  'reportStream'.  'rtTimer'. 'inputQueue'. 'seQueue'. 			"TO DO: move this to subclasses!!!"  
-	}
 ]
 
 { #category : 'simple simulation' }
@@ -168,12 +140,6 @@ DEVSAbstractSimulation >> name: n [
 	name := n
 ]
 
-{ #category : 'GUI' }
-DEVSAbstractSimulation >> openModel [
-
-	self subclassResponsibility
-]
-
 { #category : 'as yet unclassified' }
 DEVSAbstractSimulation >> parent [
 	^ parent
@@ -222,7 +188,6 @@ DEVSAbstractSimulation >> remove [
 { #category : 'as yet unclassified' }
 DEVSAbstractSimulation >> reportStream [
 
-	reportStream ifNil: [ reportStream := (DummyStream on: nil) ].
 	^ reportStream 
 
 ]
@@ -302,9 +267,8 @@ DEVSAbstractSimulation >> startUnprotected [
 { #category : 'simulation control' }
 DEVSAbstractSimulation >> stop [
 
-	| r |
-	accessProtect critical: [ r := self stopUnprotected ].
-	^ r
+	^ accessProtect critical: [ 
+		self stopUnprotected ].
 
 ]
 
@@ -334,22 +298,6 @@ DEVSAbstractSimulation >> stopUnprotected [
 
 
 
-
-]
-
-{ #category : 'copying' }
-DEVSAbstractSimulation >> storeOn: aStream [
-
-	aStream nextPut: $(.
-	aStream nextPutAll: self class name, ' new'.	"initialized instance"
-	(self class allInstVarNames difference: self doNotStore) do: [:n |
-		aStream nextPutAll: ' instVarNamed: ';
-			store: n;
-			nextPutAll: ' put: ';
-			store: (self instVarNamed: n);
-			nextPut: $; ; 
-			nextPutAll: String cr ].
-	aStream nextPutAll: ' yourself)'; nextPutAll: String cr
 
 ]
 

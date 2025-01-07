@@ -20,12 +20,6 @@ DEVSRootSolver >> addComponents: compList [
 
 ]
 
-{ #category : 'modeling' }
-DEVSRootSolver >> assureComponentName: aName [
-     	^rootDEVS assureComponentName: aName.
-
-]
-
 { #category : 'simulation' }
 DEVSRootSolver >> asyncReportStream: s [
 
@@ -76,14 +70,6 @@ DEVSRootSolver >> doSteps: n [
 	super doSteps: n.
 	self rtFactor: tmp.
 
-]
-
-{ #category : 'as yet unclassified' }
-DEVSRootSolver >> finalize [
-
-	"who needs this?????"
-	"super finalize ???"
-	rootDEVS finalize
 ]
 
 { #category : 'modeling' }
@@ -217,18 +203,6 @@ DEVSRootSolver >> simulationStep [
 DEVSRootSolver >> sscopy [
 	"experimental alternative to copy - usefull for testing purposes only"
 	^Object readFrom: self storeString
-]
-
-{ #category : 'copying' }
-DEVSRootSolver >> storeOn: aStream [
-
-	aStream nextPut: $(.
-	super storeOn: aStream.
-	aStream nextPutAll: 'rootDEVS: '; store: rootDEVS; nextPut: $;.
-	aStream nextPutAll: 'beVerbose: '; store: verbose; nextPut: $;.
-	aStream nextPutAll: ' yourself)'; nextPutAll: String cr
-
-
 ]
 
 { #category : 'simulation' }

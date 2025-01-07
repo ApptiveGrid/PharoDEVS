@@ -50,7 +50,7 @@ CoupledDEVS >> addSubModel: model [
 { #category : 'modeling2' }
 CoupledDEVS >> addSubModel: model named: n [
 
-	(namedComponents keys includes: n) ifTrue: [ self error: 'Coulpled DEVS: Name of new component collides.' ].
+	(namedComponents keys includes: n) ifTrue: [ self error: 'Coupled DEVS: Name of new component collides.' ].
 	model name: n.
 	self addSubModel: model.
 	namedComponents at: n put: model.	"namedComponents for easier model construction"
@@ -118,20 +118,6 @@ CoupledDEVS >> connectSubModelNamed: c1 port: p1 toSubModelNamed: c2 port: p2 if
 	self connectPort: port1 to: port2.
 
 
-]
-
-{ #category : 'copying' }
-CoupledDEVS >> copy [
-
-	| aCopy |
-	aCopy := super copy.	 "ports were replaced by new ones, without links (w/o couplings)"
-	aCopy removeAllSubModels.
-	(components difference: namedComponents values) do: [ :c |
-		aCopy addSubModel: c copy ].
-	namedComponents keysAndValuesDo: [ :k :v |
-		aCopy addSubModel: v copy named: k ].
-	aCopy addCouplings: self couplings.	
-	^  aCopy
 ]
 
 { #category : 'couplings' }

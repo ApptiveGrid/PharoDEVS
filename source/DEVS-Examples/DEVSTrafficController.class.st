@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'direction'
 	],
-	#category : 'DEVS-Examples-crossing',
+	#category : 'DEVS-Examples-traffic-system',
 	#package : 'DEVS-Examples',
-	#tag : 'crossing'
+	#tag : 'traffic-system'
 }
 
 { #category : 'modeling' }

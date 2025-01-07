@@ -9,15 +9,6 @@ Class {
 	#package : 'DEVS-Core'
 }
 
-{ #category : 'copying' }
-AtomicDEVS >> copy [
-
-	| aCopy |
-	self safelyDo: [ aCopy := super copy ].
-	^ aCopy
-
-]
-
 { #category : 'modeling' }
 AtomicDEVS >> elapsed [
 	^elapsed

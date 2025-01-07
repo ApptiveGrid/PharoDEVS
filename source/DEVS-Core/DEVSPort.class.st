@@ -14,7 +14,9 @@ Class {
 { #category : 'as yet unclassified' }
 DEVSPort class >> hostDEVS: host name: n [
 
-	^ (super new initialize hostDEVS: host) name: n
+	^ self new 
+		hostDEVS: host;
+		name: n
 ]
 
 { #category : 'as yet unclassified' }
