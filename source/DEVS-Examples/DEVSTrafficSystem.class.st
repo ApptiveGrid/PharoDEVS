@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSTrafficSystem',
-	#superclass : 'CoupledDEVS',
+	#superclass : 'DEVSCoupled',
 	#category : 'DEVS-Examples-traffic-system',
 	#package : 'DEVS-Examples',
 	#tag : 'traffic-system'

@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSPlotter',
-	#superclass : 'AtomicDEVnDESS',
+	#superclass : 'DEVSAtomicDESS',
 	#instVars : [
 		'pm',
 		'pstep'

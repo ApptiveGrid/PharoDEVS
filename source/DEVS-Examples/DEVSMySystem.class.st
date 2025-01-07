@@ -8,7 +8,7 @@ Example:
 "
 Class {
 	#name : 'DEVSMySystem',
-	#superclass : 'CoupledDEVS',
+	#superclass : 'DEVSCoupled',
 	#category : 'DEVS-Examples-original',
 	#package : 'DEVS-Examples',
 	#tag : 'original'

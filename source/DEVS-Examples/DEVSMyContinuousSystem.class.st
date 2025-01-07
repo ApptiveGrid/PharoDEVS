@@ -3,7 +3,7 @@ Coupled DEVnDESS example.
 "
 Class {
 	#name : 'DEVSMyContinuousSystem',
-	#superclass : 'CoupledDEVnDESS',
+	#superclass : 'DEVSCoupledDESS',
 	#category : 'DEVS-Examples-original',
 	#package : 'DEVS-Examples',
 	#tag : 'original'

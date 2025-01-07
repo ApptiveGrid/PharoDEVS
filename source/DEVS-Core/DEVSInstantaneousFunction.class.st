@@ -8,7 +8,7 @@ f inspect.
 "
 Class {
 	#name : 'DEVSInstantaneousFunction',
-	#superclass : 'BasicDEVS',
+	#superclass : 'DEVSModel',
 	#instVars : [
 		'function',
 		'inputPortNames'

@@ -3,7 +3,7 @@ DEVS example. All systems coupled together. MyDaemon (part of MySystems) modifie
 "
 Class {
 	#name : 'DEVSMySystems',
-	#superclass : 'CoupledDEVnDESS',
+	#superclass : 'DEVSCoupledDESS',
 	#category : 'DEVS-Examples-original',
 	#package : 'DEVS-Examples',
 	#tag : 'original'

@@ -1,6 +1,6 @@
 Class {
-	#name : 'AtomicDEVnDESS',
-	#superclass : 'AtomicDEVS',
+	#name : 'DEVSAtomicDESS',
+	#superclass : 'DEVSAtomic',
 	#instVars : [
 		'time',
 		'step',
@@ -18,19 +18,19 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> addInputNPortNamed: n [
+DEVSAtomicDESS >> addInputNPortNamed: n [
 
 	^ self addInputPortOfType: DEVSInputNPort named: n
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> addOutputNPortNamed: n [
+DEVSAtomicDESS >> addOutputNPortNamed: n [
 
 	^ self addOutputPortOfType: DEVSOutputNPort named: n
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> addSECondition: aBlock [
+DEVSAtomicDESS >> addSECondition: aBlock [
 
 	conditions add: aBlock.
 	savedConditionValues := nil. "it will be lazily generated later"
@@ -39,7 +39,7 @@ AtomicDEVnDESS >> addSECondition: aBlock [
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> allocateIntegrators: n [
+DEVSAtomicDESS >> allocateIntegrators: n [
 
 	intg := Array new: n.
 	intgTmp := Array new: n.
@@ -48,25 +48,25 @@ AtomicDEVnDESS >> allocateIntegrators: n [
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> getSimulator [
+DEVSAtomicDESS >> getSimulator [
 
 	^ (DEVnDESSRootSolver basicNew rootDEVS: self) initialize
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> getSimulatorRT [
+DEVSAtomicDESS >> getSimulatorRT [
 
 	^ (DEVnDESSRootSolverRT basicNew rootDEVS: self) initialize
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> initConditions [
+DEVSAtomicDESS >> initConditions [
 
 	self subclassResponsibility
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> initialize [
+DEVSAtomicDESS >> initialize [
 
 	super initialize.
 	conditions := OrderedCollection new.
@@ -81,7 +81,7 @@ AtomicDEVnDESS >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> intg: n integrate: block [ 
+DEVSAtomicDESS >> intg: n integrate: block [ 
 
 	"Euler integration. To be replaced by RK4 or something else in future."
 
@@ -90,21 +90,21 @@ AtomicDEVnDESS >> intg: n integrate: block [
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> intgPostStep [
+DEVSAtomicDESS >> intgPostStep [
 
 	intg := intgTmp copy.
 
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> receiveMsgInitTime: t [
+DEVSAtomicDESS >> receiveMsgInitTime: t [
 
 	super receiveMsgInitTime: t.
 	time := t.
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> receiveNMsgStarTime: t step: h [
+DEVSAtomicDESS >> receiveNMsgStarTime: t step: h [
 
 	(t = time) "no #closeTo: because step restart is initated by exatly the same argument (?)"
 		ifTrue: [ 
@@ -124,7 +124,7 @@ AtomicDEVnDESS >> receiveNMsgStarTime: t step: h [
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> receiveNMsgX: x time: t step: h [
+DEVSAtomicDESS >> receiveNMsgX: x time: t step: h [
 
 	 | s1 s2 | 
 
@@ -148,7 +148,7 @@ AtomicDEVnDESS >> receiveNMsgX: x time: t step: h [
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> removeSEConditionNo: index [
+DEVSAtomicDESS >> removeSEConditionNo: index [
 
 	conditions remove: (conditions at: index).
 	savedConditionValues := nil. "it will be lazily generated later"
@@ -157,13 +157,13 @@ AtomicDEVnDESS >> removeSEConditionNo: index [
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> revertToPrevState [
+DEVSAtomicDESS >> revertToPrevState [
 
 	intg := savedIntg copy.
 ]
 
 { #category : 'as yet unclassified' }
-AtomicDEVnDESS >> saveState [
+DEVSAtomicDESS >> saveState [
 
 	savedIntg := intg copy.
 

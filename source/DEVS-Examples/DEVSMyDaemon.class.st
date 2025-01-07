@@ -4,7 +4,7 @@ Part of coupled model MySystems. intTransition modifies structure of MySystems a
 "
 Class {
 	#name : 'DEVSMyDaemon',
-	#superclass : 'AtomicDEVS',
+	#superclass : 'DEVSAtomic',
 	#instVars : [
 		'done'
 	],
@@ -38,7 +38,7 @@ DEVSMyDaemon >> internalTransition [
 
 	"Add empty model and fill it by components ..."
 	"note that all newly created models has to be initated with actual time"
-	newsystem := CoupledDEVnDESS new.	
+	newsystem := DEVSCoupledDESS new.	
 	self rootSolver rootDEVS addComponents: { #ns2 -> newsystem }.
 	newsystem addComponents: {
 		#contiblock 	-> (DEVSMyContinuousBlock new).

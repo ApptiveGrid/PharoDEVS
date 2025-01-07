@@ -3,7 +3,7 @@ Atomic DEVnDESS example.
 "
 Class {
 	#name : 'DEVSMyContinuousBlock2',
-	#superclass : 'AtomicDEVnDESS',
+	#superclass : 'DEVSAtomicDESS',
 	#category : 'DEVS-Examples-original',
 	#package : 'DEVS-Examples',
 	#tag : 'original'

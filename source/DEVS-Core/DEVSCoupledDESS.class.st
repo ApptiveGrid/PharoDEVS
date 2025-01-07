@@ -1,43 +1,43 @@
 Class {
-	#name : 'CoupledDEVnDESS',
-	#superclass : 'CoupledDEVS',
+	#name : 'DEVSCoupledDESS',
+	#superclass : 'DEVSCoupled',
 	#category : 'DEVS-Core-Continuous',
 	#package : 'DEVS-Core',
 	#tag : 'Continuous'
 }
 
 { #category : 'as yet unclassified' }
-CoupledDEVnDESS >> addInputNPortNamed: n [
+DEVSCoupledDESS >> addInputNPortNamed: n [
 
 	^ self addInputPortOfType: DEVSInputNPort named: n
 ]
 
 { #category : 'as yet unclassified' }
-CoupledDEVnDESS >> addOutputNPortNamed: n [
+DEVSCoupledDESS >> addOutputNPortNamed: n [
 
 	^ self addOutputPortOfType: DEVSOutputNPort named: n
 ]
 
 { #category : 'as yet unclassified' }
-CoupledDEVnDESS >> getSimulator [
+DEVSCoupledDESS >> getSimulator [
 
 	^ (DEVnDESSRootSolver basicNew rootDEVS: self) initialize
 ]
 
 { #category : 'as yet unclassified' }
-CoupledDEVnDESS >> getSimulatorRT [
+DEVSCoupledDESS >> getSimulatorRT [
 
 	^ (DEVnDESSRootSolverRT basicNew rootDEVS: self) initialize
 ]
 
 { #category : 'as yet unclassified' }
-CoupledDEVnDESS >> receiveNMsgStarTime: t step: h [
+DEVSCoupledDESS >> receiveNMsgStarTime: t step: h [
 
 	| yy xx yetUnevaluatedFunctions toEvaluate |
 
 	"get output from (send '*' to) all blocks with integrators and collect their outputs"
 	yy := Dictionary new.	
-	(components select: [ :c | (c isKindOf: CoupledDEVnDESS) | (c isKindOf: AtomicDEVnDESS) ]) 
+	(components select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) ]) 
 		do: [ :c | (c receiveNMsgStarTime: t step: h) associationsDo: [ :a | yy add: a ] ].
 
 	"evaluate memoryless fast blocks with defined inputs while it is possible 
@@ -64,7 +64,7 @@ CoupledDEVnDESS >> receiveNMsgStarTime: t step: h [
 ]
 
 { #category : 'as yet unclassified' }
-CoupledDEVnDESS >> receiveNMsgX: x time: t step: h [
+DEVSCoupledDESS >> receiveNMsgX: x time: t step: h [
 
 	| xx yy |
 
@@ -75,13 +75,13 @@ CoupledDEVnDESS >> receiveNMsgX: x time: t step: h [
 	"collect previously generated outputs from all numeric components, including self's input"
 	yy := Dictionary new.
 	input associationsDo: [ :a | (a key isKindOf: DEVSInputNPort) ifTrue: [ yy add: a ] ].
-	(components select: [ :c | (c isKindOf: CoupledDEVnDESS) | (c isKindOf: AtomicDEVnDESS) | 
+	(components select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) | 
 	   (c isKindOf: DEVSInstantaneousFunction) ]) 
 		do: [ :c | c output associationsDo: [ :a | 
 			(a key isKindOf: DEVSOutputNPort) ifTrue: [ yy add: a ] ] ].
 
 	"evaluate all numeric components with appropriate inputs - make integration step"
-	(components select: [ :c | (c isKindOf: CoupledDEVnDESS) | (c isKindOf: AtomicDEVnDESS) ]) 
+	(components select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) ]) 
 	  do: [ :c |
 		xx := Dictionary new.
 		(c inputPorts select: [ :p | p isKindOf: DEVSInputNPort]) do: [ :p | p inLines do: [ :pi |

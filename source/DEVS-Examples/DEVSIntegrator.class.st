@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSIntegrator',
-	#superclass : 'AtomicDEVnDESS',
+	#superclass : 'DEVSAtomicDESS',
 	#instVars : [
 		'initCondition',
 		'pm'

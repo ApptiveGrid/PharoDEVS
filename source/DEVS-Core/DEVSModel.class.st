@@ -1,5 +1,5 @@
 Class {
-	#name : 'BasicDEVS',
+	#name : 'DEVSModel',
 	#superclass : 'Object',
 	#instVars : [
 		'parent',
@@ -17,27 +17,27 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-BasicDEVS class >> getSimulator [
+DEVSModel class >> getSimulator [
 
 	^ self new getSimulator
 
 ]
 
 { #category : 'as yet unclassified' }
-BasicDEVS class >> getSimulatorRT [
+DEVSModel class >> getSimulatorRT [
 
 	^ self new getSimulatorRT
 
 ]
 
 { #category : 'as yet unclassified' }
-BasicDEVS class >> new [
+DEVSModel class >> new [
 
 	^ self basicNew initialize	"not needed in 3.7+"
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> addInputPortNamed: n [
+DEVSModel >> addInputPortNamed: n [
 
 	^ self 
 		addInputPortOfType: DEVSInputPort 
@@ -45,7 +45,7 @@ BasicDEVS >> addInputPortNamed: n [
 ]
 
 { #category : 'private' }
-BasicDEVS >> addInputPortOfType: inputPortClass named: aString [
+DEVSModel >> addInputPortOfType: inputPortClass named: aString [
 
 	| port |
 	port := inputPortClass 
@@ -60,20 +60,20 @@ BasicDEVS >> addInputPortOfType: inputPortClass named: aString [
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> addInputPorts: aCollection [
+DEVSModel >> addInputPorts: aCollection [
 
 	aCollection do: [ :p | self addInputPortNamed: p ].
 
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> addOutputPortNamed: n [
+DEVSModel >> addOutputPortNamed: n [
 
 	^ self addOutputPortOfType: DEVSOutputPort named: n
 ]
 
 { #category : 'private' }
-BasicDEVS >> addOutputPortOfType: portClass named: n [
+DEVSModel >> addOutputPortOfType: portClass named: n [
 
 	| port |
 	port := portClass hostDEVS: self name: n.
@@ -82,14 +82,14 @@ BasicDEVS >> addOutputPortOfType: portClass named: n [
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> addOutputPorts: list [
+DEVSModel >> addOutputPorts: list [
 
 	list do: [ :p | self addOutputPortNamed: p ].
 
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> beVerbose: truefalse [
+DEVSModel >> beVerbose: truefalse [
 
 	verbose := truefalse.
 
@@ -97,12 +97,12 @@ BasicDEVS >> beVerbose: truefalse [
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> componentNames [
+DEVSModel >> componentNames [
   ^Array new
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> deepVerbose: truefalse [
+DEVSModel >> deepVerbose: truefalse [
 
 	self beVerbose: truefalse.
 
@@ -110,25 +110,25 @@ BasicDEVS >> deepVerbose: truefalse [
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> getSimulator [
+DEVSModel >> getSimulator [
 
 	^ (DEVSRootSolver basicNew rootDEVS: self) initialize
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> getSimulatorRT [
+DEVSModel >> getSimulatorRT [
 
 	^ (DEVSRootSolverRT basicNew rootDEVS: self) initialize
 ]
 
 { #category : 'misc' }
-BasicDEVS >> initModel [
+DEVSModel >> initModel [
 
 	^ self
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> initialize [
+DEVSModel >> initialize [
 
 	inputPorts := Dictionary new.
 	outputPorts := Dictionary new.
@@ -145,95 +145,95 @@ BasicDEVS >> initialize [
 ]
 
 { #category : 'misc' }
-BasicDEVS >> input [
+DEVSModel >> input [
 	^input
 ]
 
 { #category : 'misc' }
-BasicDEVS >> input: i [
+DEVSModel >> input: i [
 	input := i
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> inputPortNamed: n [
+DEVSModel >> inputPortNamed: n [
 	
 	^  inputPorts at: n ifAbsent: [nil]
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> inputPortNames [
+DEVSModel >> inputPortNames [
   ^self inputPorts collect: [:ip | ip name]
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> inputPorts [
+DEVSModel >> inputPorts [
 
 	^ inputPorts values
 
 ]
 
 { #category : 'misc' }
-BasicDEVS >> isRootDEVS [
+DEVSModel >> isRootDEVS [
 	^ parent isKindOf: DEVSRootSolver
 
 ]
 
 { #category : 'as yet unclassified' }
-BasicDEVS >> name [
+DEVSModel >> name [
 
 	^ name
 ]
 
 { #category : 'as yet unclassified' }
-BasicDEVS >> name: n [
+DEVSModel >> name: n [
 
 	name := n. 
 ]
 
 { #category : 'misc' }
-BasicDEVS >> output [
+DEVSModel >> output [
 	^output
 ]
 
 { #category : 'misc' }
-BasicDEVS >> output: o [
+DEVSModel >> output: o [
 	output := o
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> outputPortNamed: n [
+DEVSModel >> outputPortNamed: n [
 
 	^  outputPorts at: n ifAbsent: [nil]
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> outputPortNames [
+DEVSModel >> outputPortNames [
   ^self outputPorts collect: [:op | op name]
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> outputPorts [
+DEVSModel >> outputPorts [
 
 	^ outputPorts values
 
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> parent [
+DEVSModel >> parent [
 
 	^ parent
 
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> parent: p [
+DEVSModel >> parent: p [
 
 	parent := p
 
 ]
 
 { #category : 'misc' }
-BasicDEVS >> pathName [
+DEVSModel >> pathName [
 	parent isNil ifTrue: [^''].
 	self isRootDEVS 
 		ifTrue: [^(parent pathName)]	"is the same as rootDEVS pathName"
@@ -242,30 +242,30 @@ BasicDEVS >> pathName [
 ]
 
 { #category : 'port accessing' }
-BasicDEVS >> peekFrom: p [
+DEVSModel >> peekFrom: p [
 	| port |
 	(port := (self inputPortNamed: p)) ifNil: [self error: 'port not found'].
 	^ input at: port ifAbsent: [ nil ]
 ]
 
 { #category : 'port accessing' }
-BasicDEVS >> poke: x to: p [
+DEVSModel >> poke: x to: p [
 	| port |
 	(port := (self outputPortNamed: p)) ifNil: [self error: 'port not found'].
 	output at: port  put: x
 ]
 
 { #category : 'printing' }
-BasicDEVS >> printOn: aStream [
+DEVSModel >> printOn: aStream [
 
-	(parent isKindOf: BasicDEVS) ifTrue: [ parent printOn: aStream. aStream nextPutAll: '/' ].
+	(parent isKindOf: DEVSModel) ifTrue: [ parent printOn: aStream. aStream nextPutAll: '/' ].
 	super printOn: aStream.
 
 
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> receiveMsgSyncTime: t [
+DEVSModel >> receiveMsgSyncTime: t [
 
 	"See subclasses. MsgSync prepares atomic models to receive MsgInit safely during simulation. It updates elapsed time of atomic models. This is used before cloning, removing, and adding submodels during simulation. MsgInit uses saved value if timeAdvance for sure (it eases random generation of timeAdvance because timeAdvenace is not invocated more then once at a time).
 
@@ -276,7 +276,7 @@ BasicDEVS >> receiveMsgSyncTime: t [
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> removeAllPorts [
+DEVSModel >> removeAllPorts [
 
 	inputPorts := Dictionary new.
 	outputPorts := Dictionary new.
@@ -284,35 +284,35 @@ BasicDEVS >> removeAllPorts [
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> removeInputPortNamed: n [
+DEVSModel >> removeInputPortNamed: n [
 
 	inputPorts removeKey: n.
 
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> removeInputPorts: list [
+DEVSModel >> removeInputPorts: list [
 
 	list do: [ :p | self removeInputPortNamed: p ].
 
 ]
 
 { #category : 'modeling' }
-BasicDEVS >> removeOutputPortNamed: n [
+DEVSModel >> removeOutputPortNamed: n [
 
 	outputPorts removeKey: n.
 
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> removeOutputPorts: list [
+DEVSModel >> removeOutputPorts: list [
 
 	list do: [ :p | self removeOutputPortNamed: p ].
 
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> renameInputPort: n1 to: n2 [
+DEVSModel >> renameInputPort: n1 to: n2 [
 	"returns true if ok"
 	(inputPorts keys includes: n1) ifFalse: [^false].
 	(inputPorts keys includes: n2) ifTrue: [^false].
@@ -323,7 +323,7 @@ BasicDEVS >> renameInputPort: n1 to: n2 [
 ]
 
 { #category : 'modeling2' }
-BasicDEVS >> renameOutputPort: n1 to: n2 [
+DEVSModel >> renameOutputPort: n1 to: n2 [
 	"returns true if ok"
 	(outputPorts keys includes: n1) ifFalse: [^false].
 	(outputPorts keys includes: n2) ifTrue: [^false].
@@ -334,28 +334,28 @@ BasicDEVS >> renameOutputPort: n1 to: n2 [
 ]
 
 { #category : 'printing' }
-BasicDEVS >> reportInputPortConfig [
+DEVSModel >> reportInputPortConfig [
 
 	inputPorts associationsDo: [ :assoc |
 		self reportStream nextPutAll: '        ', assoc key asString, ':', String tab, (input at: assoc value ifAbsent: [nil]) printString, String cr ].
 ]
 
 { #category : 'printing' }
-BasicDEVS >> reportOutputPortConfig [
+DEVSModel >> reportOutputPortConfig [
 
 	outputPorts associationsDo: [ :assoc |
 		self reportStream nextPutAll: '        ', assoc key asString, ': ', String tab, (output at: assoc value ifAbsent: [nil]) printString, String cr ].
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> reportStream [
+DEVSModel >> reportStream [
 
 	^ self rootSolver reportStream
 
 ]
 
 { #category : 'printing' }
-BasicDEVS >> reportStructure [
+DEVSModel >> reportStructure [
 
 	| prefix |
 	prefix := (String cr), (String new: (self printString findTokens: '/') size withAll: Character tab).
@@ -373,23 +373,23 @@ BasicDEVS >> reportStructure [
 ]
 
 { #category : 'misc' }
-BasicDEVS >> reset [
+DEVSModel >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
 	self initModel
 ]
 
 { #category : 'misc' }
-BasicDEVS >> rootSolver [
+DEVSModel >> rootSolver [
 
 	(parent isKindOf: DEVSRootSolver) ifTrue: [ ^parent ].
-	(parent isKindOf: BasicDEVS) ifTrue: [ ^parent rootSolver ].
+	(parent isKindOf: DEVSModel) ifTrue: [ ^parent rootSolver ].
 	^nil
 
 ]
 
 { #category : 'private' }
-BasicDEVS >> safelyDo: aBlock [
+DEVSModel >> safelyDo: aBlock [
 	"Intended for model edition at runtime (not thread safe - usable either only reflectively by a DEVS itself as part of a simulation step, or by anybody else when simulation is suspended; for thread safe use see AbstractSimulation>>safelyDo:). 
 	Synchronizes DEVS before and inits it after the block evaluation. If the simulation is suspended, then no synchronization nor initialization is needed because it has already been synchronized during simulation stop and it will be initialized during simulation start."
 
@@ -406,19 +406,19 @@ BasicDEVS >> safelyDo: aBlock [
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> timeLast [
+DEVSModel >> timeLast [
 
 	^ timeLast
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> timeNext [
+DEVSModel >> timeNext [
 
 	^ timeNext
 ]
 
 { #category : 'simulation' }
-BasicDEVS >> verbose [
+DEVSModel >> verbose [
 
 	^ verbose 
 
