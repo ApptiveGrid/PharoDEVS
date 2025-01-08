@@ -11,6 +11,11 @@ Class {
 	#tag : 'Basic'
 }
 
+{ #category : 'as yet unclassified' }
+DEVSCoupled class >> displayLabel [ 
+	^ #coupled
+]
+
 { #category : 'modeling2' }
 DEVSCoupled >> addComponent: model named: n [
 	^ self addSubModel: model named: n

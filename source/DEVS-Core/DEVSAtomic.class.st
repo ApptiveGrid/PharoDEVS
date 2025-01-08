@@ -10,6 +10,11 @@ Class {
 	#tag : 'Basic'
 }
 
+{ #category : 'as yet unclassified' }
+DEVSAtomic class >> displayLabel [ 
+	^ #atomic
+]
+
 { #category : 'modeling' }
 DEVSAtomic >> elapsed [
 	^ elapsed

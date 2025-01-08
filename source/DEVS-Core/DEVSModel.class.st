@@ -18,6 +18,11 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+DEVSModel class >> displayLabel [ 
+	self subclassResponsibility 
+]
+
+{ #category : 'as yet unclassified' }
 DEVSModel class >> getSimulator [
 
 	^ self new getSimulator
@@ -29,12 +34,6 @@ DEVSModel class >> getSimulatorRT [
 
 	^ self new getSimulatorRT
 
-]
-
-{ #category : 'as yet unclassified' }
-DEVSModel class >> new [
-
-	^ self basicNew initialize	"not needed in 3.7+"
 ]
 
 { #category : 'modeling' }
@@ -95,6 +94,11 @@ DEVSModel >> beVerbose: truefalse [
 	verbose := truefalse.
 
 
+]
+
+{ #category : 'as yet unclassified' }
+DEVSModel >> buildName [
+	^ UUID new asString36 
 ]
 
 { #category : 'modeling2' }
@@ -187,7 +191,8 @@ DEVSModel >> isRootDEVS [
 { #category : 'as yet unclassified' }
 DEVSModel >> name [
 
-	^ name
+	^ name ifNil: [ 
+		name := self buildName ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -243,7 +248,7 @@ DEVSModel >> pathName [
 	parent isNil ifTrue: [^''].
 	self isRootDEVS 
 		ifTrue: [^(parent pathName)]	"is the same as rootDEVS pathName"
-		ifFalse: [^(parent pathName),'/',name]
+		ifFalse: [^(parent pathName),'/', self name]
 
 ]
 
@@ -263,12 +268,17 @@ DEVSModel >> poke: x to: p [
 
 { #category : 'printing' }
 DEVSModel >> printOn: aStream [
+	aStream << '[' << self class displayLabel << '] '.
+	self printPathOn: aStream 
+]
 
+{ #category : 'printing' }
+DEVSModel >> printPathOn: aStream [ 
 	(parent isKindOf: DEVSModel) ifTrue: [ 
-		parent printOn: aStream. 
+		parent printPathOn: aStream. 
 		aStream nextPutAll: '/' ].
-	name 
-		ifNotNil: [ aStream << name asString ]
+	self name 
+		ifNotNil: [ aStream << self name asString ]
 		ifNil: [ super printOn: aStream ]
 
 ]
@@ -368,7 +378,7 @@ DEVSModel >> reportStructure [
 
 	| prefix |
 	prefix := (String cr), (String new: (self printString findTokens: '/') size withAll: Character tab).
-	self reportStream nextPutAll: prefix, (name isNil ifTrue: [''] ifFalse: [name]), ' (', self class printString, ')'.
+	self reportStream nextPutAll: prefix, (self name isNil ifTrue: [''] ifFalse: [self name]), ' (', self class printString, ')'.
 	self reportStream nextPutAll: ' ('.
 	inputPorts do: [ :p | self reportStream nextPutAll: ' ', p name ].
 	self reportStream nextPutAll: ' ) ('.
