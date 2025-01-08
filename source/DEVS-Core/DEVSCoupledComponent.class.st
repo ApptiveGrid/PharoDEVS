@@ -333,8 +333,8 @@ DEVSCoupledComponent >> removeCouplings: net [
 		(#model5 #port6) -> (#model7 #port8). ... }"
 
 	net do: [ :connection |
-		self unconnectSubModelNamed: connection key first port: connection key second
-			fromSubModelNamed: connection value first port: connection value second ].
+		self unconnectComponentNamed: connection key first port: connection key second
+			fromComponentNamed: connection value first port: connection value second ].
 
 
 ]
@@ -403,25 +403,17 @@ DEVSCoupledComponent >> select: immList [
 	^ (immList asSortedCollection: [ :c1 :c2 | c1 name <= c2 name ]) first
 ]
 
-{ #category : 'modeling' }
-DEVSCoupledComponent >> unconnectPort: p1 from: p2 [
-
-	(p1 outLines includes: p2)  ifTrue: [ p1 outLines remove: p2 ].
-	(p2 inLines includes: p1) ifTrue: [ p2 inLines remove: p1 ].
-
-]
-
 { #category : 'modeling2' }
-DEVSCoupledComponent >> unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c2 port: p2 [
+DEVSCoupledComponent >> unconnectComponentNamed: c1 port: p1 fromComponentNamed: c2 port: p2 [
 
-	self unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c2 port: p2 ifFail: [
-		self unconnectSubModelNamed: c2 port: p2 fromSubModelNamed: c1 port: p1 ifFail: [
+	self unconnectComponentNamed: c1 port: p1 fromComponentNamed: c2 port: p2 ifFail: [
+		self unconnectComponentNamed: c2 port: p2 fromComponentNamed: c1 port: p1 ifFail: [
 			self error: 'Connection does not exist!']].
 
 ]
 
 { #category : 'modeling2' }
-DEVSCoupledComponent >> unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c2 port: p2 ifFail: aBlock [
+DEVSCoupledComponent >> unconnectComponentNamed: c1 port: p1 fromComponentNamed: c2 port: p2 ifFail: aBlock [
 
 	| port1 port2 | 
 
@@ -433,4 +425,12 @@ DEVSCoupledComponent >> unconnectSubModelNamed: c1 port: p1 fromSubModelNamed: c
       ((port1 isNil) | (port2 isNil)) ifTrue: [ ^ aBlock value ].
 
 	self unconnectPort: port1 from: port2.
+]
+
+{ #category : 'modeling' }
+DEVSCoupledComponent >> unconnectPort: p1 from: p2 [
+
+	(p1 outLines includes: p2)  ifTrue: [ p1 outLines remove: p2 ].
+	(p2 inLines includes: p1) ifTrue: [ p2 inLines remove: p1 ].
+
 ]
