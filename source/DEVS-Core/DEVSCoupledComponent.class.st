@@ -16,6 +16,13 @@ DEVSCoupledComponent class >> displayLabel [
 ]
 
 { #category : 'modeling2' }
+DEVSCoupledComponent >> addComponent: aComponent [ 
+	components 
+		at: aComponent name 
+		put: aComponent 
+]
+
+{ #category : 'modeling2' }
 DEVSCoupledComponent >> addComponents: compList [
 
 	compList do: [ :assoc |
