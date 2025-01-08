@@ -12,6 +12,8 @@ BaselineOfPharoDEVS >> baseline: spec [
 		for: #common
 		do: [ 
 			spec
-				package: 'SmallDEVS-Core';
+				package: 'DEVS-Core';
+				package: 'DEVS-Core-Tests' with: [ spec requires: #('DEVS-Core') ];
+				package: 'DEVS-Examples' with: [ spec requires: #('DEVS-Core') ];
 				package: 'DES-Example' ]
 ]
