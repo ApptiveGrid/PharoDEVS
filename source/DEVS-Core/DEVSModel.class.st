@@ -122,10 +122,9 @@ DEVSModel >> getSimulatorRT [
 	^ (DEVSRootSolverRT basicNew rootDEVS: self) initialize
 ]
 
-{ #category : 'misc' }
-DEVSModel >> initModel [
-
-	^ self
+{ #category : 'accessing' }
+DEVSModel >> infinityTime [
+	^ Float infinity 
 ]
 
 { #category : 'modeling' }
@@ -143,6 +142,12 @@ DEVSModel >> initialize [
 
 
 
+]
+
+{ #category : 'misc' }
+DEVSModel >> initializeModel [
+
+	^ self
 ]
 
 { #category : 'misc' }
@@ -259,9 +264,12 @@ DEVSModel >> poke: x to: p [
 { #category : 'printing' }
 DEVSModel >> printOn: aStream [
 
-	(parent isKindOf: DEVSModel) ifTrue: [ parent printOn: aStream. aStream nextPutAll: '/' ].
-	super printOn: aStream.
-
+	(parent isKindOf: DEVSModel) ifTrue: [ 
+		parent printOn: aStream. 
+		aStream nextPutAll: '/' ].
+	name 
+		ifNotNil: [ aStream << name asString ]
+		ifNil: [ super printOn: aStream ]
 
 ]
 
@@ -377,7 +385,7 @@ DEVSModel >> reportStructure [
 DEVSModel >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
-	self initModel
+	self initializeModel
 ]
 
 { #category : 'misc' }

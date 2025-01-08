@@ -133,7 +133,7 @@ DEVSAtomic >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
 	elapsed := 0. savedTimeAdvance := nil.
-	self initModel
+	self initializeModel
 ]
 
 { #category : 'simulation' }

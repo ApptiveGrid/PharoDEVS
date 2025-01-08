@@ -33,17 +33,6 @@ DEVSRootSolverRT >> asyncRtFactor: f [
 ]
 
 { #category : 'realtime simulation' }
-DEVSRootSolverRT >> initModel [
-
-	super initModel.
-	inputQueue := SharedQueue new.
-	seQueue := SharedQueue new.	
-	startTime := Time millisecondClockValue.
-	lastTime:=startTime.
-	
-]
-
-{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> initialize [
 
 	super initialize.	
@@ -54,6 +43,17 @@ DEVSRootSolverRT >> initialize [
 	rtFactor := 1.
 
 
+]
+
+{ #category : 'realtime simulation' }
+DEVSRootSolverRT >> initializeModel [
+
+	super initializeModel.
+	inputQueue := SharedQueue new.
+	seQueue := SharedQueue new.	
+	startTime := Time millisecondClockValue.
+	lastTime:=startTime.
+	
 ]
 
 { #category : 'asynchronous interrupts' }

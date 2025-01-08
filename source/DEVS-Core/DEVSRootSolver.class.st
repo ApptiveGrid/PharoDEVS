@@ -74,7 +74,7 @@ DEVSRootSolver >> doSteps: n [
 ]
 
 { #category : 'modeling' }
-DEVSRootSolver >> initModel [
+DEVSRootSolver >> initializeModel [
 
 	"let's initialize the model"
 	rootDEVS reset.	
@@ -155,7 +155,7 @@ DEVSRootSolver >> reportStream: s [
 DEVSRootSolver >> reset [
 
 	super reset.
-	self initModel.
+	self initializeModel.
 ]
 
 { #category : 'modeling' }

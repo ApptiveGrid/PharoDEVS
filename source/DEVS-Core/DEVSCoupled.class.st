@@ -430,7 +430,7 @@ DEVSCoupled >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
 	components do: [ :c | c reset ].
-	self initModel
+	self initializeModel
 
 ]
 
