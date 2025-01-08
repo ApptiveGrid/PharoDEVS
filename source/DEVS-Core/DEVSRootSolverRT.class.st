@@ -82,14 +82,6 @@ DEVSRootSolverRT >> prepareToStart [
 ]
 
 { #category : 'realtime simulation' }
-DEVSRootSolverRT >> prepareToStop [
-
-	super prepareToStop.
-	reportStream flush.
-
-]
-
-{ #category : 'realtime simulation' }
 DEVSRootSolverRT >> realTime [
 	"returns real time in seconds"
 	(self isRunning) 
@@ -151,8 +143,6 @@ DEVSRootSolverRT >> simulationStep [
 	"Step"
 	"TO DO: make it more consistent with other solvers - first accept interrupts, then make discrete step."
 	clock := self realTime min: component timeNext. 
-	reportStream nextPutAll: '****************** simulation time, real time: ', 
-		clock asFloat printString, ', ', self realTime asFloat printString, String cr.
 	duration := Time millisecondsToRun: [
 		inputOccured := false.
 		input := Dictionary new.
@@ -164,19 +154,12 @@ DEVSRootSolverRT >> simulationStep [
 		inputOccured
 		   ifTrue: [
 			component receiveMsgX: input time: clock.	 "... put input & update event lists"
-			verbose ifTrue: [
-				reportStream nextPutAll: '* Root DEVS Input Port Configuration: ', String cr.			
-				component reportInputPortConfig ]]
+			component logIncoming ]
 		   ifFalse: [
 			((component timeNext - clock) closeTo: 0) 
 				ifTrue: [ component receiveMsgStarTime: clock ] "The planned event takes place."	
-				ifFalse: [reportStream nextPutAll: '* Empty step.', String cr.]].	 
-		verbose ifTrue: [
-			reportStream nextPutAll: '* Root DEVS Output Port Configuration: ', String cr.
-		 	component reportOutputPortConfig ]].  
-	reportStream nextPutAll: '* Step duration: ', duration printString, ' ms', String cr.
-	reportStream = Transcript ifTrue: [ reportStream flush ].
-
+				ifFalse: []].	 
+		component logOutgoing ]
 
 ]
 

@@ -79,10 +79,10 @@ DEVSDocumentation class >> continuousDemo [
 DEVSDocumentation class >> discreteDemo [
 
 	"Generator generates jobs of random size, cascade of processors with queues process the jobs."
-	(DEVSMySystem newSimulator deepVerbose: true) simulate: 100.
+	DEVSMySystem newSimulator simulate: 100.
 
 	"dtto, one processor, another way of coupled model specification"
-	(DEVSMySystem2 newSimulator deepVerbose: true) simulate: 100.
+	DEVSMySystem2 newSimulator simulate: 100.
 
 
 ]

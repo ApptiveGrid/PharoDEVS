@@ -88,6 +88,11 @@ DEVSComponent >> addOutputPorts: list [
 
 ]
 
+{ #category : 'announcer' }
+DEVSComponent >> announce: anAnnouncement [ 
+	self simulation emitEvent: anAnnouncement 
+]
+
 { #category : 'simulation' }
 DEVSComponent >> beVerbose: truefalse [
 
@@ -106,12 +111,20 @@ DEVSComponent >> componentNames [
   ^Array new
 ]
 
-{ #category : 'simulation' }
-DEVSComponent >> deepVerbose: truefalse [
+{ #category : 'announcer' }
+DEVSComponent >> emitEvent: anAnnouncement [ 
+	self simulation emitEvent: anAnnouncement 
+]
 
-	self beVerbose: truefalse.
-
-
+{ #category : 'accessing' }
+DEVSComponent >> incomingValues [ 
+	| dict |
+	dict := Dictionary new.
+	inputPorts keysAndValuesDo: [ :label :port |
+		dict 
+			at: label
+			put: (input at: port ifAbsent: nil) ].
+	^ dict 
 ]
 
 { #category : 'accessing' }
@@ -176,6 +189,24 @@ DEVSComponent >> isRoot [
 ]
 
 { #category : 'as yet unclassified' }
+DEVSComponent >> logIncoming [
+	self emitEvent: (DEVSExternalTransitionEvent new 
+		component: self;
+		incoming: self incomingValues;
+		timeNext: timeNext
+		).
+]
+
+{ #category : 'as yet unclassified' }
+DEVSComponent >> logOutgoing [
+	self emitEvent: (DEVSInternalTransitionEvent new 
+		component: self;
+		outgoing: self outgoingValues;
+		timeNext: timeNext
+		).
+]
+
+{ #category : 'as yet unclassified' }
 DEVSComponent >> name [
 
 	^ name ifNil: [ 
@@ -202,6 +233,17 @@ DEVSComponent >> newSimulatorRT [
 	^ DEVSRootSolverRT new 
 		component: self;
 		yourself
+]
+
+{ #category : 'accessing' }
+DEVSComponent >> outgoingValues [ 
+	| dict |
+	dict := Dictionary new.
+	outputPorts keysAndValuesDo: [ :label :port |
+		dict 
+			at: label
+			put: (output at: port ifAbsent: nil) ].
+	^ dict 
 ]
 
 { #category : 'misc' }
@@ -268,8 +310,10 @@ DEVSComponent >> poke: x to: p [
 
 { #category : 'printing' }
 DEVSComponent >> printOn: aStream [
-	aStream << '[' << self class displayLabel << '] '.
-	self printPathOn: aStream 
+	"aStream << '[' << self class displayLabel << '] '."
+	aStream << '<'.
+	self printPathOn: aStream.
+	aStream << '>'
 ]
 
 { #category : 'printing' }
@@ -352,45 +396,6 @@ DEVSComponent >> renameOutputPort: n1 to: n2 [
 
 ]
 
-{ #category : 'printing' }
-DEVSComponent >> reportInputPortConfig [
-
-	inputPorts associationsDo: [ :assoc |
-		self reportStream nextPutAll: '        ', assoc key asString, ':', String tab, (input at: assoc value ifAbsent: [nil]) printString, String cr ].
-]
-
-{ #category : 'printing' }
-DEVSComponent >> reportOutputPortConfig [
-
-	outputPorts associationsDo: [ :assoc |
-		self reportStream nextPutAll: '        ', assoc key asString, ': ', String tab, (output at: assoc value ifAbsent: [nil]) printString, String cr ].
-]
-
-{ #category : 'simulation' }
-DEVSComponent >> reportStream [
-
-	^ self rootSolver reportStream
-
-]
-
-{ #category : 'printing' }
-DEVSComponent >> reportStructure [
-
-	| prefix |
-	prefix := (String cr), (String new: (self printString findTokens: '/') size withAll: Character tab).
-	self reportStream nextPutAll: prefix, (self name isNil ifTrue: [''] ifFalse: [self name]), ' (', self class printString, ')'.
-	self reportStream nextPutAll: ' ('.
-	inputPorts do: [ :p | self reportStream nextPutAll: ' ', p name ].
-	self reportStream nextPutAll: ' ) ('.
-	outputPorts do: [ :p | self reportStream nextPutAll: ' ', p name ].
-	self reportStream nextPutAll: ' )'.
-	inputPorts do: [ :p | p outLines do: [ :l |
-		self reportStream nextPutAll: prefix, String tab, p name, ' -> ', l hostDEVS name, ' ', l name ]].
-	outputPorts do: [ :p | p outLines do: [ :l |
-		self reportStream nextPutAll: prefix, String tab, p name, ' -> ', l hostDEVS name, ' ', l name ]].
-
-]
-
 { #category : 'misc' }
 DEVSComponent >> reset [
 
@@ -419,6 +424,13 @@ DEVSComponent >> safelyDo: aBlock [
 		simulationIsRunning ifTrue: [ self receiveMsgInitTime: self rootSolver time ] "]" ]
 	ifFalse: [ v := aBlock value ].
 	^ v
+
+]
+
+{ #category : 'misc' }
+DEVSComponent >> simulation [
+
+	^ parent simulation 
 
 ]
 

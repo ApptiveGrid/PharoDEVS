@@ -83,13 +83,7 @@ DEVSAtomicComponent >> receiveMsgStarTime: time [
 	timeLast := time.
 	timeNext := timeLast + (savedTimeAdvance := self timeAdvance).
 	elapsed := 0.
-
-	verbose ifTrue: [
-		self reportStream nextPutAll: '* Internal Transition: ', self printString, String cr.
-		self reportStream nextPutAll: '    * New State: ', self printString, String cr.
-		self reportStream nextPutAll: '    * Output Port Configuration: ', String cr.
-		self reportOutputPortConfig.
-		self reportStream nextPutAll: '    * Next scheduled internal transition at time ', timeNext printString, String cr ].
+	self logOutgoing.
 
 	^ output
 

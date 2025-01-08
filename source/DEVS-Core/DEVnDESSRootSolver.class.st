@@ -19,17 +19,11 @@ DEVnDESSRootSolver >> bigStep [
 
 		[ (clock < tn) & (clock < stopTime) ] whileTrue: [ 
 			self numericStep ].
-		component reportStream nextPutAll: String cr.
 
 		tn <= stopTime ifTrue: [ 
 			clock := tn.
-			component reportStream nextPutAll: 
-				'****************** time: ', clock printString, String cr.
 			component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
-			component verbose ifTrue: [
-				component reportStream nextPutAll: 
-					'* Root DEVS Output Port Configuration: ', String cr.
-		 		component reportOutputPortConfig ]].
+		 	component reportOutputPortConfig ].
 
 
 ]
@@ -49,10 +43,8 @@ DEVnDESSRootSolver >> numericStep [
 	seDetected := false.
 	component receiveNMsgStarTime: clock step: dh.		"send (*, t, h) to root DEVS"
 	component receiveNMsgX: {} time: clock step: dh.		"send (x, t, h) to root DEVS"
-	reportStream nextPutAll: '.'.
 	seDetected ifTrue: [ 	| dhmin dhmax | dhmin := 0. dhmax := dh.
 		[ seDetected & ((dhmax - dhmin) < 0.001) ] whileFalse: [ 
-			reportStream nextPutAll: ':'.
 			seDetected ifTrue: [ dhmax := dh ] ifFalse: [ dhmin := dh ].
 			dh := (dhmax + dhmin)/2.
 			seDetected := false.
@@ -84,9 +76,6 @@ DEVnDESSRootSolver >> simulateB: t [
 	[ clock < stopTime ] whileTrue: [ 
 		self bigStep ].
 
-	component reportStream flush.
-
-
 ]
 
 { #category : 'simulation' }
@@ -97,14 +86,8 @@ DEVnDESSRootSolver >> simulationStep [
 	(clock < tn) & (clock < stopTime) ifTrue: [ ^ self numericStep ].
 
 	"Discrete step:"
-	reportStream nextPutAll: String cr.
 	tn <= stopTime ifTrue: [ 
 		clock := tn.
-		reportStream nextPutAll: '****************** time: ', clock printString, String cr.
 		component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
-		verbose ifTrue: [
-			reportStream nextPutAll: '* Root DEVS Output Port Configuration: ', String cr.
-	 		component reportOutputPortConfig ]].
-
-
+	component logOutgoing ]
 ]
