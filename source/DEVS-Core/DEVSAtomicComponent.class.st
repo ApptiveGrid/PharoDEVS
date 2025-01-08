@@ -1,6 +1,6 @@
 Class {
-	#name : 'DEVSAtomic',
-	#superclass : 'DEVSModel',
+	#name : 'DEVSAtomicComponent',
+	#superclass : 'DEVSComponent',
 	#instVars : [
 		'elapsed',
 		'savedTimeAdvance'
@@ -11,23 +11,23 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-DEVSAtomic class >> displayLabel [ 
+DEVSAtomicComponent class >> displayLabel [ 
 	^ #atomic
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> elapsed [
+DEVSAtomicComponent >> elapsed [
 	^ elapsed
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> externalTransition [
+DEVSAtomicComponent >> externalTransition [
 
 	self subclassResponsibility
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> initialize [
+DEVSAtomicComponent >> initialize [
 
 	super initialize.
 	elapsed := 0.
@@ -36,31 +36,31 @@ DEVSAtomic >> initialize [
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> internalTransition [
+DEVSAtomicComponent >> internalTransition [
 
 	self subclassResponsibility
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> outputFunction [
+DEVSAtomicComponent >> outputFunction [
 
 	self subclassResponsibility
 
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> prepareToStart [
+DEVSAtomicComponent >> prepareToStart [
 	"Resumes eventual processes in atomic model. It makes some sense in RT simulation."
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> prepareToStop [
+DEVSAtomicComponent >> prepareToStop [
 	"Suspends eventual processes in atomic model. It makes some sense in RT simulation."
 
 ]
 
 { #category : 'simulation' }
-DEVSAtomic >> receiveMsgInitTime: time [
+DEVSAtomicComponent >> receiveMsgInitTime: time [
 
 	timeLast := time - elapsed.
 	savedTimeAdvance isNil ifTrue: [ savedTimeAdvance := self timeAdvance ].
@@ -72,7 +72,7 @@ DEVSAtomic >> receiveMsgInitTime: time [
 ]
 
 { #category : 'simulation' }
-DEVSAtomic >> receiveMsgStarTime: time [
+DEVSAtomicComponent >> receiveMsgStarTime: time [
 
 	self assert: [ (time - timeNext) closeTo: 0 ].
 
@@ -98,7 +98,7 @@ DEVSAtomic >> receiveMsgStarTime: time [
 ]
 
 { #category : 'simulation' }
-DEVSAtomic >> receiveMsgSyncTime: time [
+DEVSAtomicComponent >> receiveMsgSyncTime: time [
 
 	timeLast ifNotNil: [ 
 		elapsed := time - timeLast ].
@@ -107,7 +107,7 @@ DEVSAtomic >> receiveMsgSyncTime: time [
 ]
 
 { #category : 'simulation' }
-DEVSAtomic >> receiveMsgX: message time: time [
+DEVSAtomicComponent >> receiveMsgX: message time: time [
 
 	self assert: [ (timeLast <= time) & (time <= timeNext) ].
 
@@ -129,12 +129,12 @@ DEVSAtomic >> receiveMsgX: message time: time [
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> remaining [
+DEVSAtomicComponent >> remaining [
 	^ savedTimeAdvance - elapsed
 ]
 
 { #category : 'private' }
-DEVSAtomic >> reset [
+DEVSAtomicComponent >> reset [
 
 	timeLast = 0. timeNext := Float infinity.
 	elapsed := 0. savedTimeAdvance := nil.
@@ -142,19 +142,19 @@ DEVSAtomic >> reset [
 ]
 
 { #category : 'simulation' }
-DEVSAtomic >> sendMsgSETime: time [
+DEVSAtomicComponent >> sendMsgSETime: time [
 
 	parent receiveMsgSETime: (timeNext := time).
 
 ]
 
 { #category : 'internal events' }
-DEVSAtomic >> signalStateEvent [   
+DEVSAtomicComponent >> signalStateEvent [   
 	self rootSolver stateEventIn: self
 ]
 
 { #category : 'modeling' }
-DEVSAtomic >> timeAdvance [
+DEVSAtomicComponent >> timeAdvance [
 
 	self subclassResponsibility
 

@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSTrafficController',
-	#superclass : 'DEVSAtomic',
+	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'direction'
 	],

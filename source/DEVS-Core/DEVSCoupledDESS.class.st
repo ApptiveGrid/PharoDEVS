@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSCoupledDESS',
-	#superclass : 'DEVSCoupled',
+	#superclass : 'DEVSCoupledComponent',
 	#category : 'DEVS-Core-Continuous',
 	#package : 'DEVS-Core',
 	#tag : 'Continuous'
@@ -37,12 +37,12 @@ DEVSCoupledDESS >> receiveNMsgStarTime: t step: h [
 
 	"get output from (send '*' to) all blocks with integrators and collect their outputs"
 	yy := Dictionary new.	
-	(components select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) ]) 
+	(components values select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) ]) 
 		do: [ :c | (c receiveNMsgStarTime: t step: h) associationsDo: [ :a | yy add: a ] ].
 
 	"evaluate memoryless fast blocks with defined inputs while it is possible 
 	 (each block is evaluated max 1 time)"
-	yetUnevaluatedFunctions := components select: [ :c | (c isKindOf: DEVSInstantaneousFunction) ].
+	yetUnevaluatedFunctions := components values select: [ :c | (c isKindOf: DEVSInstantaneousFunction) ].
 	toEvaluate := OrderedCollection new.
 	[ toEvaluate size = yetUnevaluatedFunctions size ] whileFalse: [ 
 	  toEvaluate := yetUnevaluatedFunctions copy.
@@ -75,13 +75,13 @@ DEVSCoupledDESS >> receiveNMsgX: x time: t step: h [
 	"collect previously generated outputs from all numeric components, including self's input"
 	yy := Dictionary new.
 	input associationsDo: [ :a | (a key isKindOf: DEVSInputNPort) ifTrue: [ yy add: a ] ].
-	(components select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) | 
+	(components values select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) | 
 	   (c isKindOf: DEVSInstantaneousFunction) ]) 
 		do: [ :c | c output associationsDo: [ :a | 
 			(a key isKindOf: DEVSOutputNPort) ifTrue: [ yy add: a ] ] ].
 
 	"evaluate all numeric components with appropriate inputs - make integration step"
-	(components select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) ]) 
+	(components values select: [ :c | (c isKindOf: DEVSCoupledDESS) | (c isKindOf: DEVSAtomicDESS) ]) 
 	  do: [ :c |
 		xx := Dictionary new.
 		(c inputPorts select: [ :p | p isKindOf: DEVSInputNPort]) do: [ :p | p inLines do: [ :pi |

@@ -8,17 +8,17 @@ Class {
 { #category : 'tests' }
 DEVSCoupledTest >> testAddingModel [ 
 	| model coupled |
-	model := DEVSAtomic new name: #atomic.
+	model := DEVSAtomicComponent new name: #atomic.
 	coupled := DEVSTestCoupled new.
-	coupled addSubModel: model.
+	coupled addComponent: model.
 	self assert: (coupled componentNamed: #atomic) name equals: model name 
 ]
 
 { #category : 'tests' }
 DEVSCoupledTest >> testAddingNamedModel [ 
 	| model coupled |
-	model := DEVSAtomic new.
+	model := DEVSAtomicComponent new.
 	coupled := DEVSTestCoupled new.
-	coupled addSubModel: model named: #atomic.
+	coupled addComponent: (model name: #atomic).
 	self assert: (coupled componentNamed: #atomic) name equals: model name 
 ]

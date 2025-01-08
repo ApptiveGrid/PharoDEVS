@@ -4,7 +4,7 @@ Part of coupled model MySystems. intTransition modifies structure of MySystems a
 "
 Class {
 	#name : 'DEVSMyDaemon',
-	#superclass : 'DEVSAtomic',
+	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'done'
 	],
@@ -66,19 +66,19 @@ DEVSMyDaemon >> internalTransition [
 	"Clone submodels ..."	
 "	newsystem := (self rootSolver rootDEVS subModelNamed: #c1) copy.
 	self rootSolver rootDEVS addComponents: { #clone1 -> newsystem }.
-"	newsystem := (self rootSolver rootDEVS subModelNamed: #c2) copy.
+"	newsystem := (self rootSolver rootDEVS componentNamed: #c2) copy.
 	self rootSolver rootDEVS addComponents: { #clone2 -> newsystem }.
 
 	"Clone the whole model ..."	
 	newsystem := self rootSolver rootDEVS copy.
-	newsystem removeSubModelNamed: #d.
+	newsystem removeComponentNamed: #d.
 	self rootSolver rootDEVS addComponents: { #clone -> newsystem }.
 
 	"Make nested simulation of a clone (with independent simulation time)" 		
 	newsystem := self rootSolver rootDEVS copy.
 	newsolver := self rootSolver copy rootDEVS: newsystem.
 	newsystem name: #nestedSimulation.
-	newsystem removeSubModelNamed: #d.
+	newsystem removeComponentNamed: #d.
 	newsolver simulate: 35. 			"starting at actual sim. time (25)"
 
 	"Show actual model structure"
