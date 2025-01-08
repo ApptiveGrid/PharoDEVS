@@ -77,7 +77,7 @@ DEVSRootSolverRT >> prepareToStart [
 	rtFactor = 0 
 		ifFalse: [ startTime := Time millisecondClockValue - (clock / rtFactor * 1000) ]
 		ifTrue: [ startTime := Time millisecondClockValue - (clock  * 1000) ].
-	rootDEVS receiveMsgInitTime: clock.
+	component receiveMsgInitTime: clock.
 
 ]
 
@@ -123,7 +123,7 @@ DEVSRootSolverRT >> simulate: t [
 
 	startTime := Time millisecondClockValue.
 	stopTime := t.	"in seconds"
-	clock := self realTime min: rootDEVS timeNext.		"isn't this redundant ???"
+	clock := self realTime min: component timeNext.		"isn't this redundant ???"
 	self prepareToStart.
 	startStopSemaphore initSignals.	"running simulation indication"
 	[ clock <= stopTime ] whileTrue: [ self simulationStep ].
@@ -143,37 +143,37 @@ DEVSRootSolverRT >> simulationStep [
 	rtFactor = 0 ifTrue: [ ^ self nonRTStep ].
 
 	"Synchronize with real time"
-	rtTimer := DEVSTimer at: ((startTime + ((rootDEVS timeNext min: stopTime) / rtFactor * 1000)) min: SmallInteger maxVal) rounded.
+	rtTimer := DEVSTimer at: ((startTime + ((component timeNext min: stopTime) / rtFactor * 1000)) min: SmallInteger maxVal) rounded.
 	rtTimer wait.		"Waiting can be interrupted by asynchronous internal or external event."
 	
 	startStopSemaphore isSignaled ifTrue: [^self].	"No step, return immediately."
 
 	"Step"
 	"TO DO: make it more consistent with other solvers - first accept interrupts, then make discrete step."
-	clock := self realTime min: rootDEVS timeNext. 
+	clock := self realTime min: component timeNext. 
 	reportStream nextPutAll: '****************** simulation time, real time: ', 
 		clock asFloat printString, ', ', self realTime asFloat printString, String cr.
 	duration := Time millisecondsToRun: [
 		inputOccured := false.
 		input := Dictionary new.
 		[ (msg := inputQueue nextOrNil) == nil ] whileFalse: [ 
-			input at: (rootDEVS inputPortNamed: msg first) put: msg second.
+			input at: (component inputPortNamed: msg first) put: msg second.
 			inputOccured := true ].
 		[ (aSubModel := seQueue nextOrNil) == nil ] whileFalse: [ 
 			aSubModel sendMsgSETime: clock ].
 		inputOccured
 		   ifTrue: [
-			rootDEVS receiveMsgX: input time: clock.	 "... put input & update event lists"
+			component receiveMsgX: input time: clock.	 "... put input & update event lists"
 			verbose ifTrue: [
 				reportStream nextPutAll: '* Root DEVS Input Port Configuration: ', String cr.			
-				rootDEVS reportInputPortConfig ]]
+				component reportInputPortConfig ]]
 		   ifFalse: [
-			((rootDEVS timeNext - clock) closeTo: 0) 
-				ifTrue: [ rootDEVS receiveMsgStarTime: clock ] "The planned event takes place."	
+			((component timeNext - clock) closeTo: 0) 
+				ifTrue: [ component receiveMsgStarTime: clock ] "The planned event takes place."	
 				ifFalse: [reportStream nextPutAll: '* Empty step.', String cr.]].	 
 		verbose ifTrue: [
 			reportStream nextPutAll: '* Root DEVS Output Port Configuration: ', String cr.
-		 	rootDEVS reportOutputPortConfig ]].  
+		 	component reportOutputPortConfig ]].  
 	reportStream nextPutAll: '* Step duration: ', duration printString, ' ms', String cr.
 	reportStream = Transcript ifTrue: [ reportStream flush ].
 

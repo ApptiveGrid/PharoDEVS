@@ -15,21 +15,21 @@ Class {
 { #category : 'OBSOLETE ???' }
 DEVnDESSRootSolver >> bigStep [
 
-		tn := rootDEVS timeNext. 
+		tn := component timeNext. 
 
 		[ (clock < tn) & (clock < stopTime) ] whileTrue: [ 
 			self numericStep ].
-		rootDEVS reportStream nextPutAll: String cr.
+		component reportStream nextPutAll: String cr.
 
 		tn <= stopTime ifTrue: [ 
 			clock := tn.
-			rootDEVS reportStream nextPutAll: 
+			component reportStream nextPutAll: 
 				'****************** time: ', clock printString, String cr.
-			rootDEVS receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
-			rootDEVS verbose ifTrue: [
-				rootDEVS reportStream nextPutAll: 
+			component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
+			component verbose ifTrue: [
+				component reportStream nextPutAll: 
 					'* Root DEVS Output Port Configuration: ', String cr.
-		 		rootDEVS reportOutputPortConfig ]].
+		 		component reportOutputPortConfig ]].
 
 
 ]
@@ -47,8 +47,8 @@ DEVnDESSRootSolver >> numericStep [
 
 	clock + h < tn ifTrue: [ dh := h ] ifFalse: [ dh := tn - clock ].
 	seDetected := false.
-	rootDEVS receiveNMsgStarTime: clock step: dh.		"send (*, t, h) to root DEVS"
-	rootDEVS receiveNMsgX: {} time: clock step: dh.		"send (x, t, h) to root DEVS"
+	component receiveNMsgStarTime: clock step: dh.		"send (*, t, h) to root DEVS"
+	component receiveNMsgX: {} time: clock step: dh.		"send (x, t, h) to root DEVS"
 	reportStream nextPutAll: '.'.
 	seDetected ifTrue: [ 	| dhmin dhmax | dhmin := 0. dhmax := dh.
 		[ seDetected & ((dhmax - dhmin) < 0.001) ] whileFalse: [ 
@@ -56,8 +56,8 @@ DEVnDESSRootSolver >> numericStep [
 			seDetected ifTrue: [ dhmax := dh ] ifFalse: [ dhmin := dh ].
 			dh := (dhmax + dhmin)/2.
 			seDetected := false.
-			rootDEVS receiveNMsgStarTime: clock step: dh.		
-			rootDEVS receiveNMsgX: {} time: clock step: dh.
+			component receiveNMsgStarTime: clock step: dh.		
+			component receiveNMsgX: {} time: clock step: dh.
 				"Note: rootDEVS and consequently an AtomicDEVnDESS is repeatedly called 
 				 for the same time. It is supposed that it remembers state and time 
 				 from which last step was made. It must check time for which it is called
@@ -84,7 +84,7 @@ DEVnDESSRootSolver >> simulateB: t [
 	[ clock < stopTime ] whileTrue: [ 
 		self bigStep ].
 
-	rootDEVS reportStream flush.
+	component reportStream flush.
 
 
 ]
@@ -93,7 +93,7 @@ DEVnDESSRootSolver >> simulateB: t [
 DEVnDESSRootSolver >> simulationStep [
 
 	"Numeric step:"
-	tn := rootDEVS timeNext. 
+	tn := component timeNext. 
 	(clock < tn) & (clock < stopTime) ifTrue: [ ^ self numericStep ].
 
 	"Discrete step:"
@@ -101,10 +101,10 @@ DEVnDESSRootSolver >> simulationStep [
 	tn <= stopTime ifTrue: [ 
 		clock := tn.
 		reportStream nextPutAll: '****************** time: ', clock printString, String cr.
-		rootDEVS receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
+		component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
 		verbose ifTrue: [
 			reportStream nextPutAll: '* Root DEVS Output Port Configuration: ', String cr.
-	 		rootDEVS reportOutputPortConfig ]].
+	 		component reportOutputPortConfig ]].
 
 
 ]
