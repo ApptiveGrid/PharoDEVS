@@ -1,19 +1,13 @@
 Class {
 	#name : 'DEVSRootSolver',
-	#superclass : 'DEVSAbstractSimulation',
+	#superclass : 'DEVSBasicSolver',
 	#instVars : [
-		'rootDEVS'
+		'component'
 	],
 	#category : 'DEVS-Core-Basic',
 	#package : 'DEVS-Core',
 	#tag : 'Basic'
 }
-
-{ #category : 'modeling' }
-DEVSRootSolver >> addComponents: compList [
-	^ rootDEVS addComponents: compList
-
-]
 
 { #category : 'simulation' }
 DEVSRootSolver >> asyncReportStream: s [
@@ -27,31 +21,34 @@ DEVSRootSolver >> asyncReportStream: s [
 DEVSRootSolver >> beVerbose: truefalse [
 
 	verbose := truefalse.
-	rootDEVS beVerbose: truefalse.
+	component beVerbose: truefalse.
 
 
 ]
 
 { #category : 'modeling' }
-DEVSRootSolver >> componentNamed: n [
-  ^self rootDEVS componentNamed: n
+DEVSRootSolver >> component [
+
+	^ component
+
+
+
 ]
 
 { #category : 'modeling' }
-DEVSRootSolver >> componentNamed: n ifAbsent: aBlock [
-  ^self rootDEVS componentNamed: n ifAbsent: aBlock
-]
+DEVSRootSolver >> component: aComponent [
 
-{ #category : 'modeling' }
-DEVSRootSolver >> componentNames [
-  ^self rootDEVS componentNames
+	component := aComponent.
+
+
+
 ]
 
 { #category : 'as yet unclassified' }
 DEVSRootSolver >> deepVerbose: truefalse [
 
 	verbose := truefalse.
-	rootDEVS deepVerbose: truefalse.
+	component deepVerbose: truefalse.
 
 
 ]
@@ -71,70 +68,28 @@ DEVSRootSolver >> doSteps: n [
 DEVSRootSolver >> initializeModel [
 
 	"let's initialize the model"
-	rootDEVS reset.	
+	component reset.	
 
 	"let's initilalize simulation as well"
 	clock := 0. stopTime := Float infinity.
-	rootDEVS receiveMsgInitTime: clock.	"it also starts processes in atomic devses"
-	rootDEVS receiveMsgSyncTime: clock.				"here we stop them"
+	component receiveMsgInitTime: clock.	"it also starts processes in atomic devses"
+	component receiveMsgSyncTime: clock.				"here we stop them"
 
 	
-
-]
-
-{ #category : 'modeling' }
-DEVSRootSolver >> model [
-
-	^ rootDEVS
-
-
-
-]
-
-{ #category : 'modeling' }
-DEVSRootSolver >> name [
-
-	^ rootDEVS ifNotNil: [ rootDEVS name ] ifNil: [ name ]
-
-]
-
-{ #category : 'modeling' }
-DEVSRootSolver >> name: n [
-
-	name := n.
-	rootDEVS ifNotNil: [ rootDEVS name: n ]
-]
-
-{ #category : 'copying' }
-DEVSRootSolver >> postCopy [
-	self rootDEVS: self rootDEVS copy.
-	^ self
 
 ]
 
 { #category : 'simulation' }
 DEVSRootSolver >> prepareToStart [
 
-	rootDEVS receiveMsgInitTime: clock.
+	component receiveMsgInitTime: clock.
 
 ]
 
 { #category : 'simulation' }
 DEVSRootSolver >> prepareToStop [
 
-	rootDEVS receiveMsgSyncTime: clock.
-
-]
-
-{ #category : 'modeling' }
-DEVSRootSolver >> removeComponentNamed: n [
-	^ rootDEVS removeComponentNamed: n
-
-]
-
-{ #category : 'modeling' }
-DEVSRootSolver >> renameComponentNamed: n1 to: n2 [
-	^ rootDEVS renameComponentNamed: n1 to: n2
+	component receiveMsgSyncTime: clock.
 
 ]
 
@@ -153,25 +108,6 @@ DEVSRootSolver >> reset [
 ]
 
 { #category : 'modeling' }
-DEVSRootSolver >> rootDEVS [
-
-	^ rootDEVS
-
-
-
-]
-
-{ #category : 'modeling' }
-DEVSRootSolver >> rootDEVS: d [
-
-	rootDEVS := d.
-	rootDEVS parent: self.
-
-
-
-]
-
-{ #category : 'modeling' }
 DEVSRootSolver >> rootSolver [
 
 	^ self
@@ -180,24 +116,18 @@ DEVSRootSolver >> rootSolver [
 { #category : 'simulation' }
 DEVSRootSolver >> simulationStep [
 
-	clock := rootDEVS timeNext.
+	clock := component timeNext.
 	clock isInfinite ifTrue: [^self].
 	reportStream nextPutAll: '****************** time: ', clock printString, String cr.
-	rootDEVS receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
+	component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
 	verbose ifTrue: [
 		reportStream nextPutAll: '* Root DEVS Output Port Configuration: ', String cr.
-	 	rootDEVS reportOutputPortConfig ].
+	 	component reportOutputPortConfig ].
 	reportStream flush.
-	clock := rootDEVS timeLast.
+	clock := component timeLast.
 
 
 
-]
-
-{ #category : 'testing' }
-DEVSRootSolver >> sscopy [
-	"experimental alternative to copy - usefull for testing purposes only"
-	^Object readFrom: self storeString
 ]
 
 { #category : 'simulation' }

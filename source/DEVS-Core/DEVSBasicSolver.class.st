@@ -9,7 +9,7 @@ Note: Since the simulation runs as a sequence of steps, there could be possible 
 
 "
 Class {
-	#name : 'DEVSAbstractSimulation',
+	#name : 'DEVSBasicSolver',
 	#superclass : 'Object',
 	#instVars : [
 		'parent',
@@ -29,57 +29,57 @@ Class {
 }
 
 { #category : 'private' }
-DEVSAbstractSimulation >> accessProtect [
+DEVSBasicSolver >> accessProtect [
 
 	^accessProtect
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> asyncReset [
+DEVSBasicSolver >> asyncReset [
 
 	[ self reset ] fork
 
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> asyncSafelyDo: aBlock [
+DEVSBasicSolver >> asyncSafelyDo: aBlock [
 
 	[ self safelyDo: aBlock ] fork
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> asyncStart [
+DEVSBasicSolver >> asyncStart [
 
 	[ self start ] fork
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> asyncStop [
+DEVSBasicSolver >> asyncStop [
 
 	[ self stop ] fork
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> asyncStopTime: endTime [
+DEVSBasicSolver >> asyncStopTime: endTime [
 
 	self asyncSafelyDo: [ stopTime := endTime ]. 				"in seconds"
 
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> cancelStopTime [
+DEVSBasicSolver >> cancelStopTime [
 
 	self stopTime: Float infinity
 ]
 
 { #category : 'simple simulation' }
-DEVSAbstractSimulation >> doOneStep [
+DEVSBasicSolver >> doOneStep [
 
 	self doSteps: 1.
 ]
 
 { #category : 'simple simulation' }
-DEVSAbstractSimulation >> doSteps: n [
+DEVSBasicSolver >> doSteps: n [
 
 	self stop.
 	self prepareToStart.
@@ -93,12 +93,12 @@ DEVSAbstractSimulation >> doSteps: n [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> fullName [
+DEVSBasicSolver >> fullName [
 	^ self name, ' [', (self isRunning ifTrue: ['R'] ifFalse: ['S']) , ']'
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> initialize [
+DEVSBasicSolver >> initialize [
 
 	self initializeSimulationControl.
 	clock ifNil: [ clock := 0 ]. stopTime := Float infinity.
@@ -108,7 +108,7 @@ DEVSAbstractSimulation >> initialize [
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> initializeSimulationControl [
+DEVSBasicSolver >> initializeSimulationControl [
 
 	startStopSemaphore := Semaphore new.
 	startStopSemaphore signal.							"means that simulator has been requested to stop"
@@ -120,56 +120,56 @@ DEVSAbstractSimulation >> initializeSimulationControl [
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> isIdle [
+DEVSBasicSolver >> isIdle [
 
 	^ idleSemaphore isSignaled
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> isRunning [
+DEVSBasicSolver >> isRunning [
 
 	^ startStopSemaphore isSignaled not
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> name [
+DEVSBasicSolver >> name [
 	^ name
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> name: n [
-	name := n
+DEVSBasicSolver >> name: aString [
+	name := aString
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> parent [
+DEVSBasicSolver >> parent [
 	^ parent
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> parent: p [
+DEVSBasicSolver >> parent: p [
 	parent := p
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> pathName [
+DEVSBasicSolver >> pathName [
   parent isNil ifTrue: [^''] ifFalse: [^(parent pathName),'/',name].
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> prepareToStart [
+DEVSBasicSolver >> prepareToStart [
 
 	"Subclasses may define some initalization code."
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> prepareToStop [
+DEVSBasicSolver >> prepareToStop [
 
 	"Subclasses may define some finalization code."
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> processBody [
+DEVSBasicSolver >> processBody [
 
 	self prepareToStart.
 	[ startStopSemaphore isSignaled ] whileFalse: [ 	
@@ -181,27 +181,27 @@ DEVSAbstractSimulation >> processBody [
 ]
 
 { #category : 'GUI' }
-DEVSAbstractSimulation >> remove [
+DEVSBasicSolver >> remove [
   (UIManager default confirm: 'Really DELETE simulation?')
   ifTrue: [ parent removeComponents: (Array with: name) ].
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> reportStream [
+DEVSBasicSolver >> reportStream [
 
 	^ reportStream 
 
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> reportStream: s [
+DEVSBasicSolver >> reportStream: s [
 
 	self safelyDo: [ reportStream := s ]
 
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> reset [
+DEVSBasicSolver >> reset [
 
 	self stop.
 	clock := 0. stopTime := Float infinity.
@@ -209,7 +209,7 @@ DEVSAbstractSimulation >> reset [
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> safelyDo: aBlock [
+DEVSBasicSolver >> safelyDo: aBlock [
 
 	| r v |
 	accessProtect critical: [
@@ -221,7 +221,7 @@ DEVSAbstractSimulation >> safelyDo: aBlock [
 ]
 
 { #category : 'simple simulation' }
-DEVSAbstractSimulation >> simulate: time [
+DEVSBasicSolver >> simulate: time [
 
 	stopTime := time.
 	self prepareToStart.
@@ -235,14 +235,14 @@ DEVSAbstractSimulation >> simulate: time [
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> simulationStep [
+DEVSBasicSolver >> simulationStep [
 
 	self subclassResponsibility
 
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> start [
+DEVSBasicSolver >> start [
 
 	| r |
 	accessProtect critical: [ r := self startUnprotected ].
@@ -251,7 +251,7 @@ DEVSAbstractSimulation >> start [
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> startUnprotected [
+DEVSBasicSolver >> startUnprotected [
 
 	| r |
 	r := true.
@@ -266,7 +266,7 @@ DEVSAbstractSimulation >> startUnprotected [
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> stop [
+DEVSBasicSolver >> stop [
 
 	^ accessProtect critical: [ 
 		self stopUnprotected ].
@@ -274,19 +274,19 @@ DEVSAbstractSimulation >> stop [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAbstractSimulation >> stopTime [
+DEVSBasicSolver >> stopTime [
   ^stopTime
 ]
 
 { #category : 'simulation control' }
-DEVSAbstractSimulation >> stopTime: endTime [
+DEVSBasicSolver >> stopTime: endTime [
 
 	self safelyDo: [ stopTime := endTime ]. 				"in seconds"
 
 ]
 
 { #category : 'private' }
-DEVSAbstractSimulation >> stopUnprotected [
+DEVSBasicSolver >> stopUnprotected [
 
 	| r |
 	r := false.
@@ -303,6 +303,6 @@ DEVSAbstractSimulation >> stopUnprotected [
 ]
 
 { #category : 'GUI' }
-DEVSAbstractSimulation >> timeToShow [
+DEVSBasicSolver >> timeToShow [
 	^ clock 
 ]

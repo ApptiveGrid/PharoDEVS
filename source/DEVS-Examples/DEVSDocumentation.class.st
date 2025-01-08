@@ -60,19 +60,17 @@ DEVSDocumentation class >> continuousDemo [
 
 	"Van Der Pol system specified as atomic model, 
 	 one of outputs trigger discrete events (when zero is crossed)"
-	DEVSMyContinuousBlock getSimulator simulate: 20.
+	DEVSMyContinuousBlock newSimulator simulate: 20.
 
 	"MyContinuousBlock with a plotter connected to it."
-	DEVSMyContinuousSystem getSimulator simulate: 20.
+	DEVSMyContinuousSystem newSimulator simulate: 20.
 
 	"Van Der Pol system specified as a coupling of integrators and a function"
-	DEVSMyContinuousSystem2 getSimulator simulate: 20.
+	DEVSMyContinuousSystem2 newSimulator simulate: 20.
 
-	"All systems in one"
-	DEVSMySystems getSimulator simulate: 20.
 
 	"Bouncing ball"
-	DEVSMyContinuousSystem1 getSimulator simulate: 5
+	DEVSMyContinuousSystem1 newSimulator simulate: 5
 
 
 ]
@@ -81,23 +79,10 @@ DEVSDocumentation class >> continuousDemo [
 DEVSDocumentation class >> discreteDemo [
 
 	"Generator generates jobs of random size, cascade of processors with queues process the jobs."
-	(DEVSMySystem getSimulator deepVerbose: true) simulate: 100.
+	(DEVSMySystem newSimulator deepVerbose: true) simulate: 100.
 
 	"dtto, one processor, another way of coupled model specification"
-	(DEVSMySystem2 getSimulator deepVerbose: true) simulate: 100.
-
-
-]
-
-{ #category : 'demo' }
-DEVSDocumentation class >> dynamicDemo [
-
-	| s c |
-	s := 	DEVSMySystems getSimulator simulate: 10.
-	c := s rootDEVS removeComponentNamed: #c1.
-	s simulate: 20.
-	s rootDEVS addComponents: {#c1 -> c}.
-	s simulate: 30.	"at t=25 model performs selfmodification - see MyDaemon>>intTransition"
+	(DEVSMySystem2 newSimulator deepVerbose: true) simulate: 100.
 
 
 ]
@@ -110,6 +95,6 @@ DEVSDocumentation class >> realtimeDemo [
 	(Delay forSeconds: 10) wait.
 	s inject: #aaaa to: #in.
 "
-	[ s := DEVSMySystem3b getSimulatorRT. s simulate: 20. ] forkAt: Processor timingPriority.
+	[ s := DEVSMySystem3b newSimulatorRT. s simulate: 20. ] forkAt: Processor timingPriority.
 
 ]

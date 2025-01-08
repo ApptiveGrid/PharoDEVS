@@ -48,18 +48,6 @@ DEVSAtomicDESS >> allocateIntegrators: n [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSAtomicDESS >> getSimulator [
-
-	^ (DEVnDESSRootSolver basicNew rootDEVS: self) initialize
-]
-
-{ #category : 'as yet unclassified' }
-DEVSAtomicDESS >> getSimulatorRT [
-
-	^ (DEVnDESSRootSolverRT basicNew rootDEVS: self) initialize
-]
-
-{ #category : 'as yet unclassified' }
 DEVSAtomicDESS >> initConditions [
 
 	self subclassResponsibility
@@ -94,6 +82,22 @@ DEVSAtomicDESS >> intgPostStep [
 
 	intg := intgTmp copy.
 
+]
+
+{ #category : 'as yet unclassified' }
+DEVSAtomicDESS >> newSimulator [
+
+	^ DEVnDESSRootSolver new 
+		component: self;
+		yourself 
+]
+
+{ #category : 'as yet unclassified' }
+DEVSAtomicDESS >> newSimulatorRT [
+
+	^ DEVnDESSRootSolverRT new 
+		component: self;
+		yourself
 ]
 
 { #category : 'as yet unclassified' }

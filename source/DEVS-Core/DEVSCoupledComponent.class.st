@@ -19,7 +19,8 @@ DEVSCoupledComponent class >> displayLabel [
 DEVSCoupledComponent >> addComponent: aComponent [ 
 	components 
 		at: aComponent name 
-		put: aComponent 
+		put: (aComponent
+			parent: self) 
 ]
 
 { #category : 'modeling2' }
@@ -291,6 +292,12 @@ DEVSCoupledComponent >> receiveMsgX: x time: t [
 ]
 
 { #category : 'modeling' }
+DEVSCoupledComponent >> removeAllComponents [
+
+	components := Dictionary new.
+]
+
+{ #category : 'modeling' }
 DEVSCoupledComponent >> removeAllCouplings [
 	| cpl |
 	cpl := OrderedCollection new.
@@ -299,12 +306,6 @@ DEVSCoupledComponent >> removeAllCouplings [
 	self outputPorts do: [ :p | p inLines do: [ :l | cpl add: { l. p. } ]].	"theoretically redundant"
 	cpl do: [ :c | self unconnectPort: c first from: c second ].
 
-]
-
-{ #category : 'modeling' }
-DEVSCoupledComponent >> removeAllSubModels [
-
-	components := Dictionary new.
 ]
 
 { #category : 'modeling' }
@@ -326,10 +327,10 @@ DEVSCoupledComponent >> removeComponentNamed: n [
 ]
 
 { #category : 'modeling2' }
-DEVSCoupledComponent >> removeComponents: compList [
+DEVSCoupledComponent >> removeComponents: aCollection [
 
-	compList do: [ :x |
-		self removeComponentNamed: x ].
+	aCollection do: [ :component |
+		self removeComponent: component ].
 ]
 
 { #category : 'modeling2' }

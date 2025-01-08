@@ -23,16 +23,16 @@ DEVSComponent class >> displayLabel [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSComponent class >> getSimulator [
+DEVSComponent class >> newSimulator [
 
-	^ self new getSimulator
+	^ self new newSimulator
 
 ]
 
 { #category : 'as yet unclassified' }
-DEVSComponent class >> getSimulatorRT [
+DEVSComponent class >> newSimulatorRT [
 
-	^ self new getSimulatorRT
+	^ self new newSimulatorRT
 
 ]
 
@@ -114,18 +114,6 @@ DEVSComponent >> deepVerbose: truefalse [
 
 ]
 
-{ #category : 'simulation' }
-DEVSComponent >> getSimulator [
-
-	^ (DEVSRootSolver basicNew rootDEVS: self) initialize
-]
-
-{ #category : 'simulation' }
-DEVSComponent >> getSimulatorRT [
-
-	^ (DEVSRootSolverRT basicNew rootDEVS: self) initialize
-]
-
 { #category : 'accessing' }
 DEVSComponent >> infinityTime [
 	^ Float infinity 
@@ -199,6 +187,22 @@ DEVSComponent >> name [
 DEVSComponent >> name: n [
 
 	name := n. 
+]
+
+{ #category : 'simulation' }
+DEVSComponent >> newSimulator [
+
+	^ DEVSRootSolver new 
+		component: self;
+		yourself 
+]
+
+{ #category : 'simulation' }
+DEVSComponent >> newSimulatorRT [
+
+	^ DEVSRootSolverRT new 
+		component: self;
+		yourself
 ]
 
 { #category : 'misc' }

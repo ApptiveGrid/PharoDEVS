@@ -19,15 +19,19 @@ DEVSCoupledDESS >> addOutputNPortNamed: n [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSCoupledDESS >> getSimulator [
+DEVSCoupledDESS >> newSimulator [
 
-	^ (DEVnDESSRootSolver basicNew rootDEVS: self) initialize
+	^ DEVnDESSRootSolver new 
+		component: self;
+		yourself
 ]
 
 { #category : 'as yet unclassified' }
-DEVSCoupledDESS >> getSimulatorRT [
+DEVSCoupledDESS >> newSimulatorRT [
 
-	^ (DEVnDESSRootSolverRT basicNew rootDEVS: self) initialize
+	^ DEVnDESSRootSolverRT new 
+		component: self;
+		yourself
 ]
 
 { #category : 'as yet unclassified' }
