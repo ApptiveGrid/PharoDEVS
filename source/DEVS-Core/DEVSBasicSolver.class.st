@@ -19,9 +19,7 @@ Class {
 		'startStopSemaphore',
 		'accessProtect',
 		'clock',
-		'stopTime',
-		'reportStream',
-		'verbose'
+		'stopTime'
 	],
 	#category : 'DEVS-Core-Basic',
 	#package : 'DEVS-Core',
@@ -88,8 +86,6 @@ DEVSBasicSolver >> doSteps: n [
 	startStopSemaphore signal.
 	self prepareToStop.
 
-	reportStream flush.
-
 ]
 
 { #category : 'as yet unclassified' }
@@ -101,10 +97,8 @@ DEVSBasicSolver >> fullName [
 DEVSBasicSolver >> initialize [
 
 	self initializeSimulationControl.
-	clock ifNil: [ clock := 0 ]. stopTime := Float infinity.
-
-	reportStream := Transcript. verbose := true.
-
+	clock ifNil: [ clock := 0 ].
+	stopTime := Float infinity
 ]
 
 { #category : 'private' }
@@ -175,20 +169,6 @@ DEVSBasicSolver >> processBody [
 
 ]
 
-{ #category : 'as yet unclassified' }
-DEVSBasicSolver >> reportStream [
-
-	^ reportStream 
-
-]
-
-{ #category : 'simulation control' }
-DEVSBasicSolver >> reportStream: s [
-
-	self safelyDo: [ reportStream := s ]
-
-]
-
 { #category : 'simulation control' }
 DEVSBasicSolver >> reset [
 
@@ -218,9 +198,6 @@ DEVSBasicSolver >> simulate: time [
 	[ clock < stopTime ] whileTrue: [ self simulationStep ].
 	startStopSemaphore signal.
 	self prepareToStop.
-
-	reportStream flush.
-
 ]
 
 { #category : 'private' }

@@ -2,7 +2,8 @@ Class {
 	#name : 'DEVSTrafficLight',
 	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
-		'state'
+		'state',
+		'changedState'
 	],
 	#category : 'DEVS-Examples-traffic-system',
 	#package : 'DEVS-Examples',
@@ -11,17 +12,7 @@ Class {
 
 { #category : 'modeling' }
 DEVSTrafficLight >> externalTransition [
-	| inputState |
-	inputState := self peekFrom: #in.
-	(inputState ifNil: [^ self ]).
-	(inputState beginsWith: name) 
-		ifTrue: [ 
-			(state = #red) ifTrue: [ state := #green ] ]
-		ifFalse: [
-			(state = #yellow) ifTrue: [ state := #red ].
-			(state = #green) ifTrue: [ state := #yellow ] ] .
-	self reportStream nextPutAll: '----> ', name ,' state is now ', state, String cr.
-
+	self internalTransition 
 ]
 
 { #category : 'modeling' }
@@ -33,7 +24,28 @@ DEVSTrafficLight >> initialize [
 
 { #category : 'modeling' }
 DEVSTrafficLight >> internalTransition [
-	self externalTransition 
+	| inputState oldState |
+	oldState := state.
+	inputState := self peekFrom: #in.
+	(inputState ifNil: [^ self ]).
+	(inputState beginsWith: name) 
+		ifTrue: [ 
+			(state = #red) ifTrue: [ state := #green ] ]
+		ifFalse: [
+			(state = #yellow) ifTrue: [ state := #red ].
+			(state = #green) ifTrue: [ state := #yellow ] ].
+	(state = oldState) ifFalse: [ 
+		changedState := { #state -> ( oldState -> state ) } asDictionary ]
+]
+
+{ #category : 'as yet unclassified' }
+DEVSTrafficLight >> logOutgoing [
+	self emitEvent: (DEVSInternalTransitionEvent new 
+		component: self;
+		outgoing: self outgoingValues;
+		stateChanges: changedState;
+		timeNext: timeNext
+		).
 ]
 
 { #category : 'modeling' }

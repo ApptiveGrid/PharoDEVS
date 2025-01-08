@@ -9,23 +9,6 @@ Class {
 	#tag : 'Basic'
 }
 
-{ #category : 'simulation' }
-DEVSRootSolver >> asyncReportStream: s [
-
-	self asyncSafelyDo: [ reportStream := s ]
-
-
-]
-
-{ #category : 'as yet unclassified' }
-DEVSRootSolver >> beVerbose: truefalse [
-
-	verbose := truefalse.
-	component beVerbose: truefalse.
-
-
-]
-
 { #category : 'modeling' }
 DEVSRootSolver >> component [
 
@@ -40,15 +23,6 @@ DEVSRootSolver >> component: aComponent [
 
 	component := aComponent.
 
-
-
-]
-
-{ #category : 'as yet unclassified' }
-DEVSRootSolver >> deepVerbose: truefalse [
-
-	verbose := truefalse.
-	component deepVerbose: truefalse.
 
 
 ]
@@ -94,23 +68,10 @@ DEVSRootSolver >> prepareToStop [
 ]
 
 { #category : 'simulation' }
-DEVSRootSolver >> reportStream: s [
-
-	self safelyDo: [ reportStream := s ]
-
-]
-
-{ #category : 'simulation' }
 DEVSRootSolver >> reset [
 
 	super reset.
 	self initializeModel.
-]
-
-{ #category : 'modeling' }
-DEVSRootSolver >> rootSolver [
-
-	^ self
 ]
 
 { #category : 'simulation' }
@@ -118,12 +79,9 @@ DEVSRootSolver >> simulationStep [
 
 	clock := component timeNext.
 	clock isInfinite ifTrue: [^self].
-	reportStream nextPutAll: '****************** time: ', clock printString, String cr.
 	component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
-	verbose ifTrue: [
-		reportStream nextPutAll: '* Root DEVS Output Port Configuration: ', String cr.
-	 	component reportOutputPortConfig ].
-	reportStream flush.
+	
+	component logOutgoing.
 	clock := component timeLast.
 
 

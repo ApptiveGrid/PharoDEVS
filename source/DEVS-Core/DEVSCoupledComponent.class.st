@@ -178,14 +178,6 @@ DEVSCoupledComponent >> couplingsOfPort: aSymbol [
 		(((c key second)=aSymbol) & ((c key first)=#self)) | (((c value second)=aSymbol) & ((c value first)=#self))]
 ]
 
-{ #category : 'simulation' }
-DEVSCoupledComponent >> deepVerbose: truefalse [
-
-	self beVerbose: truefalse.
-	components do: [ :c | c deepVerbose: truefalse ].
-
-]
-
 { #category : 'modeling' }
 DEVSCoupledComponent >> initialize [
 
@@ -234,10 +226,9 @@ DEVSCoupledComponent >> receiveMsgStarTime: t [
 		ifTrue: [ selected := immChildren at: 1 ].
 	immChildren size > 1 
 		ifTrue: [ selected := self select: immChildren.
-				"verbose" true ifTrue: [
-					self reportStream nextPutAll: '* Collision occured in ', self printString, ', involving: ', 
-						immChildren printString, String cr.
-					self reportStream nextPutAll: '        select chooses: ', selected printString, String cr] ].
+			self emitEvent: (DEVSCollisionEvent new 
+				events: immChildren copy;
+				selected: selected) ].
 
 	selected 
 		ifNil: [ "model is empty" yy := Dictionary new ]
@@ -384,16 +375,6 @@ DEVSCoupledComponent >> rename: n1 to: n2 [
 	^true
 
 
-]
-
-{ #category : 'simulation' }
-DEVSCoupledComponent >> reportStructure [
-
-	super reportStructure.
-	components do: [ :c | c reportStructure ].
-
-
-	
 ]
 
 { #category : 'as yet unclassified' }

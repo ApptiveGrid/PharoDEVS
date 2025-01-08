@@ -3,10 +3,12 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'model',
-		'coordinator'
+		'coordinator',
+		'logger'
 	],
-	#category : 'DEVS-Core',
-	#package : 'DEVS-Core'
+	#category : 'DEVS-Core-Basic',
+	#package : 'DEVS-Core',
+	#tag : 'Basic'
 }
 
 { #category : 'accessing' }
@@ -26,6 +28,20 @@ DEVSSimulation >> defaultSimulationTime [
 	^ 100 
 ]
 
+{ #category : 'announcer' }
+DEVSSimulation >> emitEvent: anEvent [ 
+	self logger addEvent: (
+		anEvent
+			time: coordinator time;
+			yourself)
+]
+
+{ #category : 'accessing' }
+DEVSSimulation >> logger [ 
+	^ logger ifNil: [ 
+		logger := self newDefaultLogger ] 
+]
+
 { #category : 'accessing' }
 DEVSSimulation >> model [
 
@@ -38,9 +54,14 @@ DEVSSimulation >> model: anObject [
 	model := anObject
 ]
 
+{ #category : 'instance creation' }
+DEVSSimulation >> newDefaultLogger [
+	^ DEVSLogger new 
+]
+
 { #category : 'printing' }
 DEVSSimulation >> printPathOn: aStream [ 
-	aStream << '<' << self class name << '> '.
+
 ]
 
 { #category : 'misc' }
@@ -58,4 +79,10 @@ DEVSSimulation >> runTo: aTime [
 	self coordinator 
 		component: self model;
 		simulate: aTime 
+]
+
+{ #category : 'misc' }
+DEVSSimulation >> simulation [ 
+	
+	^ self
 ]
