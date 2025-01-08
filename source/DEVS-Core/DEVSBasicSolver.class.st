@@ -147,13 +147,8 @@ DEVSBasicSolver >> parent [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSBasicSolver >> parent: p [
-	parent := p
-]
-
-{ #category : 'as yet unclassified' }
-DEVSBasicSolver >> pathName [
-  parent isNil ifTrue: [^''] ifFalse: [^(parent pathName),'/',name].
+DEVSBasicSolver >> parent: anObject [
+	parent := anObject
 ]
 
 { #category : 'private' }
@@ -178,12 +173,6 @@ DEVSBasicSolver >> processBody [
 			ifFalse: [ startStopSemaphore signal ] ].
 	self prepareToStop.
 
-]
-
-{ #category : 'GUI' }
-DEVSBasicSolver >> remove [
-  (UIManager default confirm: 'Really DELETE simulation?')
-  ifTrue: [ parent removeComponents: (Array with: name) ].
 ]
 
 { #category : 'as yet unclassified' }

@@ -171,9 +171,8 @@ DEVSComponent >> inputPorts [
 ]
 
 { #category : 'misc' }
-DEVSComponent >> isRootDEVS [
-	^ parent isKindOf: DEVSRootSolver
-
+DEVSComponent >> isRoot [
+	^ parent isNil 
 ]
 
 { #category : 'as yet unclassified' }
@@ -247,13 +246,10 @@ DEVSComponent >> parent: p [
 
 ]
 
-{ #category : 'misc' }
-DEVSComponent >> pathName [
-	parent isNil ifTrue: [^''].
-	self isRootDEVS 
-		ifTrue: [^(parent pathName)]	"is the same as rootDEVS pathName"
-		ifFalse: [^(parent pathName),'/', self name]
-
+{ #category : 'printing' }
+DEVSComponent >> path [ 
+	^ String streamContents: [ :stream |
+		self printPathOn: stream ]
 ]
 
 { #category : 'port accessing' }
@@ -278,9 +274,9 @@ DEVSComponent >> printOn: aStream [
 
 { #category : 'printing' }
 DEVSComponent >> printPathOn: aStream [ 
-	(parent isKindOf: DEVSComponent) ifTrue: [ 
+	parent ifNotNil: [ 
 		parent printPathOn: aStream. 
-		aStream nextPutAll: '/' ].
+		aStream << '/' ].
 	self name 
 		ifNotNil: [ aStream << self name asString ]
 		ifNil: [ super printOn: aStream ]
@@ -405,9 +401,7 @@ DEVSComponent >> reset [
 { #category : 'misc' }
 DEVSComponent >> rootSolver [
 
-	(parent isKindOf: DEVSRootSolver) ifTrue: [ ^parent ].
-	(parent isKindOf: DEVSComponent) ifTrue: [ ^parent rootSolver ].
-	^nil
+	^ parent rootSolver 
 
 ]
 

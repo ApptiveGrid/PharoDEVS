@@ -38,6 +38,16 @@ DEVSSimulation >> model: anObject [
 	model := anObject
 ]
 
+{ #category : 'printing' }
+DEVSSimulation >> printPathOn: aStream [ 
+	aStream << '<' << self class name << '> '.
+]
+
+{ #category : 'misc' }
+DEVSSimulation >> rootSolver [
+	^ self coordinator 
+]
+
 { #category : 'running' }
 DEVSSimulation >> run [ 
 	self runTo: self defaultSimulationTime 
