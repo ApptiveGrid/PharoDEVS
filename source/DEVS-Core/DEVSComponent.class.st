@@ -88,11 +88,6 @@ DEVSComponent >> addOutputPorts: list [
 
 ]
 
-{ #category : 'announcer' }
-DEVSComponent >> announce: anAnnouncement [ 
-	self simulation emitEvent: anAnnouncement 
-]
-
 { #category : 'simulation' }
 DEVSComponent >> beVerbose: truefalse [
 
@@ -310,7 +305,6 @@ DEVSComponent >> poke: x to: p [
 
 { #category : 'printing' }
 DEVSComponent >> printOn: aStream [
-	"aStream << '[' << self class displayLabel << '] '."
 	aStream << '<'.
 	self printPathOn: aStream.
 	aStream << '>'

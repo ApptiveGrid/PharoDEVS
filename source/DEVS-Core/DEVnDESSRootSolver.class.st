@@ -23,7 +23,7 @@ DEVnDESSRootSolver >> bigStep [
 		tn <= stopTime ifTrue: [ 
 			clock := tn.
 			component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
-		 	component reportOutputPortConfig ].
+		 	component logOutgoing ].
 
 
 ]

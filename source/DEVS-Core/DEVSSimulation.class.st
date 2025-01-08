@@ -6,8 +6,9 @@ Class {
 		'coordinator',
 		'logger'
 	],
-	#category : 'DEVS-Core',
-	#package : 'DEVS-Core'
+	#category : 'DEVS-Core-Basic',
+	#package : 'DEVS-Core',
+	#tag : 'Basic'
 }
 
 { #category : 'accessing' }
@@ -60,7 +61,7 @@ DEVSSimulation >> newDefaultLogger [
 
 { #category : 'printing' }
 DEVSSimulation >> printPathOn: aStream [ 
-	"aStream << '<' << self class name << '> '."
+
 ]
 
 { #category : 'misc' }
