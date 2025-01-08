@@ -114,12 +114,7 @@ DEVSAtomicComponent >> receiveMsgX: message time: time [
 	timeNext := timeLast + (savedTimeAdvance := self timeAdvance).
 	elapsed := 0.
 
-	verbose ifTrue: [
-		self reportStream nextPutAll: '* External Transition: ', self printString, String cr.
-		self reportStream nextPutAll: '    * Input Port Configuration: ', String cr.
-		self reportInputPortConfig. 
-		self reportStream nextPutAll: '    * New State: ', self printString, String cr ].
-
+	self logIncoming
 ]
 
 { #category : 'modeling' }
