@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSAtomicDESS',
-	#superclass : 'DEVSAtomic',
+	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'time',
 		'step',

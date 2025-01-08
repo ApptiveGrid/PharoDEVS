@@ -10,12 +10,6 @@ Class {
 }
 
 { #category : 'modeling' }
-DEVSRootSolver >> addComponent: c Named: n [
-	^ rootDEVS addComponent: c named: n
-
-]
-
-{ #category : 'modeling' }
 DEVSRootSolver >> addComponents: compList [
 	^ rootDEVS addComponents: compList
 

@@ -8,7 +8,7 @@ MySystem2 getSimulator simulate: 100.
 "
 Class {
 	#name : 'DEVSMySystem2',
-	#superclass : 'DEVSCoupled',
+	#superclass : 'DEVSCoupledComponent',
 	#category : 'DEVS-Examples-original',
 	#package : 'DEVS-Examples',
 	#tag : 'original'

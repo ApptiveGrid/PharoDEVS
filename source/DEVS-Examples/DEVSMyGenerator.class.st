@@ -3,7 +3,7 @@ Part of MySystem
 "
 Class {
 	#name : 'DEVSMyGenerator',
-	#superclass : 'DEVSAtomic',
+	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'ia',
 		'ib',

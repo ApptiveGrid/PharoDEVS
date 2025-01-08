@@ -94,7 +94,7 @@ DEVSDocumentation class >> dynamicDemo [
 
 	| s c |
 	s := 	DEVSMySystems getSimulator simulate: 10.
-	c := s rootDEVS removeSubModelNamed: #c1.
+	c := s rootDEVS removeComponentNamed: #c1.
 	s simulate: 20.
 	s rootDEVS addComponents: {#c1 -> c}.
 	s simulate: 30.	"at t=25 model performs selfmodification - see MyDaemon>>intTransition"

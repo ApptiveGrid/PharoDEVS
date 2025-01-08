@@ -1,6 +1,6 @@
 Class {
 	#name : 'DEVSTrafficLight',
-	#superclass : 'DEVSAtomic',
+	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'state'
 	],

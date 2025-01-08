@@ -3,7 +3,7 @@ Part of MySystem
 "
 Class {
 	#name : 'DEVSMyProcessor',
-	#superclass : 'DEVSAtomic',
+	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'queue',
 		'queueSize',
