@@ -9,7 +9,6 @@ Class {
 		'output',
 		'timeLast',
 		'timeNext',
-		'verbose',
 		'name'
 	],
 	#category : 'DEVS-Core-Basic',
@@ -88,14 +87,6 @@ DEVSComponent >> addOutputPorts: list [
 
 ]
 
-{ #category : 'simulation' }
-DEVSComponent >> beVerbose: truefalse [
-
-	verbose := truefalse.
-
-
-]
-
 { #category : 'as yet unclassified' }
 DEVSComponent >> buildName [
 	^ UUID new asString36 
@@ -137,9 +128,6 @@ DEVSComponent >> initialize [
 
 	timeLast := 0.
 	timeNext := Float infinity.
-
-	verbose := true.
-
 
 
 ]
@@ -438,12 +426,4 @@ DEVSComponent >> timeLast [
 DEVSComponent >> timeNext [
 
 	^ timeNext
-]
-
-{ #category : 'simulation' }
-DEVSComponent >> verbose [
-
-	^ verbose 
-
-
 ]
