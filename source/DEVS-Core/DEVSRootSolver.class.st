@@ -77,7 +77,7 @@ DEVSRootSolver >> reset [
 { #category : 'simulation' }
 DEVSRootSolver >> simulationStep [
 
-	clock := component timeNext.
+	clock := self component timeNext.
 	clock isInfinite ifTrue: [^self].
 	component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
 	

@@ -12,22 +12,6 @@ Class {
 	#tag : 'Continuous'
 }
 
-{ #category : 'OBSOLETE ???' }
-DEVnDESSRootSolver >> bigStep [
-
-		tn := component timeNext. 
-
-		[ (clock < tn) & (clock < stopTime) ] whileTrue: [ 
-			self numericStep ].
-
-		tn <= stopTime ifTrue: [ 
-			clock := tn.
-			component receiveMsgStarTime: clock. 				"send (*, t) to root DEVS"
-		 	component logOutgoing ].
-
-
-]
-
 { #category : 'simulation' }
 DEVnDESSRootSolver >> initialize [
 
@@ -65,16 +49,6 @@ DEVnDESSRootSolver >> receiveMsgSETime: tnc [
 	seDetected := true.
 	tnc < tn ifTrue: [ tn := tnc ] ifFalse: [ ((tnc - tn) closeTo: 0) ifFalse: [ self error: 'Bad sync !'] ]
 
-
-]
-
-{ #category : 'OBSOLETE ???' }
-DEVnDESSRootSolver >> simulateB: t [
-
-	stopTime := t.
-
-	[ clock < stopTime ] whileTrue: [ 
-		self bigStep ].
 
 ]
 

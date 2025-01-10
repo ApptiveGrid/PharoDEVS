@@ -20,6 +20,11 @@ DEVSPort class >> hostDEVS: host name: n [
 		name: n
 ]
 
+{ #category : 'printing' }
+DEVSPort >> direction [
+	self subclassResponsibility 
+]
+
 { #category : 'as yet unclassified' }
 DEVSPort >> hostDEVS [
 
@@ -62,4 +67,9 @@ DEVSPort >> name: n [
 DEVSPort >> outLines [
 
 	^ outLines
+]
+
+{ #category : 'printing' }
+DEVSPort >> printOn: aStream [ 
+	aStream << self direction << ' port: ' << name
 ]

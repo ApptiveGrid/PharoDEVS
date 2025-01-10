@@ -5,3 +5,8 @@ Class {
 	#package : 'DEVS-Core',
 	#tag : 'Basic'
 }
+
+{ #category : 'printing' }
+DEVSOutputPort >> direction [
+	^ #output
+]

@@ -86,3 +86,8 @@ DEVSSimulation >> simulation [
 	
 	^ self
 ]
+
+{ #category : 'stepping' }
+DEVSSimulation >> step [
+	self coordinator simulationStep 
+]
