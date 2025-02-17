@@ -1,3 +1,12 @@
+"
+I represent input or output port of DEVS model, which is defined by one of my subclasses. I keep reference about:
+- input ports collection (inLines) pointing to me
+- ouput ports collection (outLines) that I'm pointing to
+- host DEVS model (hostDEVS)
+- direction (input or output) defined in my subclasses
+
+I also keep name about me.
+"
 Class {
 	#name : 'DEVSPort',
 	#superclass : 'Object',
@@ -20,50 +29,51 @@ DEVSPort class >> hostDEVS: host name: n [
 		name: n
 ]
 
-{ #category : 'printing' }
+{ #category : 'accessing - model' }
 DEVSPort >> direction [
 	self subclassResponsibility 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - model' }
 DEVSPort >> hostDEVS [
 
 	^ hostDEVS
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - model' }
 DEVSPort >> hostDEVS: host [
 
 	hostDEVS := host
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - model' }
 DEVSPort >> inLines [
 
 	^ inLines
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 DEVSPort >> initialize [
 
+	super initialize.
 	inLines := OrderedCollection new.
 	outLines := OrderedCollection new.
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - model' }
 DEVSPort >> name [
 
 	^name
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - model' }
 DEVSPort >> name: n [
 
 	name := n. 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - model' }
 DEVSPort >> outLines [
 
 	^ outLines
