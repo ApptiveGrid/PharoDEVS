@@ -26,6 +26,7 @@ DEVSLogger >> inspectionEvents [
 	<inspectorPresentationOrder: 0 title: 'simulation events'>
 
 	^ SpTablePresenter new
+		beResizable;
 		items: events;
 		addColumn: (SpStringTableColumn new title: '#'; width: 35; evaluated: [:each | events indexOf: each ]);
 		addColumn: (SpStringTableColumn new title: 'time'; width: 40; evaluated: [:each | each time  ]);

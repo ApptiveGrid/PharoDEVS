@@ -25,5 +25,5 @@ DEVSInternalTransitionEvent >> payload [
 		stateChanges 
 			ifNotNil: [ s << 'state: ' << ($, join: stateChanges associations)  ]
 			ifNil: [ 'N/A' ].
-		s << 'outgoing: ' << ($, join: outgoing associations) ]
+		s << 'outgoing: ' << ($, join: (outgoing associations select: [:each | each value notNil ])) ]
 ]
