@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'state',
 		'address',
-		'messages'
+		'messages',
+		'hostname'
 	],
 	#category : 'DEVS-Network',
 	#package : 'DEVS-Network'
@@ -21,7 +22,7 @@ DEVSUDPServer >> address: aString [
 	(address endsWith: '1') ifTrue: [ 
 		messages add: (DEVSNetworkMessage new 
 				from: name;
-				to: 'server3';
+				to: '10.0.0.3';
 				payload: #foo)  ]
 ]
 
@@ -35,6 +36,16 @@ DEVSUDPServer >> externalTransition [
 		to: msg from;
 		payload: #bar) ].
 
+]
+
+{ #category : 'accessing' }
+DEVSUDPServer >> hostname [
+	^ hostname
+]
+
+{ #category : 'initialization' }
+DEVSUDPServer >> hostname: aString [ 
+	hostname := aString 
 ]
 
 { #category : 'modeling' }

@@ -7,20 +7,17 @@ Class {
 
 { #category : 'modeling' }
 DEVSTestNetwork >> initialize [ 
-	| serverName node server |
+	| serverName network server |
 	super initialize.
 	
-	node := DEVSNetworkNode new name: #networknode.
-	self addComponent: node.
+	network := DEVSNetworkNode new name: #networknode.
+	self addComponent: network.
 	1 to: 3 do: [ :n |
 		serverName := ('server', n asString).
 		server := DEVSUDPServer new 
 			name: serverName;
+			hostname: 'server', n asString, '.local';
 			address: ('10.0.0.', n asString).
 		self addComponent: server.
-		node addOutputPortNamed: serverName.
-		self addCouplings: { 
-			{ serverName . #out } -> #(networknode in).
-			{ #networknode . serverName } -> { serverName . #in } } ].
-
+		network addServer: server ]
 ]

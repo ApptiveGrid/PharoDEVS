@@ -4,11 +4,23 @@ Class {
 	#instVars : [
 		'state',
 		'messages',
-		'routingTable'
+		'dns',
+		'outputPortMapping'
 	],
 	#category : 'DEVS-Network',
 	#package : 'DEVS-Network'
 }
+
+{ #category : 'adding' }
+DEVSNetworkNode >> addServer: aDEVSUDPServer [
+	| portName |
+	dns at: aDEVSUDPServer hostname put: aDEVSUDPServer address.
+	portName := 'out_', aDEVSUDPServer address asString.
+	outputPortMapping at: aDEVSUDPServer address put: (self addOutputPortNamed: portName ).
+	parent addCouplings: { 
+			{ aDEVSUDPServer name . #out } -> { name . #in}.
+			{ name . portName } -> { aDEVSUDPServer name . #in } }
+]
 
 { #category : 'modeling' }
 DEVSNetworkNode >> externalTransition [
@@ -26,7 +38,8 @@ DEVSNetworkNode >> initialize [
 	self addOutputPortNamed: #out.
 	state := #idle.
 	messages := OrderedCollection new.
-	routingTable := Dictionary new
+	dns := Dictionary new.
+	outputPortMapping := Dictionary new
 ]
 
 { #category : 'modeling' }
@@ -40,7 +53,7 @@ DEVSNetworkNode >> outputFunction [
 	| msg |
 	(state = #processing) ifTrue: [ 
 		msg := messages removeFirst.
-		self poke: msg to: msg to ].
+		self poke: msg to: (outputPortMapping at: msg to) name ].
 ]
 
 { #category : 'modeling' }
