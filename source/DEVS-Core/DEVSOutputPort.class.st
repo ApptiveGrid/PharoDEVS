@@ -1,3 +1,6 @@
+"
+I represent output port of atomic or coupled DEVS component.
+"
 Class {
 	#name : 'DEVSOutputPort',
 	#superclass : 'DEVSPort',
