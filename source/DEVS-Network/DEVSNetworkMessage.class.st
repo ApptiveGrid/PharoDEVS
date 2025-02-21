@@ -2,24 +2,38 @@ Class {
 	#name : 'DEVSNetworkMessage',
 	#superclass : 'Object',
 	#instVars : [
-		'from',
-		'to',
-		'payload'
+		'payload',
+		'sourceAddress',
+		'sourePort',
+		'destinationAddress',
+		'destinationPort'
 	],
 	#category : 'DEVS-Network',
 	#package : 'DEVS-Network'
 }
 
 { #category : 'accessing' }
-DEVSNetworkMessage >> from [
+DEVSNetworkMessage >> destinationAddress [
 
-	^ from
+	^ destinationAddress
 ]
 
 { #category : 'accessing' }
-DEVSNetworkMessage >> from: anObject [
+DEVSNetworkMessage >> destinationAddress: anObject [
 
-	from := anObject
+	destinationAddress := anObject
+]
+
+{ #category : 'accessing' }
+DEVSNetworkMessage >> destinationPort [
+
+	^ destinationPort
+]
+
+{ #category : 'accessing' }
+DEVSNetworkMessage >> destinationPort: anObject [
+
+	destinationPort := anObject
 ]
 
 { #category : 'accessing' }
@@ -38,21 +52,33 @@ DEVSNetworkMessage >> payload: anObject [
 DEVSNetworkMessage >> printOn: aStream [ 
 	aStream 
 		<< 'message '.
-	from printOn: aStream.
+	sourceAddress printOn: aStream.
 	aStream << ' -> '.
-	to printOn: aStream.
+	destinationAddress printOn: aStream.
 	aStream << ', payload: '.
 	payload printOn: aStream 
 ]
 
 { #category : 'accessing' }
-DEVSNetworkMessage >> to [
+DEVSNetworkMessage >> sourceAddress [
 
-	^ to
+	^ sourceAddress
 ]
 
 { #category : 'accessing' }
-DEVSNetworkMessage >> to: anObject [
+DEVSNetworkMessage >> sourceAddress: anObject [
 
-	to := anObject
+	sourceAddress := anObject
+]
+
+{ #category : 'accessing' }
+DEVSNetworkMessage >> sourePort [
+
+	^ sourePort
+]
+
+{ #category : 'accessing' }
+DEVSNetworkMessage >> sourePort: anObject [
+
+	sourePort := anObject
 ]

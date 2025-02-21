@@ -3,49 +3,22 @@ Class {
 	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'state',
-		'address',
-		'messages',
-		'hostname'
+		'messages'
 	],
 	#category : 'DEVS-Network',
 	#package : 'DEVS-Network'
 }
 
-{ #category : 'accessing' }
-DEVSUDPServer >> address [
-	^ address
-]
-
-{ #category : 'accessing' }
-DEVSUDPServer >> address: aString [ 
-	address := aString.
-	(address endsWith: '1') ifTrue: [ 
-		messages add: (DEVSNetworkMessage new 
-				from: name;
-				to: '10.0.0.3';
-				payload: #foo)  ]
-]
-
 { #category : 'modeling' }
 DEVSUDPServer >> externalTransition [ 
 	| msg |
 	msg := self peekFrom: #in.
-	(msg from = '10.0.0.1') ifTrue: [  
+	(msg sourceAddress = '10.0.0.1') ifTrue: [  
 	messages add: (DEVSNetworkMessage new
 		from: msg to;
 		to: msg from;
 		payload: #bar) ].
 
-]
-
-{ #category : 'accessing' }
-DEVSUDPServer >> hostname [
-	^ hostname
-]
-
-{ #category : 'initialization' }
-DEVSUDPServer >> hostname: aString [ 
-	hostname := aString 
 ]
 
 { #category : 'modeling' }
@@ -61,6 +34,17 @@ DEVSUDPServer >> initialize [
 { #category : 'modeling' }
 DEVSUDPServer >> internalTransition [
 	
+]
+
+{ #category : 'as yet unclassified' }
+DEVSUDPServer >> name: aString [ 
+	super name: aString.
+	(aString endsWith: '1') ifTrue: [ 
+		messages add: (DEVSNetworkMessage new 
+				sourceAddress: name;
+				destinationAddress: '10.0.0.3';
+				destinationPort: 7000;
+				payload: #foo)  ]
 ]
 
 { #category : 'modeling' }

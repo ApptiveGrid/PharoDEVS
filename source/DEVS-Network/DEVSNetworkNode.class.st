@@ -5,21 +5,23 @@ Class {
 		'state',
 		'messages',
 		'dns',
-		'outputPortMapping'
+		'hostMapping'
 	],
 	#category : 'DEVS-Network',
 	#package : 'DEVS-Network'
 }
 
 { #category : 'adding' }
-DEVSNetworkNode >> addServer: aDEVSUDPServer [
-	| portName |
-	dns at: aDEVSUDPServer hostname put: aDEVSUDPServer address.
-	portName := 'out_', aDEVSUDPServer address asString.
-	outputPortMapping at: aDEVSUDPServer address put: (self addOutputPortNamed: portName ).
+DEVSNetworkNode >> addHost: host [
+	| hostPortName |
+	dns at: host hostname put: host address.
+	hostPortName := 'out_', host address asString.
+	hostMapping 
+		at: host address 
+		put: (self addOutputPortNamed: hostPortName ).
 	parent addCouplings: { 
-			{ aDEVSUDPServer name . #out } -> { name . #in}.
-			{ name . portName } -> { aDEVSUDPServer name . #in } }
+			{ host name . #out } -> { name . #in}.
+			{ name . hostPortName } -> { host name . #in } }
 ]
 
 { #category : 'modeling' }
@@ -39,7 +41,7 @@ DEVSNetworkNode >> initialize [
 	state := #idle.
 	messages := OrderedCollection new.
 	dns := Dictionary new.
-	outputPortMapping := Dictionary new
+	hostMapping := Dictionary new
 ]
 
 { #category : 'modeling' }
@@ -53,7 +55,7 @@ DEVSNetworkNode >> outputFunction [
 	| msg |
 	(state = #processing) ifTrue: [ 
 		msg := messages removeFirst.
-		self poke: msg to: (outputPortMapping at: msg to) name ].
+		self poke: msg to: (hostMapping at: msg destinationAddress) name ].
 ]
 
 { #category : 'modeling' }
