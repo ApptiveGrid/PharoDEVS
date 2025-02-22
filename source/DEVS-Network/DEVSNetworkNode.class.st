@@ -15,13 +15,11 @@ Class {
 DEVSNetworkNode >> addHost: host [
 	| hostPortName |
 	dns at: host hostname put: host address.
-	hostPortName := 'out_', host address asString.
+	hostPortName := host address asString.
 	hostMapping 
 		at: host address 
 		put: (self addOutputPortNamed: hostPortName ).
-	parent addCouplings: { 
-			{ host name . #out } -> { name . #in}.
-			{ name . hostPortName } -> { host name . #in } }
+
 ]
 
 { #category : 'modeling' }

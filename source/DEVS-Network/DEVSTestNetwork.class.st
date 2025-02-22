@@ -25,5 +25,9 @@ DEVSTestNetwork >> initialize [
 		self addComponent: server.
 		network addHost: host.
 		host addServer: server atPort: 7000.
+		
+		self addCouplings: { 
+			{ host name . #out } -> { network name . #in}.
+			{ network name . host address } -> { host name . #in } }
 		]
 ]
