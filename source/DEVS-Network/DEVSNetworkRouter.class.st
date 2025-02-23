@@ -1,5 +1,5 @@
 Class {
-	#name : 'DEVSNetworkNode',
+	#name : 'DEVSNetworkRouter',
 	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'state',
@@ -12,18 +12,18 @@ Class {
 }
 
 { #category : 'adding' }
-DEVSNetworkNode >> addHost: host [
-	| hostPortName |
-	dns at: host hostname put: host address.
-	hostPortName := host address asString.
+DEVSNetworkRouter >> addHost: host [
+	dns 
+		at: host hostname 
+		put: host address.
 	hostMapping 
 		at: host address 
-		put: (self addOutputPortNamed: hostPortName ).
+		put: (self addOutputPortNamed: host address ).
 
 ]
 
 { #category : 'modeling' }
-DEVSNetworkNode >> externalTransition [
+DEVSNetworkRouter >> externalTransition [
 
 	| msg |
 	msg := self peekFrom: #in.
@@ -32,7 +32,7 @@ DEVSNetworkNode >> externalTransition [
 ]
 
 { #category : 'modeling' }
-DEVSNetworkNode >> initialize [ 
+DEVSNetworkRouter >> initialize [ 
 	super initialize.
 	self addInputPortNamed: #in.
 	self addOutputPortNamed: #out.
@@ -43,13 +43,13 @@ DEVSNetworkNode >> initialize [
 ]
 
 { #category : 'modeling' }
-DEVSNetworkNode >> internalTransition [
+DEVSNetworkRouter >> internalTransition [
 	messages ifEmpty: [  
 		state := #idle ]
 ]
 
 { #category : 'modeling' }
-DEVSNetworkNode >> outputFunction [
+DEVSNetworkRouter >> outputFunction [
 	| msg |
 	(state = #processing) ifTrue: [ 
 		msg := messages removeFirst.
@@ -57,8 +57,8 @@ DEVSNetworkNode >> outputFunction [
 ]
 
 { #category : 'modeling' }
-DEVSNetworkNode >> timeAdvance [
-	^ (state = #processing)
+DEVSNetworkRouter >> timeAdvance [
+ 	^ (state = #processing)
 		ifTrue: [ 1 ]
 		ifFalse: [ self infinityTime ]
 ]

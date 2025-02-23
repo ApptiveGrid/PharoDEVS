@@ -1,27 +1,13 @@
 Class {
 	#name : 'DEVSNetworkHost',
-	#superclass : 'DEVSAtomicComponent',
+	#superclass : 'DEVSCoupledComponent',
 	#instVars : [
 		'hostname',
-		'address',
-		'ports',
-		'messages',
-		'state'
+		'address'
 	],
 	#category : 'DEVS-Network',
 	#package : 'DEVS-Network'
 }
-
-{ #category : 'adding' }
-DEVSNetworkHost >> addServer: aDEVSUDPServer atPort: anInteger [ 
-	| portName |
-	portName := 'port_', anInteger asString.
-	ports 
-		at: anInteger put: (self addOutputPortNamed: portName ).
-	parent addCouplings: { 
-			{ aDEVSUDPServer name . #out } -> { name . #in}.
-			{ name . portName } -> { aDEVSUDPServer name . #in } }
-]
 
 { #category : 'accessing' }
 DEVSNetworkHost >> address [
@@ -31,15 +17,6 @@ DEVSNetworkHost >> address [
 { #category : 'accessing' }
 DEVSNetworkHost >> address: aString [ 
 	address := aString 
-]
-
-{ #category : 'modeling' }
-DEVSNetworkHost >> externalTransition [
-
-	| msg |
-	msg := self peekFrom: #in.
-	messages add: msg.
-	state := #processing 
 ]
 
 { #category : 'accessing' }
@@ -54,38 +31,23 @@ DEVSNetworkHost >> hostname: aString [
 
 { #category : 'modeling' }
 DEVSNetworkHost >> initialize [
+	| resolver server |
 	super initialize.
 	self addInputPortNamed: #in.
 	self addOutputPortNamed: #out.
-	ports := Dictionary new.
-	messages := OrderedCollection new
-]
-
-{ #category : 'modeling' }
-DEVSNetworkHost >> internalTransition [
-	messages ifEmpty: [  
-		state := #idle ]
-]
-
-{ #category : 'modeling' }
-DEVSNetworkHost >> outputFunction [
-	| msg |
-	(state = #processing) ifTrue: [ 
-		msg := messages removeFirst.
-		(msg destinationAddress = self address)
-			ifTrue: [  
-				self 
-					poke: msg 
-					to: (ports at: msg destinationPort) name ]
-			ifFalse: [
-				self 
-					poke: msg 
-					to: #out ] ]
-]
-
-{ #category : 'modeling' }
-DEVSNetworkHost >> timeAdvance [
-	^ (state = #processing)
-		ifTrue: [ 1 ]
-		ifFalse: [ self infinityTime ]
+			
+	resolver := DEVSHostServiceResolver new name: #resolver.
+	self addComponent: resolver.
+	7001 to: 7003 do: [ :n |
+		server := DEVSServer new
+			name:  ('port:', n asString);
+			port: n .
+		self addComponent: server.
+		resolver addServer: server.
+		self addCouplings: { 
+			{ server name . #out } -> { resolver name . #in}.
+			{ resolver name. #out } -> { #self . #out }.
+			{ #self . #in } -> { resolver name . #in }.
+			{ resolver name . server port } -> { server name . #in } }.
+		]
 ]

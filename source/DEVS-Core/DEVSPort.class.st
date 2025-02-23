@@ -71,5 +71,5 @@ DEVSPort >> outLines [
 
 { #category : 'printing' }
 DEVSPort >> printOn: aStream [ 
-	aStream << self direction << ' port: ' << name
+	aStream << self direction << ' port: ' << name asString 
 ]
