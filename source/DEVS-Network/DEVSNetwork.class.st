@@ -5,6 +5,18 @@ Class {
 	#package : 'DEVS-Network'
 }
 
+{ #category : 'examples' }
+DEVSNetwork class >> example [
+
+	<example>
+   "discrete event time simulation of network of UDP servers and network node sending UDP packets (messages)"
+   DEVSSimulation new 
+		model: (self new name: 'UDP network simulation');
+		coordinator: DEVSRootSolver new;
+		runTo: 10;
+		logger
+]
+
 { #category : 'modeling' }
 DEVSNetwork >> initialize [ 
 	| serverName router host |
