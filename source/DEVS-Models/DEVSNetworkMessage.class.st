@@ -8,8 +8,9 @@ Class {
 		'destinationAddress',
 		'destinationPort'
 	],
-	#category : 'DEVS-Network',
-	#package : 'DEVS-Network'
+	#category : 'DEVS-Models-network',
+	#package : 'DEVS-Models',
+	#tag : 'network'
 }
 
 { #category : 'accessing' }

@@ -8,8 +8,9 @@ Class {
 		'messages',
 		'state'
 	],
-	#category : 'DEVS-Network',
-	#package : 'DEVS-Network'
+	#category : 'DEVS-Models-network',
+	#package : 'DEVS-Models',
+	#tag : 'network'
 }
 
 { #category : 'as yet unclassified' }
