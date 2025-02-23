@@ -46,8 +46,7 @@ DEVSNetworkHost >> initialize [
 		self addComponent: server.
 		resolver addServer: server.
 		self addCouplings: { 
-			{ server name . #out } -> { resolver name . #in}.
-			{ resolver name. #out } -> { #self . #out }.
+			{ server name . #out } -> { #self . #out }.
 			{ #self . #in } -> { resolver name . #in }.
 			{ resolver name . server port } -> { server name . #in } }.
 		]
