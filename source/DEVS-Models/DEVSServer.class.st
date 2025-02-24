@@ -13,15 +13,7 @@ Class {
 
 { #category : 'modeling' }
 DEVSServer >> externalTransition [ 
-	| msg |
-	msg := self peekFrom: #in.
-	(msg sourceAddress = '10.0.0.1') ifTrue: [  
-	messages add: (DEVSNetworkMessage new
-		sourceAddress: msg destinationAddress;
-		destinationAddress: msg sourceAddress;
-		destinationPort: 7003;
-		payload: #bar) ].
-
+	"this does nothing for now"
 ]
 
 { #category : 'modeling' }
@@ -37,11 +29,6 @@ DEVSServer >> initialize [
 { #category : 'modeling' }
 DEVSServer >> internalTransition [
 	
-]
-
-{ #category : 'as yet unclassified' }
-DEVSServer >> name: aString [ 
-	super name: aString
 ]
 
 { #category : 'modeling' }
@@ -72,5 +59,7 @@ DEVSServer >> sendMessage: aMessage [
 { #category : 'modeling' }
 DEVSServer >> timeAdvance [
 
-	^ messages ifNotEmpty: [ 1 ] ifEmpty: [ self infinityTime ]
+	^ messages 
+		ifNotEmpty: [ 1 ] 
+		ifEmpty: [ self infinityTime ]
 ]
