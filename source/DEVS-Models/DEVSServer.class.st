@@ -12,32 +12,20 @@ Class {
 }
 
 { #category : 'modeling' }
-DEVSServer >> externalTransition [ 
-	"this does nothing for now"
-]
-
-{ #category : 'modeling' }
 DEVSServer >> initialize [ 
 	super initialize.
+	
 	self addInputPortNamed: #in.
 	self addOutputPortNamed: #out.
+	
 	state := #idle.
 	messages := OrderedCollection new.
 	
 ]
 
-{ #category : 'modeling' }
-DEVSServer >> internalTransition [
-	
-]
-
-{ #category : 'modeling' }
-DEVSServer >> outputFunction [
-	messages ifNotEmpty: [  
-		self 
-			poke: messages removeFirst 
-			to: #out ].
-
+{ #category : 'testing' }
+DEVSServer >> isIncoming: message [
+	^ message destinationAddress = parent address
 ]
 
 { #category : 'accessing' }
@@ -48,6 +36,16 @@ DEVSServer >> port [
 { #category : 'accessing' }
 DEVSServer >> port: anInteger [ 
 	port := anInteger
+]
+
+{ #category : 'as yet unclassified' }
+DEVSServer >> send: payload to: destinationAddress port: destinationPort [ 
+	self sendMessage: (DEVSNetworkMessage new 
+			destinationAddress: destinationAddress;
+			destinationPort: destinationPort;
+			sourceAddress: parent address;
+			sourcePort: port;
+			payload: payload)
 ]
 
 { #category : 'actions' }

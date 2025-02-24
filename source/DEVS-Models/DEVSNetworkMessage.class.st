@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'payload',
 		'sourceAddress',
-		'sourePort',
 		'destinationAddress',
-		'destinationPort'
+		'destinationPort',
+		'sourcePort'
 	],
 	#category : 'DEVS-Models-network',
 	#package : 'DEVS-Models',
@@ -52,10 +52,14 @@ DEVSNetworkMessage >> payload: anObject [
 { #category : 'printing' }
 DEVSNetworkMessage >> printOn: aStream [ 
 	aStream 
-		<< 'message '.
-	sourceAddress printOn: aStream.
-	aStream << ' -> '.
-	destinationAddress printOn: aStream.
+		<< 'message '
+		<< sourceAddress asString 
+		<< ':'
+		<< sourcePort asString 
+		<< ' -> '
+		<< destinationAddress asString
+		<< ':'
+		<< destinationPort asString.
 	aStream << ', payload: '.
 	payload printOn: aStream 
 ]
@@ -72,14 +76,14 @@ DEVSNetworkMessage >> sourceAddress: anObject [
 	sourceAddress := anObject
 ]
 
-{ #category : 'accessing' }
-DEVSNetworkMessage >> sourePort [
+{ #category : 'as yet unclassified' }
+DEVSNetworkMessage >> sourcePort [
 
-	^ sourePort
+	^ sourcePort 
 ]
 
 { #category : 'accessing' }
-DEVSNetworkMessage >> sourePort: anObject [
+DEVSNetworkMessage >> sourcePort: anObject [
 
-	sourePort := anObject
+	sourcePort := anObject
 ]
