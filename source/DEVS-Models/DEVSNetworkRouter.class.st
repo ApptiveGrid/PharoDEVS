@@ -49,11 +49,11 @@ DEVSNetworkRouter >> internalTransition [
 
 { #category : 'modeling' }
 DEVSNetworkRouter >> outputFunction [
+
 	| msg |
-	
-	(state = #processing) ifTrue: [ 
-		msg := messages removeFirst.
-		self poke: msg to: (hostMapping at: msg destinationAddress) name ].
+	state = #processing ifFalse: [ ^ self ].
+	msg := messages removeFirst.
+	self poke: msg to: (hostMapping at: msg destinationAddress) name
 ]
 
 { #category : 'modeling' }

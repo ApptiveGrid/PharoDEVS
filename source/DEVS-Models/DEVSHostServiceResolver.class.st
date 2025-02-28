@@ -66,12 +66,11 @@ DEVSHostServiceResolver >> internalTransition [
 
 { #category : 'modeling' }
 DEVSHostServiceResolver >> outputFunction [
+
 	| message |
-	(state = #processing) ifTrue: [ 
-		message := messages removeFirst.
-		self 
-			poke: message 
-			to: (ports at: message destinationPort) name ]
+	state = #processing ifFalse: [ ^ self ].
+	message := messages removeFirst.
+	self poke: message to: (ports at: message destinationPort) name
 ]
 
 { #category : 'modeling' }
