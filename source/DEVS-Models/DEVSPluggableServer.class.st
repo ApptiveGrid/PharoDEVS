@@ -12,11 +12,6 @@ Class {
 	#tag : 'network'
 }
 
-{ #category : 'accessing' }
-DEVSPluggableServer >> block: aBlock [ 
-	block := aBlock
-]
-
 { #category : 'modeling' }
 DEVSPluggableServer >> externalTransition [ 
 	messages add: (self peekFrom: #in).
@@ -27,6 +22,12 @@ DEVSPluggableServer >> externalTransition [
 DEVSPluggableServer >> internalTransition [ 
 	messages ifEmpty: [ 
 		state := #idle ]
+]
+
+{ #category : 'accessing' }
+DEVSPluggableServer >> onIncomingDo: aBlock [ 
+	"aBlock that is executed when incoming message is for me"
+	block := aBlock
 ]
 
 { #category : 'modeling' }

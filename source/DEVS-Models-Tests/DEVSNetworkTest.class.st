@@ -42,7 +42,7 @@ DEVSNetworkTest >> testRoundtrip [
 	simulation := self simulation: self echoNetwork.
 	(simulation / #host1 / #server1)
 		send: #foo to: '10.0.0.2' port: 7001;
-		block: [ :message :server |
+		onIncomingDo: [ :message :server |
 			received := true.
 			payload := message payload.
 			nil ].
