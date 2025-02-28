@@ -1,10 +1,12 @@
+"
+I route incoming messages from hosts (its servers) to other hosts that is identified by IP address. 
+"
 Class {
 	#name : 'DEVSNetworkRouter',
 	#superclass : 'DEVSAtomicComponent',
 	#instVars : [
 		'state',
 		'messages',
-		'dns',
 		'hostMapping'
 	],
 	#category : 'DEVS-Models-network',
@@ -14,9 +16,6 @@ Class {
 
 { #category : 'adding' }
 DEVSNetworkRouter >> addHost: host [
-	dns 
-		at: host hostname 
-		put: host address.
 	hostMapping 
 		at: host address 
 		put: (self addOutputPortNamed: host address ).
@@ -35,30 +34,34 @@ DEVSNetworkRouter >> externalTransition [
 { #category : 'modeling' }
 DEVSNetworkRouter >> initialize [ 
 	super initialize.
+	
 	self addInputPortNamed: #in.
 	self addOutputPortNamed: #out.
+	
 	state := #idle.
 	messages := OrderedCollection new.
-	dns := Dictionary new.
 	hostMapping := Dictionary new
 ]
 
 { #category : 'modeling' }
 DEVSNetworkRouter >> internalTransition [
+
 	messages ifEmpty: [  
 		state := #idle ]
 ]
 
 { #category : 'modeling' }
 DEVSNetworkRouter >> outputFunction [
+
 	| msg |
-	(state = #processing) ifTrue: [ 
-		msg := messages removeFirst.
-		self poke: msg to: (hostMapping at: msg destinationAddress) name ].
+	state = #processing ifFalse: [ ^ self ].
+	msg := messages removeFirst.
+	self poke: msg to: (hostMapping at: msg destinationAddress) name
 ]
 
 { #category : 'modeling' }
 DEVSNetworkRouter >> timeAdvance [
+
  	^ (state = #processing)
 		ifTrue: [ 1 ]
 		ifFalse: [ self infinityTime ]

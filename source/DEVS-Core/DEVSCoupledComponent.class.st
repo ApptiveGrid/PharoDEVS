@@ -15,6 +15,11 @@ DEVSCoupledComponent class >> displayLabel [
 	^ #coupled
 ]
 
+{ #category : 'arithmetic' }
+DEVSCoupledComponent >> / aString [ 
+	^ self componentNamed: aString 
+]
+
 { #category : 'modeling2' }
 DEVSCoupledComponent >> addComponent: aComponent [ 
 	components 

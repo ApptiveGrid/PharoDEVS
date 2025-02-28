@@ -33,7 +33,7 @@ DEVSLogger >> inspectionEvents [
 		addColumn: (SpStringTableColumn new title: 'event'; width: 80; evaluated: [:each | each class displayLabel ]);
 		addColumn: (SpStringTableColumn new
 			title: 'component';
-			evaluated: [:each | each component path ]);
+			evaluated: [:each | each component ]);
 		addColumn: (SpStringTableColumn new
 			title: 'description';
 			evaluated: [:each | each payload ])
