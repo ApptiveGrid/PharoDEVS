@@ -13,7 +13,7 @@ Class {
 	#tag : 'network'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 DEVSHostServiceResolver >> addServer: aServer [ 
 	ports 
 		at: aServer port 
@@ -30,7 +30,7 @@ DEVSHostServiceResolver >> address: aString [
 	address := aString 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'modeling' }
 DEVSHostServiceResolver >> externalTransition [
 
 	| msg |
@@ -58,7 +58,7 @@ DEVSHostServiceResolver >> initialize [
 	messages := OrderedCollection new
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'modeling' }
 DEVSHostServiceResolver >> internalTransition [
 	messages ifEmpty: [  
 		state := #idle ]
@@ -74,7 +74,7 @@ DEVSHostServiceResolver >> outputFunction [
 			to: (ports at: message destinationPort) name ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'modeling' }
 DEVSHostServiceResolver >> timeAdvance [
 	^ (state = #processing)
 		ifTrue: [ 1 ]

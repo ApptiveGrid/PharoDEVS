@@ -76,7 +76,7 @@ DEVSNetworkMessage >> sourceAddress: anObject [
 	sourceAddress := anObject
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 DEVSNetworkMessage >> sourcePort [
 
 	^ sourcePort 

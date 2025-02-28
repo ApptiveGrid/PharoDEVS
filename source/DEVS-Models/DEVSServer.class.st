@@ -38,7 +38,7 @@ DEVSServer >> port: anInteger [
 	port := anInteger
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 DEVSServer >> send: payload to: destinationAddress port: destinationPort [ 
 	self sendMessage: (DEVSNetworkMessage new 
 			destinationAddress: destinationAddress;
