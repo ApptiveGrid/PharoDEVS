@@ -1,3 +1,6 @@
+"
+I route incoming messages from hosts (its servers) to other hosts that is identified by IP address. 
+"
 Class {
 	#name : 'DEVSNetworkRouter',
 	#superclass : 'DEVSAtomicComponent',

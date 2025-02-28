@@ -1,3 +1,6 @@
+"
+I represent simple application server that is part of host. I can receive input messages from input port and sent messages to output port that is identified by my network port number.
+"
 Class {
 	#name : 'DEVSServer',
 	#superclass : 'DEVSAtomicComponent',

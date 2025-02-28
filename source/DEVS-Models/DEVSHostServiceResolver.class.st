@@ -1,3 +1,6 @@
+"
+I resolve incoming message from host and pass them to output port of desired server, based on destination network port.
+"
 Class {
 	#name : 'DEVSHostServiceResolver',
 	#superclass : 'DEVSAtomicComponent',

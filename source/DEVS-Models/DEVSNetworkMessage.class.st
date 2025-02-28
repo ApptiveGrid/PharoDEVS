@@ -1,3 +1,6 @@
+"
+A simple message being sent over the network (for purpose of simulation). I keep source/destination IP address, source/destination port and payload that is consumed by destination server.
+"
 Class {
 	#name : 'DEVSNetworkMessage',
 	#superclass : 'Object',

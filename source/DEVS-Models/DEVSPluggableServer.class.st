@@ -1,3 +1,6 @@
+"
+I represent application server that can consume incoming messages. I have a hook method - a block that is defined outside of me that I can execute during generating output when incoming message is for me. 
+"
 Class {
 	#name : 'DEVSPluggableServer',
 	#superclass : 'DEVSServer',

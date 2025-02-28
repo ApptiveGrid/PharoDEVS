@@ -1,3 +1,6 @@
+"
+A network that is represented by router and hosts. I wire together router with my hosts.
+"
 Class {
 	#name : 'DEVSNetwork',
 	#superclass : 'DEVSCoupledComponent',

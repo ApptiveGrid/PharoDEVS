@@ -1,3 +1,6 @@
+"
+I represent echo server just to just return the message I receive. I exchange source and destination information and send it to output port.
+"
 Class {
 	#name : 'DEVSEchoServer',
 	#superclass : 'DEVSServer',

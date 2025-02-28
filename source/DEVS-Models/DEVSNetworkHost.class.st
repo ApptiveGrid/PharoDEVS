@@ -1,3 +1,6 @@
+"
+I represent network host. I pass messages from input port to host resolver. I wire together resolver output ports (identified by IP address) with my servers.
+"
 Class {
 	#name : 'DEVSNetworkHost',
 	#superclass : 'DEVSCoupledComponent',
