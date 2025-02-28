@@ -38,6 +38,15 @@ DEVSServer >> port: anInteger [
 	port := anInteger
 ]
 
+{ #category : 'printing' }
+DEVSServer >> printOn: aStream [
+	
+	aStream << '<'.
+	self printPathOn: aStream.
+	self port ifNotNil: [:aPort | aStream << ':'; << aPort asString ].
+	aStream << '>'
+]
+
 { #category : 'actions' }
 DEVSServer >> send: payload to: destinationAddress port: destinationPort [ 
 	self sendMessage: (DEVSNetworkMessage new 
