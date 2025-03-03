@@ -11,6 +11,11 @@ Class {
 	#tag : 'Basic'
 }
 
+{ #category : 'arithmetic' }
+DEVSSimulation >> / aString [ 
+	^ model / aString 
+]
+
 { #category : 'accessing' }
 DEVSSimulation >> coordinator [
 

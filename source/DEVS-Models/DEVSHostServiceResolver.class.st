@@ -1,3 +1,6 @@
+"
+I resolve incoming message from host and pass them to output port of desired server, based on destination network port.
+"
 Class {
 	#name : 'DEVSHostServiceResolver',
 	#superclass : 'DEVSAtomicComponent',
@@ -13,7 +16,7 @@ Class {
 	#tag : 'network'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 DEVSHostServiceResolver >> addServer: aServer [ 
 	ports 
 		at: aServer port 
@@ -30,7 +33,7 @@ DEVSHostServiceResolver >> address: aString [
 	address := aString 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'modeling' }
 DEVSHostServiceResolver >> externalTransition [
 
 	| msg |
@@ -58,7 +61,7 @@ DEVSHostServiceResolver >> initialize [
 	messages := OrderedCollection new
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'modeling' }
 DEVSHostServiceResolver >> internalTransition [
 	messages ifEmpty: [  
 		state := #idle ]
@@ -66,15 +69,14 @@ DEVSHostServiceResolver >> internalTransition [
 
 { #category : 'modeling' }
 DEVSHostServiceResolver >> outputFunction [
+
 	| message |
-	(state = #processing) ifTrue: [ 
-		message := messages removeFirst.
-		self 
-			poke: message 
-			to: (ports at: message destinationPort) name ]
+	state = #processing ifFalse: [ ^ self ].
+	message := messages removeFirst.
+	self poke: message to: (ports at: message destinationPort) name
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'modeling' }
 DEVSHostServiceResolver >> timeAdvance [
 	^ (state = #processing)
 		ifTrue: [ 1 ]

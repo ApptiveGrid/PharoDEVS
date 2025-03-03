@@ -1,3 +1,6 @@
+"
+I represent simple application server that is part of host. I can receive input messages from input port and sent messages to output port that is identified by my network port number.
+"
 Class {
 	#name : 'DEVSServer',
 	#superclass : 'DEVSAtomicComponent',
@@ -12,32 +15,20 @@ Class {
 }
 
 { #category : 'modeling' }
-DEVSServer >> externalTransition [ 
-	"this does nothing for now"
-]
-
-{ #category : 'modeling' }
 DEVSServer >> initialize [ 
 	super initialize.
+	
 	self addInputPortNamed: #in.
 	self addOutputPortNamed: #out.
+	
 	state := #idle.
 	messages := OrderedCollection new.
 	
 ]
 
-{ #category : 'modeling' }
-DEVSServer >> internalTransition [
-	
-]
-
-{ #category : 'modeling' }
-DEVSServer >> outputFunction [
-	messages ifNotEmpty: [  
-		self 
-			poke: messages removeFirst 
-			to: #out ].
-
+{ #category : 'testing' }
+DEVSServer >> isIncoming: message [
+	^ message destinationAddress = parent address
 ]
 
 { #category : 'accessing' }
@@ -48,6 +39,25 @@ DEVSServer >> port [
 { #category : 'accessing' }
 DEVSServer >> port: anInteger [ 
 	port := anInteger
+]
+
+{ #category : 'printing' }
+DEVSServer >> printOn: aStream [
+	
+	aStream << '<'.
+	self printPathOn: aStream.
+	self port ifNotNil: [:aPort | aStream << ':'; << aPort asString ].
+	aStream << '>'
+]
+
+{ #category : 'actions' }
+DEVSServer >> send: payload to: destinationAddress port: destinationPort [ 
+	self sendMessage: (DEVSNetworkMessage new 
+			destinationAddress: destinationAddress;
+			destinationPort: destinationPort;
+			sourceAddress: parent address;
+			sourcePort: port;
+			payload: payload)
 ]
 
 { #category : 'actions' }
