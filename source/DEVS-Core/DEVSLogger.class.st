@@ -22,10 +22,10 @@ DEVSLogger >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-DEVSLogger >> inspectionEvents [
+DEVSLogger >> inspectionEvents: aBuilder [
 	<inspectorPresentationOrder: 0 title: 'simulation events'>
 
-	^ SpTablePresenter new
+	^ aBuilder newTable 
 		beResizable;
 		items: events;
 		addColumn: (SpStringTableColumn new title: '#'; width: 35; evaluated: [:each | events indexOf: each ]);
